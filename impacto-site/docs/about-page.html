@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html data-wf-domain="www.impactoautomationai.com" data-wf-page="about-page" data-wf-site="6427c6c769d01c2f58037956">
+<head>
+    <meta charset="utf-8">
+    <title>About Us - Impacto Automation AI</title>
+    <meta content="Learn about Impacto Automation AI, your partner in operational excellence. Our mission is to transform businesses through custom automation solutions and AI integration." name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="css/impacto-automation-dev.webflow.ce2ff4edc.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+    <script src="js/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">WebFont.load({  google: {    families: ["Inter:300,regular,500,600,700","Roboto:300,300italic,regular,italic,500,500italic,700,700italic,900,900italic","Belanosima:regular,600,700"]  }});</script>
+    <link href="images/6433db3d21ae1325db387377_Screen%20Shot%202023-04-10%20at%2006.47.13.png" rel="shortcut icon" type="image/x-icon">
+    <link href="images/65f7a2b55e7488f65da80074_Icons%20Overlayed.png" rel="apple-touch-icon">
+    
+    <style>
+    .post-image {
+        aspect-ratio: 4/2.5;
+    }
+
+    /* Workflow Background Styles */
+    .background-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        background-image: none;
+        background-size: 20px 20px;
+    }
+
+    /* Force the hero section background to be visible */
+    .section.hero {
+        background-color: rgba(67, 85, 255, 0.5) !important;
+        position: relative;
+        isolation: isolate;
+        z-index: 1;
+    }
+
+    .section.hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: rgba(67, 85, 255, 0.5);
+        z-index: -1;
+    }
+
+    .workflow-container {
+        position: absolute;
+        width: 650px;
+        height: 350px;
+        opacity: 0.15;
+        animation: floatRight linear infinite;
+        animation-duration: 45s;
+    }
+
+    .workflow-container-1 {
+        top: 15%;
+        left: -650px;
+        animation-delay: 0s;
+    }
+
+    .workflow-container-2 {
+        top: 60%;
+        left: -650px;
+        animation-delay: 20s;
+    }
+
+    .workflow-container-3 {
+        top: 35%;
+        left: -650px;
+        animation-delay: 35s;
+    }
+
+    .n8n-node {
+        position: absolute;
+        width: 120px;
+        height: 70px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 12px;
+        text-align: center;
+        color: white;
+    }
+
+    .node-trigger {
+        background-color: #4169e1;
+    }
+
+    .node-action {
+        background-color: #7a8ea6;
+    }
+
+    .node-helper {
+        background-color: #8ca3d3;
+    }
+
+    .node-connection {
+        position: absolute;
+        height: 2px;
+        background-color: #a7b4c7;
+        transform-origin: left center;
+    }
+
+    /* Workflow 1 */
+    .workflow-1-node-1 {
+        top: 20px;
+        left: 20px;
+    }
+
+    .workflow-1-node-2 {
+        top: 20px;
+        left: 220px;
+    }
+
+    .workflow-1-node-3 {
+        top: 20px;
+        left: 420px;
+    }
+
+    .workflow-1-node-4 {
+        top: 150px;
+        left: 120px;
+    }
+
+    .workflow-1-node-5 {
+        top: 150px;
+        left: 320px;
+    }
+
+    .workflow-1-conn-1 {
+        top: 55px;
+        left: 140px;
+        width: 80px;
+    }
+
+    .workflow-1-conn-2 {
+        top: 55px;
+        left: 340px;
+        width: 80px;
+    }
+
+    .workflow-1-conn-3 {
+        top: 90px;
+        left: 80px;
+        width: 70px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-1-conn-4 {
+        top: 150px;
+        left: 240px;
+        width: 80px;
+    }
+
+    .workflow-1-conn-5 {
+        top: 90px;
+        left: 480px;
+        width: 70px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-1-conn-6 {
+        top: 185px;
+        left: 180px;
+        width: 60px;
+        transform: rotate(-45deg);
+    }
+
+    /* Workflow 2 */
+    .workflow-2-node-1 {
+        top: 30px;
+        left: 50px;
+    }
+
+    .workflow-2-node-2 {
+        top: 30px;
+        left: 250px;
+    }
+
+    .workflow-2-node-3 {
+        top: 30px;
+        left: 450px;
+    }
+
+    .workflow-2-node-4 {
+        top: 160px;
+        left: 150px;
+    }
+
+    .workflow-2-node-5 {
+        top: 160px;
+        left: 350px;
+    }
+
+    .workflow-2-conn-1 {
+        top: 65px;
+        left: 170px;
+        width: 80px;
+    }
+
+    .workflow-2-conn-2 {
+        top: 65px;
+        left: 370px;
+        width: 80px;
+    }
+
+    .workflow-2-conn-3 {
+        top: 95px;
+        left: 110px;
+        width: 70px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-2-conn-4 {
+        top: 160px;
+        left: 270px;
+        width: 80px;
+    }
+
+    /* Workflow 3 */
+    .workflow-3-node-1 {
+        top: 40px;
+        left: 80px;
+    }
+
+    .workflow-3-node-2 {
+        top: 140px;
+        left: 80px;
+    }
+
+    .workflow-3-node-3 {
+        top: 240px;
+        left: 80px;
+    }
+
+    .workflow-3-node-4 {
+        top: 40px;
+        left: 280px;
+    }
+
+    .workflow-3-node-5 {
+        top: 140px;
+        left: 280px;
+    }
+
+    .workflow-3-node-6 {
+        top: 240px;
+        left: 280px;
+    }
+
+    .workflow-3-node-7 {
+        top: 140px;
+        left: 480px;
+    }
+
+    .workflow-3-conn-1 {
+        top: 105px;
+        left: 80px;
+        width: 35px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-3-conn-2 {
+        top: 205px;
+        left: 80px;
+        width: 35px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-3-conn-3 {
+        top: 105px;
+        left: 280px;
+        width: 35px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-3-conn-4 {
+        top: 205px;
+        left: 280px;
+        width: 35px;
+        transform: rotate(90deg);
+    }
+
+    .workflow-3-conn-5 {
+        top: 140px;
+        left: 400px;
+        width: 80px;
+    }
+
+    .workflow-3-conn-6 {
+        top: 75px;
+        left: 200px;
+        width: 80px;
+    }
+
+    .workflow-3-conn-7 {
+        top: 175px;
+        left: 200px;
+        width: 80px;
+    }
+
+    .workflow-3-conn-8 {
+        top: 275px;
+        left: 200px;
+        width: 80px;
+    }
+
+    @keyframes floatRight {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(calc(100vw + 650px));
+        }
+    }
+
+    /* Fix for invisible elements */
+    .animate-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    /* Mobile optimization for workflow backgrounds */
+    @media (max-width: 767px) {
+        .workflow-container {
+            opacity: 0.08;
+        }
+    }
+    
+    /* About page specific styles */
+    .about-hero {
+        padding: 120px 0 80px;
+        text-align: center;
+    }
+    
+    .about-hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+    
+    .about-hero p {
+        font-size: 1.25rem;
+        max-width: 800px;
+        margin: 0 auto 40px;
+    }
+    
+    .about-section {
+        padding: 80px 0;
+        text-align: center;
+    }
+    
+    .about-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .about-section h2:after {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 3px;
+        background-color: #4355FF;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .about-text {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .about-text p {
+        margin-bottom: 20px;
+    }
+    
+    .about-column {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 60px;
+    }
+    
+    .about-card {
+        width: 300px;
+        background-color: white;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+    
+    .about-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    
+    .about-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #4355FF;
+    }
+    
+    .about-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .about-icon {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #4355FF;
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        background-color: rgba(67, 85, 255, 0.1);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+        .about-card {
+            width: 45%;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .about-card {
+            width: 100%;
+        }
+        
+        .about-hero h1 {
+            font-size: 2.5rem;
+        }
+    }
+    </style>
+</head>
+
+<body>
+<div class="background-wrapper">
+    <!-- Workflow 1 -->
+    <div class="workflow-container workflow-container-1">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-1-node-1">Webhook</div>
+        <div class="n8n-node node-action workflow-1-node-2">Filter</div>
+        <div class="n8n-node node-action workflow-1-node-3">HTTP Request</div>
+        <div class="n8n-node node-helper workflow-1-node-4">Function</div>
+        <div class="n8n-node node-helper workflow-1-node-5">Set</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-1-conn-1"></div>
+        <div class="node-connection workflow-1-conn-2"></div>
+        <div class="node-connection workflow-1-conn-3"></div>
+        <div class="node-connection workflow-1-conn-4"></div>
+        <div class="node-connection workflow-1-conn-5"></div>
+        <div class="node-connection workflow-1-conn-6"></div>
+    </div>
+    
+    <!-- Workflow 2 -->
+    <div class="workflow-container workflow-container-2">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-2-node-1">Schedule</div>
+        <div class="n8n-node node-action workflow-2-node-2">Postgres</div>
+        <div class="n8n-node node-action workflow-2-node-3">Email</div>
+        <div class="n8n-node node-helper workflow-2-node-4">Split</div>
+        <div class="n8n-node node-helper workflow-2-node-5">Merge</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-2-conn-1"></div>
+        <div class="node-connection workflow-2-conn-2"></div>
+        <div class="node-connection workflow-2-conn-3"></div>
+        <div class="node-connection workflow-2-conn-4"></div>
+    </div>
+    
+    <!-- Workflow 3 -->
+    <div class="workflow-container workflow-container-3">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-3-node-1">Trigger</div>
+        <div class="n8n-node node-action workflow-3-node-2">Process</div>
+        <div class="n8n-node node-helper workflow-3-node-3">Output</div>
+        <div class="n8n-node node-trigger workflow-3-node-4">API</div>
+        <div class="n8n-node node-action workflow-3-node-5">Transform</div>
+        <div class="n8n-node node-helper workflow-3-node-6">Export</div>
+        <div class="n8n-node node-action workflow-3-node-7">Response</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-3-conn-1"></div>
+        <div class="node-connection workflow-3-conn-2"></div>
+        <div class="node-connection workflow-3-conn-3"></div>
+        <div class="node-connection workflow-3-conn-4"></div>
+        <div class="node-connection workflow-3-conn-5"></div>
+        <div class="node-connection workflow-3-conn-6"></div>
+        <div class="node-connection workflow-3-conn-7"></div>
+        <div class="node-connection workflow-3-conn-8"></div>
+    </div>
+    
+    <!-- Additional workflows for better coverage -->
+    <div class="workflow-container workflow-container-4">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-1-node-1">API</div>
+        <div class="n8n-node node-action workflow-1-node-2">Data</div>
+        <div class="n8n-node node-action workflow-1-node-3">Send Email</div>
+        <div class="n8n-node node-helper workflow-1-node-4">Code</div>
+        <div class="n8n-node node-helper workflow-1-node-5">Output</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-1-conn-1"></div>
+        <div class="node-connection workflow-1-conn-2"></div>
+        <div class="node-connection workflow-1-conn-3"></div>
+        <div class="node-connection workflow-1-conn-4"></div>
+        <div class="node-connection workflow-1-conn-5"></div>
+        <div class="node-connection workflow-1-conn-6"></div>
+    </div>
+    
+    <div class="workflow-container workflow-container-5">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-2-node-1">Cron</div>
+        <div class="n8n-node node-action workflow-2-node-2">MySQL</div>
+        <div class="n8n-node node-action workflow-2-node-3">Slack</div>
+        <div class="n8n-node node-helper workflow-2-node-4">Map</div>
+        <div class="n8n-node node-helper workflow-2-node-5">Join</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-2-conn-1"></div>
+        <div class="node-connection workflow-2-conn-2"></div>
+        <div class="node-connection workflow-2-conn-3"></div>
+        <div class="node-connection workflow-2-conn-4"></div>
+    </div>
+</div>
+
+<!-- Navigation (copied exactly from main page) -->
+<!-- Fixed Navigation Menu -->
+<header>
+    <div class="navbar-container">
+        <div class="brand">
+            <a href="/">
+                <img src="https://impactoautomationai.com/images/impacto-logo.png" alt="Impacto Automation AI" class="logo">
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">SERVICES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ai-automation-agency.html">AI and Automation</a></li>
+                        <li><a href="/social-media-marketing">Social Media Marketing</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/#features" class="nav-link">ABOUT US</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">RESOURCES</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/learn">Blog</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="cta-button">
+            <a href="/free-automation-consultation" class="button">Book A Call</a>
+        </div>
+    </div>
+</header>
+
+<style>
+/* Added inline styles to ensure the navigation renders correctly */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: white;
+}
+
+.logo {
+    height: 40px;
+}
+
+.main-nav {
+    display: flex;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 0 15px;
+    position: relative;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    min-width: 200px;
+    z-index: 10;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu a {
+    color: #333;
+    padding: 8px 15px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.button {
+    background-color: #4355FF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+</style>
+
+<!-- Hero Section styled with correct centering and proper font -->
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-heading">The Automation Revolution Is Here</h1>
+        <h1 class="hero-heading">We're The Architects Of<br>Operational Excellence</h1>
+        <a href="/free-automation-consultation" class="cta-button">Start Your Transformation</a>
+    </div>
+</div>
+
+<style>
+/* Hero section styles with proper centering and fonts */
+.hero-section {
+    background-color: rgba(67, 85, 255, 0.5);
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.hero-heading {
+    font-family: 'Belanosima', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.hero-subtext {
+    font-size: 1.25rem;
+    color: white;
+    max-width: 800px;
+    margin: 30px auto 40px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: white;
+    color: #4355FF;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    margin-top: 30px;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+</style>
+
+<!-- Updated Story Section with Centered Title and Correct Font -->
+<section class="story-section">
+    <div class="container">
+        <h2 class="section-title">Our Story</h2>
+        <div class="story-content">
+            <p>Impacto Automation AI was born from a simple yet powerful observation: businesses around the world were drowning in repetitive tasks, manual processes, and inefficient workflows that were holding them back from their true potential.</p>
+            <p>Our founders, seasoned veterans in business process optimization and artificial intelligence, recognized that the intersection of automation and AI could revolutionize how companies operate. They envisioned a world where businesses could focus on innovation and growth while intelligent systems handled the routine, repetitive tasks that consume valuable time and resources.</p>
+            <p>Today, Impacto stands at the forefront of the automation revolution, helping businesses of all sizes transform their operations, cut costs, and scale their impact. We've saved our clients over 50,000 hours of work and $100,000+ through our custom automation solutions.</p>
+            <p>What sets us apart isn't just our technical expertise or innovative solutions—it's our deep understanding of business operations and our commitment to delivering measurable results. We don't just implement technology; we architect transformation.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Updated styles for proper title centering and correct fonts */
+.story-section {
+    padding: 80px 0;
+    background-color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+    position: relative;
+    font-family: 'Belanosima', 'Inter', sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #4355FF;
+}
+
+.story-content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.story-content p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #444;
+    text-align: left;
+}
+
+/* Hero section headings */
+.hero-heading {
+    font-family: 'Belanosima', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    text-align: center;
+}
+
+/* All section headings */
+h2 {
+    font-family: 'Belanosima', 'Inter', sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+</style>
+
+<!-- Mission, Vision, Values Section -->
+<div class="section overflow-hidden animate-on-scroll">
+    <div class="container">
+        <div class="text-align-center">
+            <h2>Our Mission & Vision</h2>
+        </div>
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">🚀</div>
+                <h3>Mission</h3>
+                <p>To empower businesses to achieve operational excellence through intelligent automation, enabling them to focus on innovation and growth while eliminating repetitive, time-consuming tasks.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🔭</div>
+                <h3>Vision</h3>
+                <p>To lead the global transition to automated business operations, creating a world where human creativity and strategic thinking are amplified by intelligent systems working seamlessly in the background.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">💡</div>
+                <h3>Approach</h3>
+                <p>We believe in custom solutions tailored to each client's unique needs, combining deep business expertise with cutting-edge technology to deliver transformational results that drive measurable ROI.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Approach Section -->
+<div class="section animate-on-scroll" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="text-align-center">
+            <h2>Our Approach to Business Transformation</h2>
+        </div>
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">🔍</div>
+                <h3>Discovery & Analysis</h3>
+                <p>We begin by understanding your unique business challenges and identifying high-impact automation opportunities.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🧩</div>
+                <h3>Strategic Design</h3>
+                <p>We craft custom solutions that address your specific needs, integrating the right tools and technologies.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">⚙️</div>
+                <h3>Seamless Implementation</h3>
+                <p>Our experts handle the technical heavy lifting while ensuring minimal disruption to your ongoing operations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Expertise Section -->
+<div class="section animate-on-scroll">
+    <div class="container">
+        <div class="text-align-center">
+            <h2>Our Expertise</h2>
+        </div>
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">⚙️</div>
+                <h3>Workflow Automation</h3>
+                <p>We analyze your current workflows and identify automation opportunities to streamline processes, eliminate bottlenecks, and reduce manual intervention.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🤖</div>
+                <h3>AI Integration</h3>
+                <p>We leverage artificial intelligence to make your automated processes smarter, enabling them to learn and adapt over time for continuous improvement.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🔄</div>
+                <h3>Systems Integration</h3>
+                <p>We connect your disparate systems and tools to create a seamless ecosystem where data flows automatically between applications.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">📊</div>
+                <h3>Data Analytics</h3>
+                <p>We transform raw data into actionable insights through automated reporting systems that deliver the right information to the right people at the right time.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">💼</div>
+                <h3>Business Process Optimization</h3>
+                <p>We redesign core business processes to maximize efficiency, eliminate redundancies, and create scalable operations that grow with your business.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🔒</div>
+                <h3>Secure Implementations</h3>
+                <p>We build automation solutions with security at their core, ensuring your data remains protected while automation drives your business forward.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Commitment Section -->
+<div class="section animate-on-scroll" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="text-align-center">
+            <h2>Our Commitment to Excellence</h2>
+        </div>
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">⏱️</div>
+                <h3>Efficiency</h3>
+                <p>We help you eliminate wasted time and resources through intelligent automation of repetitive tasks.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">📊</div>
+                <h3>Measurable Results</h3>
+                <p>We focus on delivering quantifiable improvements in productivity, cost savings, and operational performance.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🚀</div>
+                <h3>Continuous Improvement</h3>
+                <p>We partner with you for the long term, constantly refining and enhancing your automation systems.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section copied from main page -->
+<!-- Clean Footer Section -->
+<footer class="footer-section">
+    <div class="footer-container">
+        <div class="footer-cta">
+            <h2 class="footer-heading">Let's scale together</h2>
+            <p class="footer-text">We've helped many businesses save 50,000+ hours and $100K+ with automation.<br>Let us do the same for your company.</p>
+            <a href="/free-automation-consultation" class="footer-button">Book a Free Call →</a>
+        </div>
+        
+        <div class="footer-main">
+            <div class="footer-brand">
+                <a href="/">
+                    <img src="https://impactoautomationai.com/images/impacto-logo.png" alt="Impacto Automation AI" class="footer-logo">
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-menu">
+                    <a href="/#features" class="footer-link">About Us</a>
+                    <span class="footer-divider">|</span>
+                    <a href="/#testimonials" class="footer-link">Testimonials</a>
+                    <span class="footer-divider">|</span>
+                    <a href="/free-automation-consultation" class="footer-link">Book a Call</a>
+                </div>
+                
+                <div class="footer-socials">
+                    <a href="https://www.youtube.com/@itsedimpacto" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                    <a href="https://twitter.com/itsedimpacto" target="_blank" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.9727 6.7174C20.5083 7.33692 19.9469 7.87733 19.3102 8.31776C19.3102 8.47959 19.3102 8.64142 19.3102 8.81225C19.3153 11.7511 18.1414 14.5691 16.0517 16.6345C13.9619 18.6999 11.1311 19.8399 8.19393 19.7989C6.49587 19.8046 4.81955 19.4169 3.2963 18.6661C3.21416 18.6302 3.16119 18.549 3.1615 18.4593V18.3604C3.1615 18.2313 3.26611 18.1267 3.39515 18.1267C5.0643 18.0716 6.6739 17.4929 7.99622 16.4724C6.48541 16.4419 5.12607 15.5469 4.50048 14.1707C4.46889 14.0956 4.47872 14.0093 4.52645 13.9432C4.57417 13.8771 4.65288 13.8407 4.73413 13.8471C5.1933 13.8932 5.65706 13.8505 6.10008 13.7212C4.43227 13.375 3.17909 11.9904 2.99974 10.2957C2.99337 10.2144 3.0298 10.1357 3.09588 10.0879C3.16195 10.0402 3.24812 10.0303 3.32326 10.062C3.77082 10.2595 4.25397 10.3635 4.74312 10.3676C3.28172 9.40846 2.65049 7.58405 3.20643 5.92622C3.26382 5.76513 3.40169 5.64612 3.56938 5.61294C3.73706 5.57975 3.90984 5.63728 4.0242 5.76439C5.99627 7.86325 8.70592 9.11396 11.5818 9.25279C11.5082 8.95885 11.472 8.65676 11.474 8.35372C11.5009 6.76472 12.4841 5.34921 13.9633 4.76987C15.4424 4.19054 17.1248 4.56203 18.2229 5.71044C18.9713 5.56785 19.6949 5.31645 20.3706 4.96421C20.4201 4.93331 20.4829 4.93331 20.5324 4.96421C20.5633 5.01373 20.5633 5.07652 20.5324 5.12604C20.2051 5.87552 19.6522 6.50412 18.9508 6.92419C19.565 6.85296 20.1684 6.70807 20.7481 6.49264C20.7969 6.45942 20.861 6.45942 20.9098 6.49264C20.9507 6.51134 20.9813 6.54711 20.9934 6.59042C21.0055 6.63373 20.9979 6.68018 20.9727 6.7174Z" fill="currentColor"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/impactoautomation/" target="_blank" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3ZM8 18C8.27614 18 8.5 17.7761 8.5 17.5V10.5C8.5 10.2239 8.27614 10 8 10H6.5C6.22386 10 6 10.2239 6 10.5V17.5C6 17.7761 6.22386 18 6.5 18H8ZM7.25 9C6.42157 9 5.75 8.32843 5.75 7.5C5.75 6.67157 6.42157 6 7.25 6C8.07843 6 8.75 6.67157 8.75 7.5C8.75 8.32843 8.07843 9 7.25 9ZM17.5 18C17.7761 18 18 17.7761 18 17.5V12.9C18.0325 11.3108 16.8576 9.95452 15.28 9.76C14.177 9.65925 13.1083 10.1744 12.5 11.1V10.5C12.5 10.2239 12.2761 10 12 10H10.5C10.2239 10 10 10.2239 10 10.5V17.5C10 17.7761 10.2239 18 10.5 18H12C12.2761 18 12.5 17.7761 12.5 17.5V13.75C12.5 12.9216 13.1716 12.25 14 12.25C14.8284 12.25 15.5 12.9216 15.5 13.75V17.5C15.5 17.7761 15.7239 18 16 18H17.5Z" fill="currentColor"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">Copyright Impacto Automation AI ©2025</div>
+            <div class="legal-links">
+                <a href="/privacy-policy" class="legal-link">Privacy Policy</a>
+                <a href="/terms-conditions" class="legal-link">Terms & Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Footer styles */
+.footer-section {
+    background-color: #f5f5f7;
+    padding: 0;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-cta {
+    background-color: #4355FF;
+    padding: 60px 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    margin-bottom: 60px;
+    transform: translateY(-40px);
+    box-shadow: 0 15px 30px rgba(67, 85, 255, 0.2);
+}
+
+.footer-heading {
+    font-family: 'Belanosima', 'Inter', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-text {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.footer-button {
+    display: inline-block;
+    background-color: white;
+    color: #4355FF;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.footer-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    height: 40px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer-menu {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.footer-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #4355FF;
+}
+
+.footer-divider {
+    margin: 0 15px;
+    color: #ddd;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #4355FF;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #4355FF;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.legal-links {
+    display: flex;
+    gap: 20px;
+}
+
+.legal-link {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.legal-link:hover {
+    color: #4355FF;
+}
+
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .footer-links {
+        align-items: center;
+    }
+    
+    .footer-menu {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-divider {
+        display: none;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}
+</style>
+
+<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65e86a4e7f4a8a8ef1e1fe5e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="js/webflow.6c15692c9.js" type="text/javascript"></script>
+
+<script>
+  $(document).ready(function() {
+    // Replace all inline style opacity and transform with animate-on-scroll class
+    $('[style*="opacity:0"], [style*="transform:translate3d"]').addClass('animate-on-scroll');
+    
+    // Force apply background color to hero section
+    $('.section.hero').css({
+      'background-color': 'rgba(67, 85, 255, 0.5) !important',
+      'background': 'rgba(67, 85, 255, 0.5) !important'
+    });
+    
+    // Force hero section background to be visible
+    $('.section.hero').attr('style', 'background: rgba(67, 85, 255, 0.5) !important; background-color: rgba(67, 85, 255, 0.5) !important;');
+    
+    // Intersection Observer for animations
+    if ('IntersectionObserver' in window) {
+      const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            animationObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      document.querySelectorAll('.animate-on-scroll, .about-card').forEach(element => {
+        animationObserver.observe(element);
+      });
+    } else {
+      // Fallback for browsers that don't support IntersectionObserver
+      document.querySelectorAll('.animate-on-scroll, .about-card').forEach(element => {
+        element.classList.add('is-visible');
+      });
+    }
+    
+    // Make sure all solution cards are visible
+    $('.about-card').css('opacity', 1);
+    
+    // Ensure the section is visible
+    $('.section.overflow-hidden').css({
+      'opacity': 1,
+      'transform': 'none'
+    });
+    
+    // Force all sections to have transparent backgrounds
+    $('.section').css('background-color', 'transparent');
+    
+    // Make sure background wrapper is visible 
+    $('.background-wrapper').css({
+      'display': 'block',
+      'z-index': '-1'
+    });
+    
+    // Force workflow containers to maintain consistent opacity
+    $('.workflow-container').css('opacity', '0.25');
+    
+    // Mobile menu improvements
+    $('.menu-button').on('click', function() {
+      $('.nav-menu').toggleClass('nav-menu-open');
+    });
+    
+    // Subtle opacity changes for workflow containers on scroll
+    $(window).on('scroll', function() {
+      var scrollTop = $(window).scrollTop();
+      var viewportHeight = $(window).height();
+      var documentHeight = $(document).height();
+      
+      // Calculate scroll percentage (0 to 1)
+      var scrollPercentage = scrollTop / (documentHeight - viewportHeight);
+      
+      // Subtle opacity changes for workflow containers
+      var minOpacity = 0.18;
+      var maxOpacity = 0.25;
+      var opacityRange = maxOpacity - minOpacity;
+      var newOpacity = minOpacity + (Math.sin(scrollPercentage * Math.PI * 2) * opacityRange);
+      
+      // Apply opacity with a check for mobile devices
+      if (window.innerWidth > 767) {
+        $('.workflow-container').css('opacity', newOpacity);
+      }
+    });
+
+    // Trigger scroll event to initialize
+    $(window).trigger('scroll');
+  });
+</script>
+</body>
+</html><!DOCTYPE html>
+<html data-wf-domain="www.impactoautomationai.com" data-wf-page="about-page" data-wf-site="6427c6c769d01c2f58037956">
+<head>
+    <meta charset="utf-8">
+    <title>About Us - Impacto Automation AI</title>
+    <meta content="Learn about Impacto Automation AI, your partner in operational excellence. Our mission is to transform businesses through custom automation solutions and AI integration." name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="css/impacto-automation-dev.webflow.ce2ff4edc.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+    <script src="js/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">WebFont.load({  google: {    families: ["Inter:300,regular,500,600,700","Roboto:300,300italic,regular,italic,500,500italic,700,700italic,900,900italic","Belanosima:regular,600,700"]  }});</script>
+    <link href="images/6433db3d21ae1325db387377_Screen%20Shot%202023-04-10%20at%2006.47.13.png" rel="shortcut icon" type="image/x-icon">
+    <link href="images/65f7a2b55e7488f65da80074_Icons%20Overlayed.png" rel="apple-touch-icon">
+    
+    <style>
+    /* Inherit all styles from main page */
+    .background-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        background-image: none;
+        background-size: 20px 20px;
+    }
+    
+    .section.hero {
+        background-color: rgba(67, 85, 255, 0.5) !important;
+        position: relative;
+        isolation: isolate;
+        z-index: 1;
+    }
+    
+    .section.hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: rgba(67, 85, 255, 0.5);
+        z-index: -1;
+    }
+    
+    /* About page specific styles */
+    .about-hero {
+        padding: 120px 0 80px;
+        text-align: center;
+    }
+    
+    .about-hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+    
+    .about-hero p {
+        font-size: 1.25rem;
+        max-width: 800px;
+        margin: 0 auto 40px;
+    }
+    
+    .about-section {
+        padding: 80px 0;
+        text-align: center;
+    }
+    
+    .about-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .about-section h2:after {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 3px;
+        background-color: #4355FF;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .about-text {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .about-text p {
+        margin-bottom: 20px;
+    }
+    
+    .about-column {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 60px;
+    }
+    
+    .about-card {
+        width: 300px;
+        background-color: white;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+    
+    .about-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    
+    .about-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #4355FF;
+    }
+    
+    .about-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .about-icon {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #4355FF;
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        background-color: rgba(67, 85, 255, 0.1);
+    }
+    
+    .team-section {
+        background-color: #f8f9fa;
+        padding: 80px 0;
+    }
+    
+    .team-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 50px;
+    }
+    
+    .team-member {
+        width: 280px;
+        text-align: center;
+    }
+    
+    .team-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        background-color: #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: #4355FF;
+    }
+    
+    .team-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .team-title {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+    }
+    
+    .timeline-section {
+        padding: 100px 0;
+    }
+    
+    .timeline-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .timeline-line {
+        position: absolute;
+        width: 4px;
+        background-color: #4355FF;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+    }
+    
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+    }
+    
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border: 4px solid #4355FF;
+        border-radius: 50%;
+        top: 15px;
+    }
+    
+    .timeline-item:nth-child(odd) {
+        left: 0;
+    }
+    
+    .timeline-item:nth-child(even) {
+        left: 50%;
+    }
+    
+    .timeline-item:nth-child(odd)::after {
+        right: -12px;
+    }
+    
+    .timeline-item:nth-child(even)::after {
+        left: -12px;
+    }
+    
+    .timeline-date {
+        font-weight: 600;
+        color: #4355FF;
+        margin-bottom: 10px;
+    }
+    
+    .timeline-content {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .stats-section {
+        background-color: #4355FF;
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+    }
+    
+    .stats-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .stat-item {
+        padding: 30px;
+        width: 250px;
+    }
+    
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        font-size: 1.2rem;
+    }
+    
+    .values-section {
+        padding: 100px 0;
+    }
+    
+    .values-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 50px;
+    }
+    
+    .value-card {
+        width: 300px;
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+    
+    .value-icon {
+        font-size: 3rem;
+        color: #4355FF;
+        margin-bottom: 20px;
+    }
+    
+    .value-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    
+    .value-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 991px) {
+        .about-card {
+            width: 45%;
+        }
+        
+        .timeline-item {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 20px;
+        }
+        
+        .timeline-line {
+            left: 40px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 0;
+        }
+        
+        .timeline-item::after {
+            left: 30px !important;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .about-card {
+            width: 100%;
+        }
+        
+        .about-hero h1 {
+            font-size: 2.5rem;
+        }
+        
+        .stat-item {
+            width: 150px;
+            padding: 20px 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+        }
+    }
+    </style>
+</head>
+
+<body>
+<!-- Background Wrapper (copied from main page) -->
+<div class="background-wrapper">
+    <!-- Workflow 1 -->
+    <div class="workflow-container workflow-container-1">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-1-node-1">Webhook</div>
+        <div class="n8n-node node-action workflow-1-node-2">Filter</div>
+        <div class="n8n-node node-action workflow-1-node-3">HTTP Request</div>
+        <div class="n8n-node node-helper workflow-1-node-4">Function</div>
+        <div class="n8n-node node-helper workflow-1-node-5">Set</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-1-conn-1"></div>
+        <div class="node-connection workflow-1-conn-2"></div>
+        <div class="node-connection workflow-1-conn-3"></div>
+        <div class="node-connection workflow-1-conn-4"></div>
+        <div class="node-connection workflow-1-conn-5"></div>
+        <div class="node-connection workflow-1-conn-6"></div>
+    </div>
+    
+    <!-- Workflow 2 -->
+    <div class="workflow-container workflow-container-2">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-2-node-1">Schedule</div>
+        <div class="n8n-node node-action workflow-2-node-2">Postgres</div>
+        <div class="n8n-node node-action workflow-2-node-3">Email</div>
+        <div class="n8n-node node-helper workflow-2-node-4">Split</div>
+        <div class="n8n-node node-helper workflow-2-node-5">Merge</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-2-conn-1"></div>
+        <div class="node-connection workflow-2-conn-2"></div>
+        <div class="node-connection workflow-2-conn-3"></div>
+        <div class="node-connection workflow-2-conn-4"></div>
+    </div>
+    
+    <!-- Workflow 3 (copied from main page) -->
+    <div class="workflow-container workflow-container-3">
+        <!-- Nodes -->
+        <div class="n8n-node node-trigger workflow-3-node-1">Trigger</div>
+        <div class="n8n-node node-action workflow-3-node-2">Process</div>
+        <div class="n8n-node node-helper workflow-3-node-3">Output</div>
+        <div class="n8n-node node-trigger workflow-3-node-4">API</div>
+        <div class="n8n-node node-action workflow-3-node-5">Transform</div>
+        <div class="n8n-node node-helper workflow-3-node-6">Export</div>
+        <div class="n8n-node node-action workflow-3-node-7">Response</div>
+        
+        <!-- Connections -->
+        <div class="node-connection workflow-3-conn-1"></div>
+        <div class="node-connection workflow-3-conn-2"></div>
+        <div class="node-connection workflow-3-conn-3"></div>
+        <div class="node-connection workflow-3-conn-4"></div>
+        <div class="node-connection workflow-3-conn-5"></div>
+        <div class="node-connection workflow-3-conn-6"></div>
+        <div class="node-connection workflow-3-conn-7"></div>
+        <div class="node-connection workflow-3-conn-8"></div>
+    </div>
+</div>
+
+<!-- Navigation (copied from main page) -->
+<div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+    <div class="container flex w-container">
+        <div class="brand">
+            <a href="/" class="brand-logo w-nav-brand">
+                <img src="images/impacto-logo.png" loading="lazy" alt="Impacto Automation AI" class="image">
+            </a>
+        </div>
+        <nav role="navigation" class="nav-menu w-nav-menu">
+            <div data-hover="true" data-delay="0" class="w-dropdown">
+                <div class="nav-link w-dropdown-toggle">
+                    <div class="w-icon-dropdown-toggle"></div>
+                    <div><span class="opacity-60">01</span><br>SERVICES</div>
+                </div>
+                <nav class="nav-dropdown w-dropdown-list">
+                    <a href="/ai-automation-agency.html" class="nav-dropdown-item w-dropdown-link">AI and Automation</a>
+                    <a href="/social-media-marketing" class="nav-dropdown-item w-dropdown-link">Social Media Marketing</a>
+                </nav>
+            </div>
+            <a href="/#features" class="nav-link w-nav-link">
+                <span class="opacity-60">02</span><br>ABOUT US
+            </a>
+            <div data-hover="true" data-delay="0" class="w-dropdown">
+                <div class="nav-link w-dropdown-toggle">
+                    <div class="w-icon-dropdown-toggle"></div>
+                    <div><span class="opacity-60">03</span><br>RESOURCES</div>
+                </div>
+                <nav class="nav-dropdown w-dropdown-list">
+                    <a href="/learn" class="nav-dropdown-item w-dropdown-link">Blog</a>
+                </nav>
+            </div>
+        </nav>
+        <div class="menu-button w-nav-button">
+            <div class="w-icon-nav-menu"></div>
+        </div>
+        <a href="/free-automation-consultation" class="button navlink w-button">Book A Call</a>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<div class="section hero about-hero">
+    <div class="container">
+        <h1>The Automation Revolution Is Here</h1>
+        <p>We're the architects of operational excellence, transforming businesses through intelligent automation solutions that drive growth, efficiency, and innovation.</p>
+        <a href="/free-automation-consultation" class="button w-button">Start Your Transformation</a>
+    </div>
+    <img src="images/6427ce2ee23a16d26b372c45_bg-lines-impacto.svg" loading="lazy" alt="" class="bg-lines-absolute">
+</div>
+
+<!-- Our Story Section -->
+<div class="about-section">
+    <div class="container">
+        <h2>Our Story</h2>
+        <div class="about-text">
+            <p>Impacto Automation AI was born from a simple yet powerful observation: businesses around the world were drowning in repetitive tasks, manual processes, and inefficient workflows that were holding them back from their true potential.</p>
+            <p>Our founders, seasoned veterans in business process optimization and artificial intelligence, recognized that the intersection of automation and AI could revolutionize how companies operate. They envisioned a world where businesses could focus on innovation and growth while intelligent systems handled the routine, repetitive tasks that consume valuable time and resources.</p>
+            <p>Today, Impacto stands at the forefront of the automation revolution, helping businesses of all sizes transform their operations, cut costs, and scale their impact. We've saved our clients over 50,000 hours of work and $100,000+ through our custom automation solutions.</p>
+            <p>What sets us apart isn't just our technical expertise or innovative solutions—it's our deep understanding of business operations and our commitment to delivering measurable results. We don't just implement technology; we architect transformation.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Mission, Vision, Values Section -->
+<div class="about-section">
+    <div class="container">
+        <h2>Our Mission & Vision</h2>
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">🚀</div>
+                <h3>Mission</h3>
+                <p>To empower businesses to achieve operational excellence through intelligent automation, enabling them to focus on innovation and growth while eliminating repetitive, time-consuming tasks.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🔭</div>
+                <h3>Vision</h3>
+                <p>To lead the global transition to automated business operations, creating a world where human creativity and strategic thinking are amplified by intelligent systems working seamlessly in the background.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">💡</div>
+                <h3>Approach</h3>
+                <p>We believe in custom solutions tailored to each client's unique needs, combining deep business expertise with cutting-edge technology to deliver transformational results that drive measurable ROI.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Core Values Section -->
+<div class="values-section">
+    <div class="container">
+        <h2>Our Core Values</h2>
+        <div class="values-container">
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3 class="value-title">Results-Driven</h3>
+                <p class="value-text">We measure our success by the tangible impact we create for our clients, prioritizing outcomes over activities.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔄</div>
+                <h3 class="value-title">Continuous Innovation</h3>
+                <p class="value-text">We constantly push the boundaries of what's possible, staying at the forefront of automation and AI technology.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3 class="value-title">Client Partnership</h3>
+                <p class="value-text">We work as an extension of your team, deeply understanding your business to deliver truly transformative solutions.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3 class="value-title">Operational Excellence</h3>
+                <p class="value-text">We practice what we preach, applying automation principles to our own operations to deliver efficiently.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🧠</div>
+                <h3 class="value-title">Expertise-Driven</h3>
+                <p class="value-text">We combine deep technical knowledge with business acumen to create solutions that truly transform operations.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3 class="value-title">Sustainable Growth</h3>
+                <p class="value-text">We build systems that scale with your business, ensuring long-term success rather than quick fixes.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Approach Section -->
+<div class="about-section">
+    <div class="container">
+        <h2>Our Approach to Business Transformation</h2>
+        <p class="text-center">We combine deep technical expertise, business acumen, and innovative thinking to deliver transformative automation solutions.</p>
+        
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">🔍</div>
+                <h3>Discovery & Analysis</h3>
+                <p>We begin by understanding your unique business challenges and identifying high-impact automation opportunities.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🧩</div>
+                <h3>Strategic Design</h3>
+                <p>We craft custom solutions that address your specific needs, integrating the right tools and technologies.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">⚙️</div>
+                <h3>Seamless Implementation</h3>
+                <p>Our experts handle the technical heavy lifting while ensuring minimal disruption to your ongoing operations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Commitment Section -->
+<div class="about-section" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2>Our Commitment to Excellence</h2>
+        <p class="text-center">We're dedicated to delivering measurable results that transform how your business operates.</p>
+        
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">⏱️</div>
+                <h3>Efficiency</h3>
+                <p>We help you eliminate wasted time and resources through intelligent automation of repetitive tasks.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">📊</div>
+                <h3>Measurable Results</h3>
+                <p>We focus on delivering quantifiable improvements in productivity, cost savings, and operational performance.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🚀</div>
+                <h3>Continuous Improvement</h3>
+                <p>We partner with you for the long term, constantly refining and enhancing your automation systems.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Expertise Section -->
+<div class="about-section">
+    <div class="container">
+        <h2>Our Expertise</h2>
+        <div class="about-column">
+            <div class="about-card">
+                <div class="about-icon">⚙️</div>
+                <h3>Workflow Automation</h3>
+                <p>We analyze your current workflows and identify automation opportunities to streamline processes, eliminate bottlenecks, and reduce manual intervention.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🤖</div>
+                <h3>AI Integration</h3>
+                <p>We leverage artificial intelligence to make your automated processes smarter, enabling them to learn and adapt over time for continuous improvement.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🔄</div>
+                <h3>Systems Integration</h3>
+                <p>We connect your disparate systems and tools to create a seamless ecosystem where data flows automatically between applications.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">📊</div>
+                <h3>Data Analytics</h3>
+                <p>We transform raw data into actionable insights through automated reporting systems that deliver the right information to the right people at the right time.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">💼</div>
+                <h3>Business Process Optimization</h3>
+                <p>We redesign core business processes to maximize efficiency, eliminate redundancies, and create scalable operations that grow with your business.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🔒</div>
+                <h3>Secure Implementations</h3>
+                <p>We build automation solutions with security at their core, ensuring your data remains protected while automation drives your business forward.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="section cta-section">
+    <div class="container">
+        <div class="cta-blue animate-on-scroll">
+            <h2 class="h2-center-white center">Ready to Automate Your Business?</h2>
+            <p class="paragraph _60 top center">Book a free consultation to discover how our custom automation solutions can transform your operations and drive growth.</p>
+            <a href="/free-automation-consultation" class="button white w-button">Book a Free Call →</a>
+        </div>
+    </div>
+    <img src="images/6429745b66cfe6b77f861dbe_Line%206.svg" loading="lazy" alt="" class="image-3">
+</div>
+
+<!-- Footer Section (copied from main page) -->
+<div class="section footer">
+    <div class="container">
+        <div class="f-footer-bottom">
+            <div class="f-footer-brand">
+                <a href="/" class="logo-link w-nav-brand">
+                    <img src="images/impacto-logo.png" loading="lazy" alt="Impacto Automation AI" class="image-footer">
+                </a>
+            </div>
+            <div class="f-footer-group">
+                <div class="f-footer-menu">
+                    <a href="/#features" class="navlinks w-inline-block">
+                        <div>About Us</div>
+                    </a>
+                    <div class="f-footer-vertical-divider"></div>
+                    <a href="/#testimonials" class="navlinks w-inline-block">
+                        <div class="text-block-3">Testimonials</div>
+                    </a>
+                    <div class="f-footer-vertical-divider"></div>
+                    <a href="/free-automation-consultation" class="navlinks w-inline-block">
+                        <div>Book a Call</div>
+                    </a>
+                </div>
+                <div class="f-footer-social-row-large">
+                    <div class="f-footer-social-group">
+                        <a href="https://www.youtube.com/@itsedimpacto" target="_blank" class="f-footer-social w-inline-block">
+                            <div class="f-icon-regular w-embed">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube">
+                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://twitter.com/itsedimpacto" target="_blank" class="f-footer-social w-inline-block">
+                            <div class="f-icon-regular w-embed">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.9727 6.7174C20.5083 7.33692 19.9469 7.87733 19.3102 8.31776C19.3102 8.47959 19.3102 8.64142 19.3102 8.81225C19.3153 11.7511 18.1414 14.5691 16.0517 16.6345C13.9619 18.6999 11.1311 19.8399 8.19393 19.7989C6.49587 19.8046 4.81955 19.4169 3.2963 18.6661C3.21416 18.6302 3.16119 18.549 3.1615 18.4593V18.3604C3.1615 18.2313 3.26611 18.1267 3.39515 18.1267C5.0643 18.0716 6.6739 17.4929 7.99622 16.4724C6.48541 16.4419 5.12607 15.5469 4.50048 14.1707C4.46889 14.0956 4.47872 14.0093 4.52645 13.9432C4.57417 13.8771 4.65288 13.8407 4.73413 13.8471C5.1933 13.8932 5.65706 13.8505 6.10008 13.7212C4.43227 13.375 3.17909 11.9904 2.99974 10.2957C2.99337 10.2144 3.0298 10.1357 3.09588 10.0879C3.16195 10.0402 3.24812 10.0303 3.32326 10.062C3.77082 10.2595 4.25397 10.3635 4.74312 10.3676C3.28172 9.40846 2.65049 7.58405 3.20643 5.92622C3.26382 5.76513 3.40169 5.64612 3.56938 5.61294C3.73706 5.57975 3.90984 5.63728 4.0242 5.76439C5.99627 7.86325 8.70592 9.11396 11.5818 9.25279C11.5082 8.95885 11.472 8.65676 11.474 8.35372C11.5009 6.76472 12.4841 5.34921 13.9633 4.76987C15.4424 4.19054 17.1248 4.56203 18.2229 5.71044C18.9713 5.56785 19.6949 5.31645 20.3706 4.96421C20.4201 4.93331 20.4829 4.93331 20.5324 4.96421C20.5633 5.01373 20.5633 5.07652 20.5324 5.12604C20.2051 5.87552 19.6522 6.50412 18.9508 6.92419C19.565 6.85296 20.1684 6.70807 20.7481 6.49264C20.7969 6.45942 20.861 6.45942 20.9098 6.49264C20.9507 6.51134 20.9813 6.54711 20.9934 6.59042C21.0055 6.63373 20.9979 6.68018 20.9727 6.7174Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/company/impactoautomation/" target="_blank" class="f-footer-social w-inline-block">
+                            <div class="f-icon-regular w-embed">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3ZM8 18C8.27614 18 8.5 17.7761 8.5 17.5V10.5C8.5 10.2239 8.27614 10 8 10H6.5C6.22386 10 6 10.2239 6 10.5V17.5C6 17.7761 6.22386 18 6.5 18H8ZM7.25 9C6.42157 9 5.75 8.32843 5.75 7.5C5.75 6.67157 6.42157 6 7.25 6C8.07843 6 8.75 6.67157 8.75 7.5C8.75 8.32843 8.07843 9 7.25 9ZM17.5 18C17.7761 18 18 17.7761 18 17.5V12.9C18.0325 11.3108 16.8576 9.95452 15.28 9.76C14.177 9.65925 13.1083 10.1744 12.5 11.1V10.5C12.5 10.2239 12.2761 10 12 10H10.5C10.2239 10 10 10.2239 10 10.5V17.5C10 17.7761 10.2239 18 10.5 18H12C12.2761 18 12.5 17.7761 12.5 17.5V13.75C12.5 12.9216 13.1716 12.25 14 12.25C14.8284 12.25 15.5 12.9216 15.5 13.75V17.5C15.5 17.7761 15.7239 18 16 18H17.5Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="f-footer-horizontal-divider"></div>
+        <div class="f-footer-bottom top">
+            <div class="f-footer-brand">
+                <div class="copyright-text">Copyright Impacto Automation AI ©2025</div>
+            </div>
+            <div class="f-footer-vertical-divider"></div>
+            <a href="/privacy-policy" class="link-4 text-block-3">Privacy Policy</a>
+            <a href="/terms-conditions" class="link-5">Terms & Conditions</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65e86a4e7f4a8a8ef1e1fe5e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="js/webflow.6c15692c9.js" type="text/javascript"></script>
+
+<script>
+  $(document).ready(function() {
+    // Force opacity of animate-on-scroll elements
+    $('.animate-on-scroll').css({
+      'opacity': '1',
+      'transform': 'none'
+    });
+    
+    // Force hero section background to be visible
+    $('.section.hero').attr('style', 'background: rgba(67, 85, 255, 0.5) !important; background-color: rgba(67, 85, 255, 0.5) !important;');
+    
+    // Intersection Observer for animations
+    if ('IntersectionObserver' in window) {
+      const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            animationObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      document.querySelectorAll('.about-card, .team-member, .value-card').forEach(element => {
+        animationObserver.observe(element);
+      });
+    }
+    
+    // Force workflow containers to maintain consistent opacity
+    $('.workflow-container').css('opacity', '0.25');
+    
+    // Subtle opacity changes for workflow containers on scroll
+    $(window).on('scroll', function() {
+      var scrollTop = $(window).scrollTop();
+      var viewportHeight = $(window).height();
+      var documentHeight = $(document).height();
+      
+      // Calculate scroll percentage (0 to 1)
+      var scrollPercentage = scrollTop / (documentHeight - viewportHeight);
+      
+      // Subtle opacity changes for workflow containers
+      var minOpacity = 0.18;
+      var maxOpacity = 0.25;
+      var opacityRange = maxOpacity - minOpacity;
+      var newOpacity = minOpacity + (Math.sin(scrollPercentage * Math.PI * 2) * opacityRange);
+      
+      // Apply opacity with a check for mobile devices
+      if (window.innerWidth > 767) {
+        $('.workflow-container').css('opacity', newOpacity);
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'About Us | Impacto Automation AI',
   description: 'Learn about our mission to make artificial intelligence and automation accessible, practical, and powerful for everyone.',
 };
@@ -29,7 +29,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Our Mission</h2>
           <div className="prose prose-lg max-w-none">
             <p>
-              Impacto Automation AI was founded with a single mission: to make artificial intelligence and automation accessible, practical, and powerful for everyone—especially beginners and small to medium-sized businesses. We believe that AI isn't just for tech giants or experts – it's a tool that anyone can use to solve real problems, improve efficiency, and innovate. Our mission is to break down barriers so that <strong>you</strong> can harness the power of AI in your everyday work and projects.
+              Impacto Automation AI was founded with a single mission: to make artificial intelligence and automation accessible, practical, and powerful for everyone—especially beginners and small to medium-sized businesses. We believe that AI isn&apos;t just for tech giants or experts – it&apos;s a tool that anyone can use to solve real problems, improve efficiency, and innovate. Our mission is to break down barriers so that <strong>you</strong> can harness the power of AI in your everyday work and projects.
             </p>
           </div>
         </section>
@@ -42,7 +42,7 @@ export default function AboutPage() {
               Impacto Automation AI began in 2022 with a simple idea and a lot of passion. Rafael Ananias, our founder, has been in love with computing since the days of MS-DOS. When he started exploring the world of AI in 2022, he realized something important: most people never had the chance to access or learn about this powerful technology. Rafael taught himself AI from the ground up and brought together a team of like-minded AI enthusiasts.
             </p>
             <p>
-              Together, they set out to turn that knowledge into practical tools and guidance for everyone. What started as one person's dream is now a growing team on a mission to make AI approachable and beneficial to all.
+              Together, they set out to turn that knowledge into practical tools and guidance for everyone. What started as one person&apos;s dream is now a growing team on a mission to make AI approachable and beneficial to all.
             </p>
           </div>
         </section>
@@ -52,10 +52,10 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Why We Exist</h2>
           <div className="prose prose-lg max-w-none">
             <p>
-              We founded Impacto Automation AI because we saw a gap. So many small and medium-sized businesses want to leverage AI but feel it's too complicated, too expensive, or just out of reach. We're here to change that.
+              We founded Impacto Automation AI because we saw a gap. So many small and medium-sized businesses want to leverage AI but feel it&apos;s too complicated, too expensive, or just out of reach. We&apos;re here to change that.
             </p>
             <p>
-              By simplifying complex concepts and focusing on practical solutions, we help demystify AI for everyday people. In short, we exist to empower those who thought AI was "not for me" to finally say, "I <em>can</em> do this with AI."
+              By simplifying complex concepts and focusing on practical solutions, we help demystify AI for everyday people. In short, we exist to empower those who thought AI was &quot;not for me&quot; to finally say, &quot;I <em>can</em> do this with AI.&quot;
             </p>
           </div>
         </section>
@@ -116,7 +116,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-gray-900">Real-World Results</h3>
-                <p className="text-gray-700">We measure success by the tangible improvements we create for our clients. If it doesn't help you in the real world, we won't recommend it.</p>
+                <p className="text-gray-700">We measure success by the tangible improvements we create for our clients. If it doesn&apos;t help you in the real world, we won&apos;t recommend it.</p>
               </div>
             </li>
           </ul>
@@ -128,11 +128,11 @@ export default function AboutPage() {
           <div className="bg-blue-50 p-8 rounded-xl">
             <div className="prose prose-lg max-w-none">
               <p>
-                Hi, I'm Rafael Ananias – Founder and CEO of Impacto Automation AI.
-                My journey with technology started early, back when I was a curious kid experimenting with commands on a DOS computer. That spark never left. In 2022, when I began exploring the world of Artificial Intelligence, one thing became clear: AI shouldn't be exclusive to tech experts or big corporations.
+                Hi, I&apos;m Rafael Ananias – Founder and CEO of Impacto Automation AI.
+                My journey with technology started early, back when I was a curious kid experimenting with commands on a DOS computer. That spark never left. In 2022, when I began exploring the world of Artificial Intelligence, one thing became clear: AI shouldn&apos;t be exclusive to tech experts or big corporations.
               </p>
               <p>
-                I launched Impacto Automation AI with a simple mission — to make the power of AI accessible to everyone. Whether you're a small business owner, educator, or creative professional, you deserve tools that work for you — not against you.
+                I launched Impacto Automation AI with a simple mission — to make the power of AI accessible to everyone. Whether you&apos;re a small business owner, educator, or creative professional, you deserve tools that work for you — not against you.
               </p>
               <p>
                 Today, I lead a passionate team committed to helping people harness ethical, practical AI solutions that simplify workflows, spark innovation, and create real impact.
@@ -145,7 +145,7 @@ export default function AboutPage() {
         <section className="bg-gray-100 p-8 rounded-xl text-center">
           <h3 className="text-2xl font-bold mb-4">Ready to Start Your AI Journey?</h3>
           <p className="text-lg mb-6">
-            We're excited to help you explore how AI can create real results for you. Whether you're just curious or ready to dive in, we're here to guide you every step of the way. <strong>Let's talk about your goals and ideas.</strong>
+            We&apos;re excited to help you explore how AI can create real results for you. Whether you&apos;re just curious or ready to dive in, we&apos;re here to guide you every step of the way. <strong>Let&apos;s talk about your goals and ideas.</strong>
           </p>
           <a
             href="https://calendly.com/rba-aus"

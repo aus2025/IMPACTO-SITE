@@ -292,7 +292,7 @@ export default function StarterPackagePage() {
             
             <div className="text-center">
               <p className="text-lg mb-6 text-gray-700">
-                "It's like having a virtual assistant working 24/7 for a fraction of the cost."
+                &quot;It&apos;s like having a virtual assistant working 24/7 for a fraction of the cost.&quot;
               </p>
             </div>
           </div>
@@ -391,7 +391,7 @@ export default function StarterPackagePage() {
             
             <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 text-center">
               <p className="text-gray-700 italic">
-                "The automated workflow saved me hours of back-and-forth emails and manual CRM updates. Now leads flow through my system without me lifting a finger."
+                &quot;The automated workflow saved me hours of back-and-forth emails and manual CRM updates. Now leads flow through my system without me lifting a finger.&quot;
               </p>
             </div>
           </div>

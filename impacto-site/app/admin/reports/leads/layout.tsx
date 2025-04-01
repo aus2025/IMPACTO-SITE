@@ -5,6 +5,9 @@ import { cookies } from 'next/headers'
 
 import AdminLayout from '@/app/admin/layout'
 
+// Export dynamic flag to force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Lead Reports | Impacto Admin',
   description: 'Lead analytics and reporting dashboard',

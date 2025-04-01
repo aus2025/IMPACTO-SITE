@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { DndContext, DragOverlay, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { createClient } from '@/utils/supabase/client';
 import { ChevronLeft, Plus, Save, Trash2, MoveVertical, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,13 +16,6 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
-
-// Component imports
-import FormSidebar from './components/FormSidebar';
-import FormCanvas from './components/FormCanvas';
-import PropertiesPanel from './components/PropertiesPanel';
-import DraggableItem from './components/DraggableItem';
-import SortableItem from './components/SortableItem';
 
 // Type definitions
 export type QuestionType = 

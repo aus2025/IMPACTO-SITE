@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -18,13 +18,7 @@ export default function AdminAssessmentDetailPage() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 
-  useEffect(() => {
-    if (params.id) {
-      fetchAssessment(params.id as string);
-    }
-  }, [params.id]);
-
-  const fetchAssessment = async (id: string) => {
+  const fetchAssessment = useCallback(async (id: string) => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -41,7 +35,13 @@ export default function AdminAssessmentDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [supabase, router]);
+
+  useEffect(() => {
+    if (params.id) {
+      fetchAssessment(params.id as string);
+    }
+  }, [params.id, fetchAssessment]);
 
   const handleOpenMermaidModal = () => {
     setIsMermaidModalOpen(true);

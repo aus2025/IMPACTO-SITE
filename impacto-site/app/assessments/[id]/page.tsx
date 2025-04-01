@@ -1,13 +1,29 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './page.module.css';
 
+// Define a proper type for the assessment
+interface BusinessAssessment {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  company: string;
+  role: string;
+  industry: string;
+  employees: string;
+  goals: string[];
+  challenges: Record<string, number>;
+  created_at: string;
+  // Add other fields as needed
+}
+
 export default function ViewAssessmentPage() {
-  const [assessment, setAssessment] = useState<any>(null);
+  const [assessment, setAssessment] = useState<BusinessAssessment | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const params = useParams();
@@ -18,6 +34,30 @@ export default function ViewAssessmentPage() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
+
+  const fetchAssessment = useCallback(async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('business_assessments')
+        .select('*')
+        .eq('id', assessmentId)
+        .single();
+
+      if (error) throw error;
+      
+      if (!data) {
+        setError('Assessment not found');
+      } else {
+        setAssessment(data as BusinessAssessment);
+      }
+    } catch (error: unknown) {
+      console.error('Error fetching assessment:', error);
+      setError(error instanceof Error ? error.message : 'Error fetching assessment');
+    } finally {
+      setLoading(false);
+    }
+  }, [supabase, assessmentId]);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -37,31 +77,7 @@ export default function ViewAssessmentPage() {
     };
 
     checkUser();
-  }, [assessmentId]);
-
-  const fetchAssessment = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from('business_assessments')
-        .select('*')
-        .eq('id', assessmentId)
-        .single();
-
-      if (error) throw error;
-      
-      if (!data) {
-        setError('Assessment not found');
-      } else {
-        setAssessment(data);
-      }
-    } catch (error: any) {
-      console.error('Error fetching assessment:', error);
-      setError(error.message || 'Error fetching assessment');
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [assessmentId, fetchAssessment, router, supabase.auth]);
 
   const formatDate = (dateString: string) => {
     if (!dateString) return 'N/A';

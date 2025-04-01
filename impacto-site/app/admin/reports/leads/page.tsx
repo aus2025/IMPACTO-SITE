@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { format, subDays, subMonths, parseISO, differenceInHours, startOfDay, endOfDay, isSameDay, isSameWeek, isSameMonth } from 'date-fns'
 import { createClient } from '@/utils/supabase/client'
 import { CalendarIcon } from 'lucide-react'
@@ -30,6 +30,13 @@ import ReportExporter from './components/ReportExporter'
 // Types
 import type { Lead } from '@/app/admin/leads/page'
 
+// Define a proper type for time series data instead of using 'any'
+interface TimeSeriesPoint {
+  date: string;
+  total: number;
+  converted: number;
+}
+
 export default function LeadsReportPage() {
   // State variables
   const [isLoading, setIsLoading] = useState(true)
@@ -55,27 +62,13 @@ export default function LeadsReportPage() {
     conversionRate: 0,
     averageResponseTime: 0
   })
-  const [timeSeriesData, setTimeSeriesData] = useState<any[]>([])
+  const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesPoint[]>([])
   
   // Setup Supabase client
   const supabase = createClient()
   
-  // Fetch leads data when date range changes
-  useEffect(() => {
-    if (dateRange.from && dateRange.to) {
-      fetchLeadsData()
-    }
-  }, [dateRange])
-  
-  // Generate time series data when leads data or time frame changes
-  useEffect(() => {
-    if (leadsData.length > 0) {
-      generateTimeSeriesData()
-    }
-  }, [leadsData, timeFrame])
-  
-  // Fetch leads data from Supabase
-  const fetchLeadsData = async () => {
+  // Implement fetchLeadsData as a useCallback to fix dependency warnings
+  const fetchLeadsData = useCallback(async () => {
     if (!dateRange.from || !dateRange.to) return
     
     setIsLoading(true)
@@ -117,7 +110,79 @@ export default function LeadsReportPage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [dateRange, supabase])
+
+  // Fix React Hook dependency warnings
+  useEffect(() => {
+    if (dateRange.from && dateRange.to) {
+      fetchLeadsData()
+    }
+  }, [dateRange, fetchLeadsData])
+  
+  // Implement generateTimeSeriesData as useCallback to fix dependency warnings
+  const generateTimeSeriesData = useCallback(() => {
+    const data: TimeSeriesPoint[] = []
+    
+    if (!dateRange.from || !dateRange.to || leadsData.length === 0) {
+      setTimeSeriesData([])
+      return
+    }
+    
+    const groupLeadsByDate = (leads: Lead[]) => {
+      const grouped: Record<string, { total: number; converted: number }> = {}
+      
+      leads.forEach(lead => {
+        const date = parseISO(lead.created_at)
+        let key = ''
+        
+        if (timeFrame === 'daily') {
+          key = format(date, 'yyyy-MM-dd')
+        } else if (timeFrame === 'weekly') {
+          key = `Week ${format(date, 'w, yyyy')}`
+        } else if (timeFrame === 'monthly') {
+          key = format(date, 'MMM yyyy')
+        }
+        
+        if (!grouped[key]) {
+          grouped[key] = { total: 0, converted: 0 }
+        }
+        
+        grouped[key].total++
+        
+        if (lead.status === 'qualified' || lead.status === 'converted') {
+          grouped[key].converted++
+        }
+      })
+      
+      return grouped
+    }
+    
+    const groupedData = groupLeadsByDate(leadsData)
+    
+    // Convert grouped data to array and sort by date
+    const timeSeriesArray = Object.entries(groupedData).map(([date, values]) => ({
+      date,
+      total: values.total,
+      converted: values.converted
+    }))
+    
+    // Sort by date
+    timeSeriesArray.sort((a, b) => {
+      if (timeFrame === 'daily') {
+        return new Date(a.date).getTime() - new Date(b.date).getTime()
+      }
+      return 0
+    })
+    
+    setTimeSeriesData(timeSeriesArray)
+  }, [dateRange, leadsData, timeFrame])
+  
+  // Fix React Hook dependency warnings
+  useEffect(() => {
+    if (leadsData.length > 0) {
+      generateTimeSeriesData()
+    }
+  }, [leadsData, timeFrame, generateTimeSeriesData])
   
   // Process leads data to calculate metrics
   const processLeadsData = (currentLeads: Lead[], previousLeads: Lead[]) => {
@@ -195,69 +260,6 @@ export default function LeadsReportPage() {
       conversionRate: prevConversionRate,
       averageResponseTime: prevAverageResponseTime
     })
-  }
-  
-  // Generate time series data based on selected timeframe
-  const generateTimeSeriesData = () => {
-    const data: { date: string; total: number; converted: number }[] = []
-    
-    if (!dateRange.from || !dateRange.to || leadsData.length === 0) {
-      setTimeSeriesData([])
-      return
-    }
-    
-    const groupLeadsByDate = (leads: Lead[]) => {
-      const grouped: Record<string, { total: number; converted: number }> = {}
-      
-      leads.forEach(lead => {
-        const date = parseISO(lead.created_at)
-        let key = ''
-        
-        if (timeFrame === 'daily') {
-          key = format(date, 'yyyy-MM-dd')
-        } else if (timeFrame === 'weekly') {
-          key = `Week ${format(date, 'w, yyyy')}`
-        } else if (timeFrame === 'monthly') {
-          key = format(date, 'MMM yyyy')
-        }
-        
-        if (!grouped[key]) {
-          grouped[key] = { total: 0, converted: 0 }
-        }
-        
-        grouped[key].total++
-        
-        if (lead.status === 'qualified' || lead.status === 'converted') {
-          grouped[key].converted++
-        }
-      })
-      
-      return grouped
-    }
-    
-    const groupedData = groupLeadsByDate(leadsData)
-    
-    // Convert grouped data to array and sort by date
-    const timeSeriesArray = Object.entries(groupedData).map(([date, values]) => ({
-      date,
-      total: values.total,
-      converted: values.converted
-    }))
-    
-    // Sort by date
-    timeSeriesArray.sort((a, b) => {
-      if (timeFrame === 'daily') {
-        return new Date(a.date).getTime() - new Date(b.date).getTime()
-      } else if (timeFrame === 'weekly') {
-        const [aWeek, aYear] = a.date.replace('Week ', '').split(', ').map(Number)
-        const [bWeek, bYear] = b.date.replace('Week ', '').split(', ').map(Number)
-        return aYear !== bYear ? aYear - bYear : aWeek - bWeek
-      } else {
-        return new Date(a.date).getTime() - new Date(b.date).getTime()
-      }
-    })
-    
-    setTimeSeriesData(timeSeriesArray)
   }
   
   // Date range change handler

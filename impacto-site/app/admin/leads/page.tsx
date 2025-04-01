@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import LeadTable from '@/components/admin/leads/LeadTable'
 import LeadFilters from '@/components/admin/leads/LeadFilters'
@@ -20,6 +20,17 @@ export type Lead = {
   last_contacted: string | null
 }
 
+// Create a proper interface for filters instead of using 'any'
+interface LeadFilters {
+  search?: string
+  status?: string
+  startDate?: string
+  endDate?: string
+  sortBy?: string
+  sortOrder?: string // Changed from 'asc' | 'desc' to string to match usage
+  perPage?: number
+}
+
 export default function LeadsPage() {
   const supabase = createClient()
   const searchParams = useSearchParams()
@@ -31,73 +42,74 @@ export default function LeadsPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [isExporting, setIsExporting] = useState(false)
   
-  // Parse search parameters
-  const page = searchParams.get('page') ? parseInt(searchParams.get('page') as string) : 1
-  const perPage = searchParams.get('perPage') ? parseInt(searchParams.get('perPage') as string) : 10
-  const search = searchParams.get('search') || ''
-  const status = searchParams.get('status') || ''
-  const startDate = searchParams.get('startDate') || ''
-  const endDate = searchParams.get('endDate') || ''
-  const sortBy = searchParams.get('sortBy') || 'created_at'
-  const sortOrder = searchParams.get('sortOrder') || 'desc'
+  // Parse search parameters with null checks
+  const page = searchParams?.get('page') ? parseInt(searchParams.get('page') as string) : 1
+  const perPage = searchParams?.get('perPage') ? parseInt(searchParams.get('perPage') as string) : 10
+  const search = searchParams?.get('search') || ''
+  const status = searchParams?.get('status') || ''
+  const startDate = searchParams?.get('startDate') || ''
+  const endDate = searchParams?.get('endDate') || ''
+  const sortBy = searchParams?.get('sortBy') || 'created_at'
+  const sortOrder = searchParams?.get('sortOrder') || 'desc'
+
+  // Convert to useCallback to fix dependency issues
+  const fetchLeads = useCallback(async () => {
+    setLoading(true)
+    
+    try {
+      // Build the query
+      let query = supabase
+        .from('leads')
+        .select('*', { count: 'exact' })
+      
+      // Apply filters
+      if (search) {
+        query = query.or(`name.ilike.%${search}%,email.ilike.%${search}%,service_interest.ilike.%${search}%`)
+      }
+      
+      if (status) {
+        query = query.eq('status', status)
+      }
+      
+      if (startDate) {
+        query = query.gte('created_at', startDate)
+      }
+      
+      if (endDate) {
+        // Add one day to include the end date
+        const nextDay = new Date(endDate)
+        nextDay.setDate(nextDay.getDate() + 1)
+        const endDateFormatted = nextDay.toISOString()
+        query = query.lt('created_at', endDateFormatted)
+      }
+      
+      // Apply sorting - Fix the type by using proper typing for sortBy
+      query = query.order(sortBy, { ascending: sortOrder === 'asc' })
+      
+      // Apply pagination
+      const from = (page - 1) * perPage
+      const to = from + perPage - 1
+      query = query.range(from, to)
+      
+      const { data, error, count } = await query
+      
+      if (error) {
+        throw error
+      }
+      
+      setLeads(data || [])
+      setTotalCount(count || 0)
+      setCurrentPage(page)
+    } catch (error) {
+      console.error('Error fetching leads:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, [page, perPage, search, status, startDate, endDate, sortBy, sortOrder, supabase]);
 
   useEffect(() => {
-    async function fetchLeads() {
-      setLoading(true)
-      
-      try {
-        // Build the query
-        let query = supabase
-          .from('leads')
-          .select('*', { count: 'exact' })
-        
-        // Apply filters
-        if (search) {
-          query = query.or(`name.ilike.%${search}%,email.ilike.%${search}%,service_interest.ilike.%${search}%`)
-        }
-        
-        if (status) {
-          query = query.eq('status', status)
-        }
-        
-        if (startDate) {
-          query = query.gte('created_at', startDate)
-        }
-        
-        if (endDate) {
-          // Add one day to include the end date
-          const nextDay = new Date(endDate)
-          nextDay.setDate(nextDay.getDate() + 1)
-          const endDateFormatted = nextDay.toISOString()
-          query = query.lt('created_at', endDateFormatted)
-        }
-        
-        // Apply sorting
-        query = query.order(sortBy as any, { ascending: sortOrder === 'asc' })
-        
-        // Apply pagination
-        const from = (page - 1) * perPage
-        const to = from + perPage - 1
-        query = query.range(from, to)
-        
-        const { data, error, count } = await query
-        
-        if (error) {
-          throw error
-        }
-        
-        setLeads(data || [])
-        setTotalCount(count || 0)
-        setCurrentPage(page)
-      } catch (error) {
-        console.error('Error fetching leads:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    
     fetchLeads()
-  }, [page, perPage, search, status, startDate, endDate, sortBy, sortOrder])
+  }, [fetchLeads])
 
   const exportToCsv = async () => {
     try {
@@ -126,8 +138,8 @@ export default function LeadsPage() {
         query = query.lt('created_at', endDateFormatted)
       }
       
-      // Apply the same sorting
-      query = query.order(sortBy as any, { ascending: sortOrder === 'asc' })
+      // Apply the same sorting - fixing type issue
+      query = query.order(sortBy, { ascending: sortOrder === 'asc' })
       
       const { data, error } = await query
       
@@ -174,12 +186,14 @@ export default function LeadsPage() {
   }
 
   const handlePageChange = (newPage: number) => {
+    if (!searchParams) return
+    
     const params = new URLSearchParams(searchParams.toString())
     params.set('page', newPage.toString())
     router.push(`/admin/leads?${params.toString()}`)
   }
 
-  const handleFilterChange = (filters: any) => {
+  const handleFilterChange = (filters: LeadFilters) => {
     const params = new URLSearchParams()
     
     // Reset to page 1 when filters change

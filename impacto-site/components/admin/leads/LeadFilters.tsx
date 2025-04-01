@@ -3,16 +3,19 @@
 import { useState, useEffect } from 'react'
 import { Search, X } from 'lucide-react'
 
+// Extract the filters type to a named export interface
+export interface LeadFilters {
+  search?: string
+  status?: string
+  startDate?: string
+  endDate?: string
+  sortBy?: string
+  sortOrder?: string
+  perPage?: number
+}
+
 interface LeadFiltersProps {
-  onFilterChange: (filters: {
-    search?: string
-    status?: string
-    startDate?: string
-    endDate?: string
-    sortBy?: string
-    sortOrder?: string
-    perPage?: number
-  }) => void
+  onFilterChange: (filters: LeadFilters) => void
   initialFilters: {
     search: string
     status: string

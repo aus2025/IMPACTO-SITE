@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
   }
   
   // Apply sorting
-  query = query.order(sortBy as any, { ascending: sortOrder === 'asc' })
+  query = query.order(sortBy as string, { ascending: sortOrder === 'asc' })
   
   // Apply pagination
   const from = (page - 1) * perPage
@@ -122,10 +122,10 @@ export async function POST(request: NextRequest) {
     }
     
     return NextResponse.json({ data }, { status: 201 })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error creating lead:', error)
     return NextResponse.json(
-      { error: error.message || 'Failed to create lead' },
+      { error: error instanceof Error ? error.message : 'Failed to create lead' },
       { status: 500 }
     )
   }
@@ -177,10 +177,10 @@ export async function DELETE(request: NextRequest) {
     }
     
     return NextResponse.json({ success: true })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error deleting leads:', error)
     return NextResponse.json(
-      { error: error.message || 'Failed to delete leads' },
+      { error: error instanceof Error ? error.message : 'Failed to delete leads' },
       { status: 500 }
     )
   }

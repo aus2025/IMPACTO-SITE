@@ -290,7 +290,7 @@ export default function HomePageClient() {
                 </div>
               </div>
               <blockquote className="text-gray-700 mb-3">
-                "Impacto's AI tools helped me increase my productivity by <strong>87%</strong> while reducing the pressure I felt daily. Now I get more done in <strong>less time</strong> and finally have the space to breathe and focus on what matters."
+                &quot;Impacto&apos;s AI tools helped me increase my productivity by <strong>87%</strong> while reducing the pressure I felt daily. Now I get more done in <strong>less time</strong> and finally have the space to breathe and focus on what matters.&quot;
               </blockquote>
               <footer className="font-medium">
                 - Sarah J.
@@ -307,7 +307,7 @@ export default function HomePageClient() {
                 </div>
               </div>
               <blockquote className="text-gray-700 mb-3">
-                "With Impacto's automation tools, I've simplified my daily routine, <strong>eliminated errors</strong>, and finally feel in control of my time. I'm more <strong>focused</strong>, less stressed, and way more <strong>efficient</strong>."
+                &quot;With Impacto&apos;s automation tools, I&apos;ve simplified my daily routine, <strong>eliminated errors</strong>, and finally feel in control of my time. I&apos;m more <strong>focused</strong>, less stressed, and way more <strong>efficient</strong>.&quot;
               </blockquote>
               <footer className="font-medium">
                 - Michael T.
@@ -324,7 +324,7 @@ export default function HomePageClient() {
                 </div>
               </div>
               <blockquote className="text-gray-700 mb-3">
-                "Impacto made it <strong>incredibly easy</strong> to bring AI into my daily life. Now I have routines that work, I'm <strong>achieving more</strong>, and I feel <strong>empowered</strong> by the structure I've built."
+                &quot;Impacto made it <strong>incredibly easy</strong> to bring AI into my daily life. Now I have routines that work, I&apos;m <strong>achieving more</strong>, and I feel <strong>empowered</strong> by the structure I&apos;ve built.&quot;
               </blockquote>
               <footer className="font-medium">
                 - David L.
@@ -349,7 +349,7 @@ export default function HomePageClient() {
             <div className="mb-8">
               <h3 className="text-xl font-semibold mb-3 text-gray-800">How quickly will I see a return on investment (ROI)?</h3>
               <p className="text-gray-700">
-                Most of our clients start noticing improvements immediately, and many see a full <span className="font-medium">ROI within the first 4–6 months</span> of implementation. We focus on quick wins – like reducing manual work and errors – which translates into fast savings. Our goal is to have the automation pay for itself as soon as possible for you.
+                Most of our clients start noticing improvements immediately, and many see a full <span className="font-medium">ROI within the first 4&ndash;6 months</span> of implementation. We focus on quick wins – like reducing manual work and errors – which translates into fast savings. Our goal is to have the automation pay for itself as soon as possible for you.
               </p>
             </div>
             

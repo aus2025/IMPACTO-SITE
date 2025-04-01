@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "export SKIP_ESLINT=true && export NEXT_TELEMETRY_DISABLED=1 && export NODE_ENV=production && next build",
+    "build:windows": "set NODE_ENV=production && set DISABLE_ESLINT_PLUGIN=true && next build",
     "start": "next start",
     "lint": "next lint"
   },

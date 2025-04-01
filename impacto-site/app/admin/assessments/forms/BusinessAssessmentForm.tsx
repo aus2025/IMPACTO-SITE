@@ -6,15 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 // Type for form data
 type FormData = {
@@ -643,7 +635,7 @@ export default function BusinessAssessmentForm() {
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Template Downloaded Successfully!</h2>
             <p className="text-gray-600 mb-6">
               Your Business Assessment Form template has been saved as a JSON file and downloaded to your computer.
-              A backup copy has also been saved in your browser's localStorage.
+              A backup copy has also been saved in your browser&apos;s localStorage.
             </p>
             <div className="mt-6">
               <Button 

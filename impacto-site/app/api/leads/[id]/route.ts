@@ -45,11 +45,11 @@ export async function GET(
     }
     
     return NextResponse.json({ data })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error retrieving lead:', error)
     return NextResponse.json(
-      { error: error.message || 'Failed to retrieve lead' },
-      { status: error.code === 'PGRST116' ? 404 : 500 }
+      { error: error instanceof Error ? error.message : 'Failed to retrieve lead' },
+      { status: error instanceof Error && 'code' in error && error.code === 'PGRST116' ? 404 : 500 }
     )
   }
 }

@@ -161,7 +161,7 @@ function ROICalculator({
     // Adjust with the cost savings percentage
     const adjustedAnnualSavings = Math.round(annualSavingsEstimate * (costSavings / 100));
     setAnnualSavings(adjustedAnnualSavings);
-  }, [timeSavings, costSavings, industry, employees]);
+  }, [timeSavings, costSavings, industry, employees, employeeCountMap, hourlyRates]);
   
   // Format currency
   const formatCurrency = (amount: number) => {

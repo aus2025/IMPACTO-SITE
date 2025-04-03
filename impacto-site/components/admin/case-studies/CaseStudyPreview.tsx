@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { format } from 'date-fns'
+import Image from 'next/image'
 
 interface CaseStudyPreviewProps {
   caseStudy: Partial<CaseStudy>
@@ -43,11 +44,14 @@ export default function CaseStudyPreview({ caseStudy }: CaseStudyPreviewProps) {
               <div className="border rounded-md p-6 bg-white">
                 {/* Featured Image */}
                 {caseStudy.featured_image && (
-                  <div className="mb-8 flex justify-center">
-                    <img 
+                  <div className="mb-8 flex justify-center relative h-96">
+                    <Image 
                       src={caseStudy.featured_image} 
                       alt={caseStudy.title || 'Case study featured image'} 
-                      className="rounded-md max-h-96 object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="rounded-md object-cover"
+                      priority={true}
                     />
                   </div>
                 )}
@@ -68,7 +72,7 @@ export default function CaseStudyPreview({ caseStudy }: CaseStudyPreviewProps) {
                   {caseStudy.challenge && (
                     <div className="mb-8">
                       <h2 className="text-2xl font-bold mb-4">The Challenge</h2>
-                      <div className="prose max-w-none">
+                      <div className="prose max-w-none text-gray-700">
                         {caseStudy.challenge.split('\n').map((paragraph, i) => (
                           <p key={i} className="mb-4">{paragraph}</p>
                         ))}
@@ -80,7 +84,7 @@ export default function CaseStudyPreview({ caseStudy }: CaseStudyPreviewProps) {
                   {caseStudy.solution && (
                     <div className="mb-8">
                       <h2 className="text-2xl font-bold mb-4">Our Solution</h2>
-                      <div className="prose max-w-none">
+                      <div className="prose max-w-none text-gray-700">
                         {caseStudy.solution.split('\n').map((paragraph, i) => (
                           <p key={i} className="mb-4">{paragraph}</p>
                         ))}
@@ -106,7 +110,7 @@ export default function CaseStudyPreview({ caseStudy }: CaseStudyPreviewProps) {
                   {caseStudy.results && (
                     <div className="mb-8">
                       <h2 className="text-2xl font-bold mb-4">The Results</h2>
-                      <div className="prose max-w-none">
+                      <div className="prose max-w-none text-gray-700">
                         {caseStudy.results.split('\n').map((paragraph, i) => (
                           <p key={i} className="mb-4">{paragraph}</p>
                         ))}
@@ -123,11 +127,16 @@ export default function CaseStudyPreview({ caseStudy }: CaseStudyPreviewProps) {
                           <div key={image.id} className="mb-4">
                             {image.url && (
                               <figure>
-                                <img 
-                                  src={image.url} 
-                                  alt={image.alt || 'Case study image'} 
-                                  className="rounded-md w-full object-cover"
-                                />
+                                <div className="relative h-64 w-full">
+                                  <Image 
+                                    src={image.url} 
+                                    alt={image.alt || 'Case study image'} 
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className="rounded-md object-cover"
+                                    priority={false}
+                                  />
+                                </div>
                                 {image.caption && (
                                   <figcaption className="mt-2 text-sm text-gray-500 italic">
                                     {image.caption}
@@ -149,11 +158,14 @@ export default function CaseStudyPreview({ caseStudy }: CaseStudyPreviewProps) {
                 <div className="p-4 bg-white">
                   {/* Mobile preview here */}
                   {caseStudy.featured_image && (
-                    <div className="mb-6">
-                      <img 
+                    <div className="mb-6 relative h-48">
+                      <Image 
                         src={caseStudy.featured_image} 
                         alt={caseStudy.title || 'Case study featured image'} 
-                        className="rounded-md w-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw"
+                        className="rounded-md object-cover"
+                        priority={false}
                       />
                     </div>
                   )}

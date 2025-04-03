@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CaseStudyImage } from './CaseStudyForm'
 import { Plus, Trash, Move, Image as ImageIcon } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
+import Image from 'next/image'
 
 interface GalleryManagerProps {
   gallery: CaseStudyImage[]
@@ -56,20 +57,14 @@ export default function GalleryManager({
   // Move image up or down
   const moveImage = (id: string, direction: 'up' | 'down') => {
     const index = gallery.findIndex(img => img.id === id)
-    if (
-      (direction === 'up' && index === 0) || 
-      (direction === 'down' && index === gallery.length - 1)
-    ) {
-      return // Can't move first up or last down
-    }
+    if (index === -1) return
+    
+    const newIndex = direction === 'up' ? index - 1 : index + 1
+    if (newIndex < 0 || newIndex >= gallery.length) return
     
     const newGallery = [...gallery]
-    const targetIndex = direction === 'up' ? index - 1 : index + 1
-    
-    // Swap the images
-    const temp = newGallery[targetIndex];
-    newGallery[targetIndex] = newGallery[index];
-    newGallery[index] = temp;
+    const [movedImage] = newGallery.splice(index, 1)
+    newGallery.splice(newIndex, 0, movedImage)
     
     onChange(newGallery)
   }
@@ -153,10 +148,13 @@ export default function GalleryManager({
                 {/* Preview if URL exists */}
                 {image.url && (
                   <div className="mb-3 flex justify-center">
-                    <img 
-                      src={image.url} 
-                      alt={image.alt || 'Case study image'} 
+                    <Image
+                      src={image.url}
+                      alt={image.alt || 'Gallery image'}
+                      width={128}
+                      height={128}
                       className="max-h-40 object-contain rounded-md border border-gray-200"
+                      priority={false}
                     />
                   </div>
                 )}

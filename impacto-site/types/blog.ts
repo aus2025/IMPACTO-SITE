@@ -19,6 +19,7 @@ export type BlogPost = {
   category?: BlogCategory;
   author?: Author;
   tags?: BlogTag[];
+  blog_post_tags?: BlogPostTag[];
 };
 
 export type BlogCategory = {
@@ -34,6 +35,17 @@ export type BlogTag = {
   name: string;
   slug: string;
   created_at: string;
+};
+
+// Join table between posts and tags
+export type BlogPostTag = {
+  id: number;
+  post_id: number;
+  tag_id: number;
+  created_at: string;
+  // Joined fields
+  tag?: BlogTag;
+  tags?: BlogTag; // Some queries return this field name instead
 };
 
 export type BlogComment = {

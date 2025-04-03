@@ -63,7 +63,65 @@ export default function EnhancedBlogContent({ content, className = '' }: Enhance
     const highlightRegex = /\[highlight\]([\s\S]*?)\[\/highlight\]/g;
     
     newHtml = newHtml.replace(highlightRegex, (match, text) => {
-      return `<span class="bg-yellow-100 px-1 rounded">$${text.trim()}</span>`;
+      return `<span class="bg-yellow-100 px-1 rounded text-gray-800">$${text.trim()}</span>`;
+    });
+    
+    // Enhance headings with decorative elements
+    const h2Regex = /<h2>(.*?)<\/h2>/g;
+    newHtml = newHtml.replace(h2Regex, (match, content) => {
+      return `<h2><span class="inline-block w-12 h-1 bg-blue-500 mb-2"></span><br>${content}</h2>`;
+    });
+    
+    // Add icon to lists for better visual hierarchy
+    const ulRegex = /<ul>([\s\S]*?)<\/ul>/g;
+    newHtml = newHtml.replace(ulRegex, (match, listContent) => {
+      const enhancedListContent = listContent.replace(/<li>/g, '<li class="flex items-start gap-2"><span class="inline-flex mt-1 items-center justify-center flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 text-blue-600"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path></svg></span>');
+      return `<ul class="space-y-3 my-6">${enhancedListContent}</ul>`;
+    });
+    
+    // Enhance blockquotes with a nicer style
+    const blockquoteRegex = /<blockquote>([\s\S]*?)<\/blockquote>/g;
+    newHtml = newHtml.replace(blockquoteRegex, (match, quoteContent) => {
+      return `<blockquote class="relative pl-8 pr-4 py-3 italic border-l-4 border-blue-500 bg-blue-50 rounded-r-lg my-6">
+                <svg class="absolute left-2 top-2 w-4 h-4 text-blue-400 opacity-50" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+                ${quoteContent}
+              </blockquote>`;
+    });
+    
+    // Add table styling
+    const tableRegex = /<table>([\s\S]*?)<\/table>/g;
+    newHtml = newHtml.replace(tableRegex, (match, tableContent) => {
+      return `<div class="overflow-x-auto rounded-lg border border-gray-200 my-6">
+                <table class="min-w-full divide-y divide-gray-200">
+                  ${tableContent}
+                </table>
+              </div>`;
+    });
+    
+    // Style table headers
+    newHtml = newHtml.replace(/<thead>([\s\S]*?)<\/thead>/g, 
+      '<thead class="bg-gray-50">\$1</thead>'
+    );
+    
+    newHtml = newHtml.replace(/<th>([\s\S]*?)<\/th>/g, 
+      '<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">\$1</th>'
+    );
+    
+    // Style table cells
+    newHtml = newHtml.replace(/<tbody>([\s\S]*?)<\/tbody>/g, 
+      '<tbody class="bg-white divide-y divide-gray-200">\$1</tbody>'
+    );
+    
+    newHtml = newHtml.replace(/<td>([\s\S]*?)<\/td>/g, 
+      '<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\$1</td>'
+    );
+    
+    // Ensure paragraph text is visible
+    const paragraphs = contentRef.current.querySelectorAll('p:not([class])');
+    paragraphs.forEach(p => {
+      p.classList.add('text-gray-700');
     });
     
     // Update content with processed HTML
@@ -101,6 +159,31 @@ export default function EnhancedBlogContent({ content, className = '' }: Enhance
         // Replace the placeholder with the actual pull quote
         element.replaceWith(pullQuoteElement);
       });
+      
+      // Apply text color to all elements without explicit color
+      const textElements = contentRef.current.querySelectorAll('h1, h2, h3, h4, h5, h6, li, td, th');
+      textElements.forEach(el => {
+        if (!el.classList.contains('text-gray-700') && 
+            !el.classList.contains('text-gray-800') && 
+            !el.classList.contains('text-gray-900') &&
+            !el.classList.contains('text-blue-600')) {
+          if (el.tagName.toLowerCase().startsWith('h')) {
+            el.classList.add('text-gray-900');
+          } else {
+            el.classList.add('text-gray-700');
+          }
+        }
+      });
+      
+      // Add dividers after sections for visual separation
+      const h2Elements = contentRef.current.querySelectorAll('h2');
+      h2Elements.forEach((h2, index) => {
+        if (index > 0) {
+          const divider = document.createElement('hr');
+          divider.className = 'my-12 border-t border-gray-200';
+          h2.parentNode?.insertBefore(divider, h2);
+        }
+      });
     }
     
     // Add clearfix after floated elements
@@ -111,10 +194,49 @@ export default function EnhancedBlogContent({ content, className = '' }: Enhance
       clearfix.style.clear = 'both';
       contentRef.current.appendChild(clearfix);
     }
+    
+    // Add a table of contents if there are at least 3 headings
+    const headings = contentRef.current.querySelectorAll('h2, h3');
+    if (headings.length >= 3) {
+      const tocContainer = document.createElement('div');
+      tocContainer.className = 'bg-gray-50 rounded-lg p-5 my-8 border border-gray-200';
+      
+      const tocTitle = document.createElement('h4');
+      tocTitle.className = 'text-lg font-bold mb-3 text-gray-900';
+      tocTitle.textContent = 'Table of Contents';
+      tocContainer.appendChild(tocTitle);
+      
+      const tocList = document.createElement('ul');
+      tocList.className = 'space-y-2';
+      
+      headings.forEach((heading, index) => {
+        // Add IDs to headings for anchor links
+        const headingId = `heading-${index}`;
+        heading.id = headingId;
+        
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `#${headingId}`;
+        link.className = heading.tagName === 'H2' 
+          ? 'text-blue-600 hover:text-blue-800 font-medium' 
+          : 'text-blue-600 hover:text-blue-800 ml-4 text-sm';
+        link.textContent = heading.textContent || '';
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+      });
+      
+      tocContainer.appendChild(tocList);
+      
+      // Insert table of contents after the first paragraph
+      const firstParagraph = contentRef.current.querySelector('p');
+      if (firstParagraph) {
+        firstParagraph.parentNode?.insertBefore(tocContainer, firstParagraph.nextSibling);
+      }
+    }
   }, [content]);
   
   return (
-    <div className={`enhanced-blog-content ${className}`} ref={contentRef}>
+    <div className={`enhanced-blog-content ${className} text-gray-700`} ref={contentRef}>
       <BlogContent content={content} />
     </div>
   );

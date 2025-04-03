@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { BlogCategory } from '@/types/blog';
 
 interface BlogCategoriesFilterProps {
@@ -15,10 +15,11 @@ export default function BlogCategoriesFilter({
   currentCategory,
 }: BlogCategoriesFilterProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // Create a URL for a category filter
   const createCategoryUrl = (categorySlug: string) => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
     
     if (categorySlug) {
       params.set('category', categorySlug);
@@ -34,7 +35,7 @@ export default function BlogCategoriesFilter({
 
   // Create URL to clear the category filter
   const clearCategoryUrl = () => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
     params.delete('category');
     params.delete('page');
     return `${pathname}?${params.toString()}`;
@@ -56,7 +57,7 @@ export default function BlogCategoriesFilter({
       </div>
       
       {categories.map((category) => (
-        <div key={category.id} className="mb-1">
+        <div key={category.slug} className="mb-1">
           <Link
             href={createCategoryUrl(category.slug)}
             className={`inline-block px-3 py-1.5 rounded-full text-sm ${

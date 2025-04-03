@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { BlogTag } from '@/types/blog';
 
 interface BlogTagsFilterProps {
@@ -15,10 +15,11 @@ export default function BlogTagsFilter({
   currentTag,
 }: BlogTagsFilterProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // Create a URL for a tag filter
   const createTagUrl = (tagSlug: string) => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
     
     if (tagSlug) {
       params.set('tag', tagSlug);
@@ -38,7 +39,7 @@ export default function BlogTagsFilter({
     <div className="flex flex-wrap gap-2">
       {tags.map((tag) => (
         <Link
-          key={tag.id}
+          key={tag.slug}
           href={createTagUrl(tag.slug)}
           className={`inline-block px-3 py-1 rounded-full text-xs ${
             currentTag === tag.slug

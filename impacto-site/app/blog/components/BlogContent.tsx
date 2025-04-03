@@ -1,86 +1,123 @@
 'use client';
 
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
-import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import Link from 'next/link';
+import Image from 'next/image';
+import BlogImage from './BlogImage';
+import BlogPagination from './BlogPagination';
+import { BlogPost } from '@/lib/static-blog';
 
 interface BlogContentProps {
-  content: string;
+  posts: BlogPost[];
+  totalPages: number;
+  currentPage: number;
+  pageBaseUrl: string;
+  categoryParam?: string;
+  tagParam?: string;
+  searchParam?: string;
 }
 
-export default function BlogContent({ content }: BlogContentProps) {
+export default function BlogContent({
+  posts,
+  totalPages,
+  currentPage,
+  pageBaseUrl,
+  categoryParam,
+  tagParam,
+  searchParam
+}: BlogContentProps) {
+  // Create URLs for pagination
+  const createPageUrl = (page: number) => {
+    const params = new URLSearchParams();
+    if (page > 1) params.set('page', page.toString());
+    if (categoryParam) params.set('category', categoryParam);
+    if (tagParam) params.set('tag', tagParam);
+    if (searchParam) params.set('search', searchParam);
+    return `${pageBaseUrl}?${params.toString()}`;
+  };
+
+  // Function to get blog image source
+  const getBlogImageSrc = (slug: string) => {
+    // Extract the blog number from the slug (e.g., "blog-1-title" => "1")
+    const match = slug.match(/^blog-(\d+)/);
+    if (match && match[1]) {
+      return `/images/blog/blog-${match[1]}.svg`;
+    }
+    return '/images/blog/default.svg';
+  };
+
   return (
-    <div className="prose prose-blue max-w-none">
-      <ReactMarkdown
-        rehypePlugins={[rehypeRaw, rehypeSanitize]}
-        remarkPlugins={[remarkGfm]}
-        components={{
-          // Renders code blocks with syntax highlighting
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || '');
-            return !inline && match ? (
-              <SyntaxHighlighter
-                style={tomorrow}
-                language={match[1]}
-                PreTag="div"
-                {...props}
-              >
-                {String(children).replace(/\n$/, '')}
-              </SyntaxHighlighter>
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            );
-          },
-          // Custom styling for headings
-          h1: ({ node, ...props }) => (
-            <h1 
-              className="text-3xl font-bold mb-4 mt-8 text-gray-900" 
-              {...props} 
-            />
-          ),
-          h2: ({ node, ...props }) => (
-            <h2 
-              className="text-2xl font-bold mb-3 mt-6 text-gray-900" 
-              {...props} 
-            />
-          ),
-          h3: ({ node, ...props }) => (
-            <h3 
-              className="text-xl font-bold mb-3 mt-5 text-gray-900" 
-              {...props} 
-            />
-          ),
-          // Custom styling for links
-          a: ({ node, ...props }) => (
-            <a 
-              className="text-blue-600 hover:text-blue-800 underline" 
-              {...props} 
-            />
-          ),
-          // Custom styling for block quotes
-          blockquote: ({ node, ...props }) => (
-            <blockquote 
-              className="border-l-4 border-blue-500 pl-4 py-1 italic text-gray-700" 
-              {...props} 
-            />
-          ),
-          // Custom styling for images
-          img: ({ node, ...props }) => (
-            <img 
-              className="rounded-md my-8 max-w-full h-auto" 
-              {...props} 
-            />
-          ),
-        }}
-      >
-        {content}
-      </ReactMarkdown>
-    </div>
+    <>
+      {/* Blog posts grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {posts.map((post) => (
+          <article key={post.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div className="relative h-56 bg-gray-200">
+              <BlogImage 
+                src={getBlogImageSrc(post.slug)}
+                alt={post.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-blue-600 text-sm font-medium">
+                  {post.category}
+                </span>
+                <span className="text-gray-500 text-sm">
+                  {post.formattedDate}
+                </span>
+              </div>
+              <h2 className="text-xl font-bold mb-3 text-gray-900 line-clamp-2">
+                <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 transition-colors duration-200">
+                  {post.title}
+                </Link>
+              </h2>
+              <p className="text-gray-600 mb-4 line-clamp-3">
+                {post.excerpt}
+              </p>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <Image 
+                    src="/images/impacto-logo-small.svg" 
+                    alt="Impacto Automation"
+                    width={30}
+                    height={30}
+                    className="rounded-full mr-2"
+                  />
+                  <span className="text-sm text-gray-700">
+                    {post.author}
+                  </span>
+                </div>
+                <span className="text-sm text-gray-500">
+                  {post.readingTime}
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      {totalPages > 1 && (
+        <div className="mt-12">
+          <BlogPagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            createPageUrl={createPageUrl} 
+          />
+        </div>
+      )}
+      
+      {posts.length === 0 && (
+        <div className="text-center py-12">
+          <h3 className="text-2xl font-semibold text-gray-700 mb-3">No posts found</h3>
+          <p className="text-gray-500 mb-6">
+            Try adjusting your search or filter criteria.
+          </p>
+        </div>
+      )}
+    </>
   );
 } 

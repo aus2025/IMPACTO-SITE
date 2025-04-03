@@ -13,7 +13,7 @@ export default function StarterPackagePage() {
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
       {/* Hero section */}
-      <section className="py-16 md:py-24 bg-blue-700 text-white w-full">
+      <section className="py-16 md:py-24 bg-blue-700 text-white w-full" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <Link 
@@ -32,21 +32,19 @@ export default function StarterPackagePage() {
                 Essential Automation for New Businesses
               </p>
               <p className="text-lg md:text-xl mb-6 text-blue-50">
-                Perfect for solopreneurs and small teams taking their first step into automation.
+                Ideal for solopreneurs and small teams ready to take the first step into automation.
               </p>
               <p className="text-lg mb-10 text-blue-50 max-w-3xl">
-                Get started with ready-made automations that save you time on social media and customer follow-ups, without any technical setup.
+                Launch fast with plug-and-play automations for social media and customer follow-ups — no tech skills needed.
               </p>
-              <Button 
-                size="lg" 
-                className="font-medium text-base"
-                onClick={() => {
-                  const element = document.getElementById('pricing');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
+              <a 
+                href="https://calendly.com/rba-aus"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-4 bg-white text-blue-700"
               >
-                Start Free
-              </Button>
+                Get Started
+              </a>
             </div>
           </div>
         </div>
@@ -241,163 +239,6 @@ export default function StarterPackagePage() {
         </div>
       </section>
       
-      {/* Workflow Teaser Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-              How It Works
-            </h2>
-            <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12">
-              Our Starter Package automates your routine tasks with a simple, effective workflow designed for busy entrepreneurs.
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="text-center bg-white rounded-lg p-6 shadow-sm">
-                <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold">1</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">Quick Setup</h3>
-                <p className="text-gray-600">
-                  We connect to your existing tools in just one 30-minute call - no technical expertise needed from you.
-                </p>
-              </div>
-              
-              <div className="text-center bg-white rounded-lg p-6 shadow-sm relative">
-                <div className="hidden md:block absolute top-1/2 -left-4 transform -translate-y-1/2">
-                  <ArrowRight className="h-6 w-6 text-blue-300" />
-                </div>
-                <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold">2</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">Automation Runs</h3>
-                <p className="text-gray-600">
-                  Your social posts, email sequences, and lead capture start working automatically in the background.
-                </p>
-              </div>
-              
-              <div className="text-center bg-white rounded-lg p-6 shadow-sm relative">
-                <div className="hidden md:block absolute top-1/2 -left-4 transform -translate-y-1/2">
-                  <ArrowRight className="h-6 w-6 text-blue-300" />
-                </div>
-                <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold">3</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">You Save Time</h3>
-                <p className="text-gray-600">
-                  Focus on growing your business while repetitive tasks handle themselves. Typical clients save 5-10 hours weekly.
-                </p>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <p className="text-lg mb-6 text-gray-700">
-                &quot;It&apos;s like having a virtual assistant working 24/7 for a fraction of the cost.&quot;
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* See It In Action - Visual Workflow Teaser */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-              See It In Action
-            </h2>
-            <h3 className="text-xl text-center text-gray-700 mb-6">
-              How Starter Automation Works
-            </h3>
-            
-            <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12">
-              Imagine this: A visitor finds you on social media and fills out your contact form. Impacto instantly adds them to your CRM, sends a personalized welcome email, and even lets them book a call with you automatically. All of this happens while you focus on your business.
-            </p>
-            
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
-              {/* Step 1: Social Post */}
-              <div className="flex-1 text-center">
-                <div className="bg-blue-100 p-4 rounded-full mx-auto mb-4 w-20 h-20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                  </svg>
-                </div>
-                <h4 className="font-bold mb-2">Social Post</h4>
-                <p className="text-sm text-gray-600">Lead discovers your business</p>
-              </div>
-              
-              {/* Arrow 1 */}
-              <div className="hidden md:block">
-                <ArrowRight className="h-8 w-8 text-blue-400" />
-              </div>
-              <div className="block md:hidden my-2">
-                <ArrowRight className="h-8 w-8 text-blue-400 rotate-90 mx-auto" />
-              </div>
-              
-              {/* Step 2: Lead Captured */}
-              <div className="flex-1 text-center">
-                <div className="bg-blue-100 p-4 rounded-full mx-auto mb-4 w-20 h-20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
-                </div>
-                <h4 className="font-bold mb-2">Lead Captured</h4>
-                <p className="text-sm text-gray-600">Automatically added to CRM</p>
-              </div>
-              
-              {/* Arrow 2 */}
-              <div className="hidden md:block">
-                <ArrowRight className="h-8 w-8 text-blue-400" />
-              </div>
-              <div className="block md:hidden my-2">
-                <ArrowRight className="h-8 w-8 text-blue-400 rotate-90 mx-auto" />
-              </div>
-              
-              {/* Step 3: Automated Email */}
-              <div className="flex-1 text-center">
-                <div className="bg-blue-100 p-4 rounded-full mx-auto mb-4 w-20 h-20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                </div>
-                <h4 className="font-bold mb-2">Automated Email</h4>
-                <p className="text-sm text-gray-600">Personalized welcome sent</p>
-              </div>
-              
-              {/* Arrow 3 */}
-              <div className="hidden md:block">
-                <ArrowRight className="h-8 w-8 text-blue-400" />
-              </div>
-              <div className="block md:hidden my-2">
-                <ArrowRight className="h-8 w-8 text-blue-400 rotate-90 mx-auto" />
-              </div>
-              
-              {/* Step 4: Meeting Booked */}
-              <div className="flex-1 text-center">
-                <div className="bg-blue-100 p-4 rounded-full mx-auto mb-4 w-20 h-20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                  </svg>
-                </div>
-                <h4 className="font-bold mb-2">Meeting Booked</h4>
-                <p className="text-sm text-gray-600">Call scheduled automatically</p>
-              </div>
-            </div>
-            
-            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 text-center">
-              <p className="text-gray-700 italic">
-                &quot;The automated workflow saved me hours of back-and-forth emails and manual CRM updates. Now leads flow through my system without me lifting a finger.&quot;
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* Pricing Breakdown */}
       <section id="pricing" className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -506,7 +347,7 @@ export default function StarterPackagePage() {
                 variant="outline" 
                 size="lg" 
                 className="font-medium text-base bg-transparent border-white text-white hover:bg-white hover:text-blue-600"
-                onClick={() => router.push('/contact?package=starter&demo=true')}
+                onClick={() => window.open("https://calendly.com/rba-aus", "_blank")}
               >
                 Schedule a Demo
               </Button>

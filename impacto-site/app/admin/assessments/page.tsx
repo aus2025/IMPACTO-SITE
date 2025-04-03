@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import Link from 'next/link';
 import MermaidModal from '@/components/admin/MermaidModal';
+import { BusinessAssessment } from '@/types/assessment';
 
 export default function AdminAssessmentsPage() {
   const [loading, setLoading] = useState(true);
-  const [assessments, setAssessments] = useState<any[]>([]);
-  const [selectedAssessment, setSelectedAssessment] = useState<any>(null);
+  const [assessments, setAssessments] = useState<BusinessAssessment[]>([]);
+  const [selectedAssessment, setSelectedAssessment] = useState<BusinessAssessment | null>(null);
   const [isMermaidModalOpen, setIsMermaidModalOpen] = useState(false);
 
   const supabase = createBrowserClient(
@@ -55,7 +56,7 @@ export default function AdminAssessmentsPage() {
     }
   };
 
-  const handleOpenMermaidModal = (assessment: any) => {
+  const handleOpenMermaidModal = (assessment: BusinessAssessment) => {
     setSelectedAssessment(assessment);
     setIsMermaidModalOpen(true);
   };

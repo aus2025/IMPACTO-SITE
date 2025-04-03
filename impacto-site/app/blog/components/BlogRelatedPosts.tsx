@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BlogPost } from '@/types/blog';
 import { formatDate } from '@/lib/utils';
 
@@ -20,11 +21,14 @@ export default function BlogRelatedPosts({ posts }: BlogRelatedPostsProps) {
           className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
         >
           {post.featured_image && (
-            <Link href={`/blog/${post.slug}`} className="block h-40 overflow-hidden">
-              <img
+            <Link href={`/blog/${post.slug}`} className="block h-40 overflow-hidden relative">
+              <Image
                 src={post.featured_image}
                 alt={post.title}
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                className="object-cover transition-transform hover:scale-105 duration-300"
+                priority={false}
               />
             </Link>
           )}

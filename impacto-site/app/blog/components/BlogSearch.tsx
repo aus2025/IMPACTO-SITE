@@ -52,7 +52,7 @@ export default function BlogSearch({ initialValue = '' }: BlogSearchProps) {
           placeholder="Search articles..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
         />
         <button
           type="submit"

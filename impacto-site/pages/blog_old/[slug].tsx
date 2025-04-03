@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getBlogPostBySlug, incrementBlogPostViewCount, getRelatedPosts } from '@/lib/blog-browser';
-import { BlogPost } from '@/types/blog';
+import { BlogPost, BlogPostTag, BlogTag } from '@/types/blog';
 import { GetServerSideProps } from 'next';
 import { createPagesServerClient } from '@/utils/supabase/pages-client';
 import { createPagesBrowserClient } from '@/utils/supabase/pages-browser';
-import { BlogPost, BlogCategory } from '@/types/blog';
+import { BlogCategory } from '@/types/blog';
 import { formatDate } from '@/lib/utils';
 
 // Import components
@@ -48,7 +49,7 @@ export default function BlogPostPage({
         month: 'long',
         day: 'numeric',
       })
-    : null;
+    : '';
   
   // Page URL for sharing
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com';
@@ -139,10 +140,13 @@ export default function BlogPostPage({
           <div className="lg:col-span-3">
             {post.featured_image && (
               <div className="w-full h-96 relative mb-8 rounded-xl overflow-hidden">
-                <img 
-                  src={post.featured_image} 
-                  alt={post.title} 
-                  className="object-cover w-full h-full"
+                <Image
+                  src={post.featured_image}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+                  className="object-cover"
+                  priority={true}
                 />
               </div>
             )}
@@ -204,11 +208,14 @@ export default function BlogPostPage({
                   <h3 className="text-lg font-semibold mb-3">About the Author</h3>
                   <div className="flex items-center">
                     {post.author.avatar_url && (
-                      <div className="mr-3">
-                        <img 
+                      <div className="mr-3 relative w-12 h-12">
+                        <Image 
                           src={post.author.avatar_url} 
                           alt={post.author.full_name}
-                          className="w-12 h-12 rounded-full object-cover"
+                          fill
+                          sizes="48px"
+                          className="rounded-full object-cover"
+                          priority={false}
                         />
                       </div>
                     )}
@@ -277,7 +284,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     
     // Format tags
     const formattedTags = post.tags
-      ? post.tags.map((tagItem: any) => tagItem.tag)
+      ? post.tags.map((tagItem: BlogPostTag) => tagItem.tag)
       : [];
     
     const formattedPost = {
@@ -303,7 +310,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const formattedRelatedPosts = relatedPosts
       ? relatedPosts.map(relatedPost => {
           const tags = relatedPost.tags
-            ? relatedPost.tags.map((tagItem: any) => tagItem.tag)
+            ? relatedPost.tags.map((tagItem: BlogPostTag) => tagItem.tag)
             : [];
           
           return {

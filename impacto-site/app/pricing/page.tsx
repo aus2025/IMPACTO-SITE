@@ -1,38 +1,134 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckIcon, Clock, TrendingUp, CheckCircle, Headphones } from 'lucide-react';
+import { CheckIcon, Clock, TrendingUp, CheckCircle, Headphones, ChevronDown, DollarSign, Clock3, AlertCircle, Gift } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+// Animation variants
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
+
+const flip = {
+  initial: { rotateY: 0 },
+  flip: { rotateY: 180, transition: { duration: 0.6 } },
+  revert: { rotateY: 0, transition: { duration: 0.6 } }
+};
+
+// Colors for gradient backgrounds
+const gradientColors = [
+  "from-blue-400/50 to-indigo-400/50",
+  "from-purple-400/50 to-pink-400/50",
+  "from-emerald-400/50 to-teal-400/50",
+  "from-amber-400/50 to-orange-400/50"
+];
 
 export default function PricingPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [flippedIcon, setFlippedIcon] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const handleIconFlip = (index: number) => {
+    setFlippedIcon(flippedIcon === index ? null : index);
+  };
+
+  const benefitIcons = [
+    {
+      frontIcon: <Clock className="h-8 w-8" />,
+      backIcon: <Gift className="h-8 w-8" />,
+      title: "Time Freedom",
+      description: "Reclaim hours every week by automating repetitive tasks so you can focus on strategy and growth."
+    },
+    {
+      frontIcon: <DollarSign className="h-8 w-8" />,
+      backIcon: <TrendingUp className="h-8 w-8" />,
+      title: "Lower Payroll Costs",
+      description: "Do more with your existing team by eliminating manual busywork and reducing the need for additional hires."
+    },
+    {
+      frontIcon: <Clock3 className="h-8 w-8" />,
+      backIcon: <CheckCircle className="h-8 w-8" />,
+      title: "Faster Response Time",
+      description: "Instantly engage with leads and customers 24/7, even when you're offline or focusing elsewhere."
+    },
+    {
+      frontIcon: <AlertCircle className="h-8 w-8" />,
+      backIcon: <Headphones className="h-8 w-8" />,
+      title: "Peace of Mind",
+      description: "Know your business runs smoothly in the background while you tackle bigger challenges or enjoy your life."
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "How long does it take to get started?",
+      answer: "For the Kickstart Plan, we can have your basic automations set up within 3-5 business days. For Growth and Scale plans, implementation typically takes 1-2 weeks depending on complexity."
+    },
+    {
+      question: "Can I upgrade my plan later?",
+      answer: "Absolutely! Our plans are designed as a growth path. Start with what you need now and upgrade as your business grows and your automation needs become more sophisticated."
+    },
+    {
+      question: "Do I need technical skills to use your services?",
+      answer: "Not at all. Our done-for-you approach means we handle all the technical aspects. You simply tell us what you need, and we implement it for you."
+    },
+    {
+      question: "What if I need help after implementation?",
+      answer: "All plans include support. Kickstart includes email support, Growth adds priority chat, and Scale includes dedicated phone support and strategy sessions."
+    }
+  ];
+
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
       {/* Hero section */}
-      <section className="py-24 bg-gradient-to-br from-blue-800 to-blue-600 text-white w-full">
+      <section className="py-24 bg-blue-700 text-white w-full" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)', backgroundImage: 'none' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Save Time and Scale Faster with Done‑For‑You Automation
+              More Time, Lower Costs, and Peace of Mind
             </h1>
             <p className="text-xl md:text-2xl mb-10">
-              Professional automation services for small businesses – we automate your busywork so you can focus on growth.
+              Automation that works for your business — so you can focus on growth without the burnout.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button 
-                size="lg" 
-                className="font-medium text-base"
-              >
-                Book a Demo
-              </Button>
-              <Button 
                 variant="outline" 
                 size="lg" 
-                className="font-medium text-base bg-transparent border-white text-white hover:bg-white hover:text-blue-700"
+                className="font-medium text-base bg-transparent border-white text-white hover:bg-white hover:text-blue-700 cursor-pointer"
+                onClick={() => window.location.href = "/assessment"}
               >
-                Start Free
+                Take the Quiz
               </Button>
             </div>
           </div>
@@ -44,50 +140,55 @@ export default function PricingPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Choose Your Automation Package</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple Plans for Your Business Growth</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Select the right package for your business needs. All plans include our core automation technology.
+                Choose the right plan based on where you are in your automation journey. Start small and scale as you grow.
               </p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Starter Package */}
-              <div onClick={() => window.location.href = "/pricing/starter"} className="cursor-pointer">
-                <Card className="flex flex-col h-full hover:shadow-md transition-shadow">
-                  <CardHeader className="border-b pb-6">
-                    <CardTitle className="text-2xl">Starter Package</CardTitle>
+              {/* Kickstart Plan */}
+              <div onClick={() => window.location.href = "/pricing/kickstart"} className="cursor-pointer transform transition-all duration-300 hover:scale-105">
+                <Card className="flex flex-col h-full hover:shadow-lg transition-shadow border-yellow-400/40 overflow-hidden">
+                  <div className="bg-gradient-to-r from-yellow-400/40 to-yellow-500/40 py-8 px-6 border-b">
+                    <CardTitle className="text-2xl">Kickstart Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">$300</span>
-                      <span className="text-gray-500">/mo</span>
+                      <span className="text-3xl font-bold">$149</span>
+                      <span className="text-gray-600">/mo</span>
+                      <span className="block text-sm text-gray-600 mt-1">or $499 one-time</span>
                     </div>
-                    <CardDescription className="mt-2 italic">
-                      Ideal for new small businesses or solopreneurs just starting with automation.
+                    <CardDescription className="mt-2 italic text-gray-700">
+                      Best for solopreneurs & small teams new to automation.
                     </CardDescription>
-                  </CardHeader>
+                  </div>
                   <CardContent className="pt-6 flex-grow">
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Social Media Automation (AI-written posts, scheduled to 1-2 platforms)</span>
+                        <span>Social Media Scheduling (1-2 platforms)</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Lead Capture to CRM (basic web form integration to your CRM)</span>
+                        <span>Lead Capture to CRM (web forms)</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Automated Email Sequence (welcome & follow-up emails)</span>
+                        <span>Email Welcome Flow (3-step)</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span><strong>Support:</strong> Email support, month-to-month flexibility</span>
+                        <span><strong>Support:</strong> Email support</span>
+                      </li>
+                      <li className="flex items-start mt-4 text-yellow-600">
+                        <CheckIcon className="h-5 w-5 text-yellow-600 mr-2 mt-0.5" />
+                        <span className="font-medium">Great first step to start seeing automation in action</span>
                       </li>
                     </ul>
                   </CardContent>
                   <CardFooter className="pt-4">
-                    <Button className="w-full" size="lg" onClick={(e) => {
+                    <Button className="w-full bg-yellow-600 hover:bg-yellow-700 cursor-pointer" size="lg" onClick={(e) => {
                       e.stopPropagation();
-                      window.location.href = "/pricing/starter";
+                      window.location.href = "/pricing/kickstart";
                     }}>
                       Start Free
                     </Button>
@@ -95,22 +196,22 @@ export default function PricingPage() {
                 </Card>
               </div>
               
-              {/* Growth Package */}
-              <div onClick={() => window.location.href = "/pricing/growth"} className="cursor-pointer">
-                <Card className="flex flex-col h-full border-blue-500 shadow-lg relative">
+              {/* Growth Plan */}
+              <div onClick={() => window.location.href = "/pricing/growth"} className="cursor-pointer transform transition-all duration-300 hover:scale-105">
+                <Card className="flex flex-col h-full border-green-500 shadow-lg relative">
                   <div className="absolute top-0 inset-x-0 flex justify-center transform -translate-y-1/2">
-                    <Badge className="bg-blue-500 text-white px-3 py-1 text-sm">Popular</Badge>
+                    <Badge className="bg-green-500 text-white px-3 py-1 text-sm">Popular</Badge>
                   </div>
-                  <CardHeader className="border-b pb-6 bg-blue-50 rounded-t-lg">
-                    <CardTitle className="text-2xl">Growth Package</CardTitle>
+                  <div className="bg-gradient-to-r from-green-400/40 to-green-500/40 py-8 px-6 border-b rounded-t-lg">
+                    <CardTitle className="text-2xl">Growth Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">$700</span>
-                      <span className="text-gray-500">/mo</span>
+                      <span className="text-3xl font-bold">$599</span>
+                      <span className="text-gray-600">/mo</span>
                     </div>
-                    <CardDescription className="mt-2 italic">
-                      Our most popular plan, perfect for growing teams that need multi-channel automation.
+                    <CardDescription className="mt-2 italic text-gray-700">
+                      For businesses ready to expand with multi-channel automation.
                     </CardDescription>
-                  </CardHeader>
+                  </div>
                   <CardContent className="pt-6 flex-grow">
                     <ul className="space-y-3">
                       <li className="flex items-start">
@@ -137,10 +238,14 @@ export default function PricingPage() {
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
                         <span><strong>Support:</strong> Priority email & chat support, quarterly tune-ups</span>
                       </li>
+                      <li className="flex items-start mt-4 text-green-600">
+                        <CheckIcon className="h-5 w-5 text-green-600 mr-2 mt-0.5" />
+                        <span className="font-medium">Full execution with measurable time & cost savings</span>
+                      </li>
                     </ul>
                   </CardContent>
                   <CardFooter className="pt-4">
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700" size="lg" onClick={(e) => {
+                    <Button className="w-full bg-green-600 hover:bg-green-700 cursor-pointer" size="lg" onClick={(e) => {
                       e.stopPropagation();
                       window.location.href = "/pricing/growth";
                     }}>
@@ -150,19 +255,19 @@ export default function PricingPage() {
                 </Card>
               </div>
               
-              {/* Advanced Package */}
-              <div onClick={() => window.location.href = "/pricing/advanced"} className="cursor-pointer">
-                <Card className="flex flex-col h-full hover:shadow-md transition-shadow">
-                  <CardHeader className="border-b pb-6">
-                    <CardTitle className="text-2xl">Advanced Package</CardTitle>
+              {/* Scale Plan */}
+              <div onClick={() => window.location.href = "/pricing/scale"} className="cursor-pointer transform transition-all duration-300 hover:scale-105">
+                <Card className="flex flex-col h-full hover:shadow-lg transition-shadow border-red-400/40 overflow-hidden">
+                  <div className="bg-gradient-to-r from-red-400/40 to-red-500/40 py-8 px-6 border-b">
+                    <CardTitle className="text-2xl">Scale Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">$1,250</span>
-                      <span className="text-gray-500">/mo</span>
+                      <span className="text-3xl font-bold">$1,499</span>
+                      <span className="text-gray-600">/mo</span>
                     </div>
-                    <CardDescription className="mt-2 italic">
-                      For established businesses needing full-scale, custom automation solutions.
+                    <CardDescription className="mt-2 italic text-gray-700">
+                      Premium solution for automation-mature businesses ready to scale.
                     </CardDescription>
-                  </CardHeader>
+                  </div>
                   <CardContent className="pt-6 flex-grow">
                     <ul className="space-y-3">
                       <li className="flex items-start font-medium">
@@ -185,24 +290,19 @@ export default function PricingPage() {
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
                         <span>VIP Support & Strategy (dedicated automation strategist, phone support)</span>
                       </li>
-                      <li className="flex items-start">
-                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span><strong>Support:</strong> 1-on-1 on-boarding, 24/7 priority support</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span className="text-gray-600">+$1,500 one-time setup</span>
+                      <li className="flex items-start mt-4 text-red-600">
+                        <CheckIcon className="h-5 w-5 text-red-600 mr-2 mt-0.5" />
+                        <span className="font-medium">Premium solution only for automation-mature clients</span>
                       </li>
                     </ul>
                   </CardContent>
                   <CardFooter className="pt-4">
                     <Button 
-                      className="w-full" 
-                      variant="outline" 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white cursor-pointer"
                       size="lg"
                       onClick={(e) => {
                         e.stopPropagation();
-                        window.location.href = "/pricing/advanced";
+                        window.location.href = "/pricing/scale";
                       }}
                     >
                       Talk to Us
@@ -219,209 +319,201 @@ export default function PricingPage() {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
+            <motion.div 
+              className="text-center mb-16"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeIn}
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Work smarter, not harder – Benefits of Our Automation Services
+                What You're Really Getting
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Discover how Impacto's automation solutions can transform your business operations.
+                Our automation is about more than just tech—it's about transforming your business and life.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="grid md:grid-cols-4 gap-8">
-              {/* Benefit 1 */}
-              <div className="text-center">
-                <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600">
-                  <Clock className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-blue-700">Save Hours Every Week</h3>
-                <p className="text-gray-600">
-                  Free up time by automating repetitive tasks. Spend more time on strategy and customers, less on admin.
-                </p>
-              </div>
-              
-              {/* Benefit 2 */}
-              <div className="text-center">
-                <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600">
-                  <TrendingUp className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-blue-700">Grow Faster</h3>
-                <p className="text-gray-600">
-                  Scalable systems that support your business growth without adding overhead. Turn on new automation modules as you need them.
-                </p>
-              </div>
-              
-              {/* Benefit 3 */}
-              <div className="text-center">
-                <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600">
-                  <CheckCircle className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-blue-700">No Tech Headaches</h3>
-                <p className="text-gray-600">
-                  We set everything up for you, no coding or IT required. You get enterprise-grade automation with zero learning curve.
-                </p>
-              </div>
-              
-              {/* Benefit 4 */}
-              <div className="text-center">
-                <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600">
-                  <Headphones className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-blue-700">Expert Support</h3>
-                <p className="text-gray-600">
-                  Dedicated automation experts guide you. We're your partners in streamlining your business, always available to help.
-                </p>
-              </div>
-            </div>
+            <motion.div 
+              className="grid md:grid-cols-4 gap-8"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {benefitIcons.map((benefit, index) => (
+                <motion.div 
+                  key={index} 
+                  className="text-center"
+                  variants={cardVariants}
+                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                >
+                  <motion.div 
+                    className={`mb-4 inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br ${gradientColors[index]} shadow-md cursor-pointer perspective-600`}
+                    onHoverStart={() => handleIconFlip(index)}
+                    onHoverEnd={() => handleIconFlip(null)}
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <motion.div 
+                      className="absolute w-full h-full flex items-center justify-center text-white"
+                      animate={flippedIcon === index ? "flip" : "revert"}
+                      variants={flip}
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      {benefit.frontIcon}
+                    </motion.div>
+                    <motion.div 
+                      className="absolute w-full h-full flex items-center justify-center text-white"
+                      initial={{ rotateY: 180 }}
+                      animate={flippedIcon === index ? "revert" : "flip"}
+                      variants={flip}
+                      style={{ backfaceVisibility: "hidden" }}
+                    >
+                      {benefit.backIcon}
+                    </motion.div>
+                  </motion.div>
+                  <motion.h3 
+                    className="text-xl font-bold mb-2 text-blue-700"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {benefit.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-gray-600"
+                    initial={{ opacity: 0.8 }}
+                    whileHover={{ opacity: 1 }}
+                  >
+                    {benefit.description}
+                  </motion.p>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
       
-      {/* Testimonials section */}
-      <section className="py-20 bg-white">
+      {/* ROI Calculator CTA */}
+      <motion.section 
+        className="py-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl mx-4 md:mx-12 my-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+      >
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
-            </div>
-            
-            <div className="bg-blue-50 rounded-xl p-8 md:p-10 shadow-sm">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-gray-200 mb-6 overflow-hidden flex items-center justify-center">
-                  {/* Silhouette placeholder for future client photos */}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-12 h-12 text-gray-400">
-                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-                  </svg>
-                </div>
-                <blockquote className="mb-4">
-                  <p className="text-xl italic text-gray-700">
-                    "Implementing Impacto's automations saved me at least 10 hours every week. It's like I hired an assistant who works 24/7, but for a fraction of the cost."
-                  </p>
-                </blockquote>
-                <cite className="text-gray-600 font-medium not-italic">— Happy Client</cite>
-              </div>
-            </div>
-            
-            {/* Space for future testimonials when available */}
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500">Automating business workflows with Impacto</p>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Not Sure Which Plan Is Right?</h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Take our quick Automation Readiness Quiz to get a personalized recommendation based on your business needs.
+            </p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg rounded-lg cursor-pointer"
+                onClick={() => window.location.href = "/assessment"}
+              >
+                Take the Quiz
+              </Button>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
       
-      {/* FAQ Section */}
-      <section className="py-24 bg-gray-50">
+      {/* FAQ section */}
+      <motion.section 
+        className="py-16 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeIn}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Get answers to common questions about our automation services
-              </p>
-            </div>
+            <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
             
-            <div className="space-y-6">
-              {/* FAQ Item 1 */}
-              <div className="border border-gray-200 rounded-lg bg-white shadow-sm overflow-hidden">
-                <details className="group">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer p-6">
-                    <span className="text-lg font-semibold text-gray-800">How do you deliver the automation services?</span>
-                    <span className="transition group-open:rotate-180">
-                      <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24">
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-700">
-                    <p>
-                      We handle everything for you in the cloud. Our team sets up and monitors your automations remotely – no on-site installation needed. We'll integrate with your existing tools (like your social media, CRM, and email) via secure connections. You simply enjoy the results without worrying about the tech behind it.
+            <motion.div 
+              className="space-y-6"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {faqs.map((faq, index) => (
+                <motion.div 
+                  key={index} 
+                  className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  variants={cardVariants}
+                >
+                  <motion.button 
+                    className="flex justify-between items-center w-full text-left focus:outline-none"
+                    onClick={() => toggleFaq(index)}
+                    whileHover={{ x: 5 }}
+                  >
+                    <h3 className="text-xl font-semibold text-blue-700">{faq.question}</h3>
+                    <motion.div
+                      animate={{ rotate: openFaq === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="h-6 w-6 text-blue-600" />
+                    </motion.div>
+                  </motion.button>
+                  
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                    animate={{ 
+                      height: openFaq === index ? "auto" : 0,
+                      opacity: openFaq === index ? 1 : 0,
+                      marginTop: openFaq === index ? 16 : 0 
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-gray-600">
+                      {faq.answer}
                     </p>
-                  </div>
-                </details>
-              </div>
-              
-              {/* FAQ Item 2 */}
-              <div className="border border-gray-200 rounded-lg bg-white shadow-sm overflow-hidden">
-                <details className="group">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer p-6">
-                    <span className="text-lg font-semibold text-gray-800">What kind of commitment is required?</span>
-                    <span className="transition group-open:rotate-180">
-                      <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24">
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-700">
-                    <p>
-                      All our packages are billed month-to-month with no long-term contracts. You can start or stop at any time. We believe in earning your business every month – stay because you love the service, not because you're locked in. Upgrades or downgrades between packages are seamless as your needs change.
-                    </p>
-                  </div>
-                </details>
-              </div>
-              
-              {/* FAQ Item 3 */}
-              <div className="border border-gray-200 rounded-lg bg-white shadow-sm overflow-hidden">
-                <details className="group">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer p-6">
-                    <span className="text-lg font-semibold text-gray-800">Can I customize the automations for my business?</span>
-                    <span className="transition group-open:rotate-180">
-                      <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24">
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-700">
-                    <p>
-                      Absolutely. We can customize to fit your processes. In the Advanced package, we even build custom workflows from scratch. During onboarding, we discuss your exact needs and configure the automations accordingly. You'll get a tailored solution for your business necessities.
-                    </p>
-                  </div>
-                </details>
-              </div>
-              
-              {/* FAQ Item 4 */}
-              <div className="border border-gray-200 rounded-lg bg-white shadow-sm overflow-hidden">
-                <details className="group">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer p-6">
-                    <span className="text-lg font-semibold text-gray-800">Is there a free trial or demo available?</span>
-                    <span className="transition group-open:rotate-180">
-                      <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24">
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-700">
-                    <p>
-                      Yes! Our Starter package offers a free trial so you can experience the benefits risk-free. For the Growth and Advanced plans, we offer a personalized demo – we'll walk you through how the automations work and show you potential ROI before you commit. We want you to be confident that Impacto is right for your business.
-                    </p>
-                  </div>
-                </details>
-              </div>
-              
-              {/* FAQ Item 5 */}
-              <div className="border border-gray-200 rounded-lg bg-white shadow-sm overflow-hidden">
-                <details className="group">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer p-6">
-                    <span className="text-lg font-semibold text-gray-800">What support do I get if something goes wrong or I need help?</span>
-                    <span className="transition group-open:rotate-180">
-                      <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24">
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6 text-gray-700">
-                    <p>
-                      We pride ourselves on hands-on support. Starter comes with responsive email support. Growth adds live chat support for quicker help. Advanced includes 24/7 priority support and a dedicated account strategist. No matter your plan, we're here to ensure your automations run smoothly and to answer any questions.
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </div>
-            
-            <div className="mt-12 text-center">
-              <p className="text-gray-600">
-                Still have questions? <a href="/contact" className="text-blue-600 font-medium hover:underline">Contact us</a> and we'll be happy to help.
-              </p>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+      
+      {/* Final CTA */}
+      <section className="py-16 bg-blue-700 text-white" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)', backgroundImage: 'none' }}>
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Ready to Take Back Your Time?</h2>
+            <p className="text-xl mb-8">
+              Start with a plan that fits your business today, and grow with us as your needs evolve.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6">
+              <motion.div
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.97 }}
+              >
+                <Button 
+                  className="bg-white text-blue-700 hover:bg-gray-100 font-semibold text-base px-8 py-6 shadow-lg"
+                  size="lg"
+                  onClick={() => window.location.href = "/assessment"}
+                >
+                  Take the Quiz
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.97 }}
+              >
+                <Button 
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-700 font-semibold text-base px-8 py-6 shadow-lg"
+                  size="lg"
+                  onClick={() => window.location.href = "/contact"}
+                >
+                  Contact Us
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>

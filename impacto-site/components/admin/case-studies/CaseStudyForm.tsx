@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Loader2, AlertCircle } from 'lucide-react'
+import Image from 'next/image'
 
 // Define case study interfaces
 export interface CaseStudyMetric {
@@ -70,143 +71,104 @@ export default function CaseStudyForm({
   isSaving,
   errorMessage
 }: CaseStudyFormProps) {
+  const [formData, setFormData] = useState<Partial<CaseStudy>>(initialData || {
+    title: '',
+    slug: '',
+    client: '',
+    industry: '',
+    challenge: '',
+    solution: '',
+    results: '',
+    metrics: [],
+    gallery: [],
+    status: 'draft'
+  })
+  
+  const [industries, setIndustries] = useState<string[]>([])
+  const [isLoadingIndustries, setIsLoadingIndustries] = useState(false)
   const supabase = createClient()
   
-  // Form state
-  const [title, setTitle] = useState(initialData?.title || '')
-  const [slug, setSlug] = useState(initialData?.slug || '')
-  const [client, setClient] = useState(initialData?.client || '')
-  const [industry, setIndustry] = useState(initialData?.industry || '')
-  const [challenge, setChallenge] = useState(initialData?.challenge || '')
-  const [solution, setSolution] = useState(initialData?.solution || '')
-  const [results, setResults] = useState(initialData?.results || '')
-  const [metrics, setMetrics] = useState<CaseStudyMetric[]>(initialData?.metrics || [])
-  const [gallery, setGallery] = useState<CaseStudyImage[]>(initialData?.gallery || [])
-  const [featuredImage, setFeaturedImage] = useState<string | undefined>(initialData?.featured_image)
-  const [metaTitle, setMetaTitle] = useState(initialData?.meta_title || '')
-  const [metaDescription, setMetaDescription] = useState(initialData?.meta_description || '')
-  const [activeTab, setActiveTab] = useState('content')
-  const [industries, setIndustries] = useState<string[]>([
-    'Technology', 'Healthcare', 'Finance', 'Education', 'Manufacturing', 'Retail'
-  ])
-  
-  // Auto-generate slug from title
-  useEffect(() => {
-    if (title && !initialData?.slug) {
-      setSlug(title.toLowerCase()
-        .replace(/[^\w\s-]/g, '') // Remove special chars
-        .replace(/\s+/g, '-') // Replace spaces with -
-        .replace(/-+/g, '-') // Replace multiple - with single -
-      )
-    }
-  }, [title, initialData?.slug])
-  
-  // Fetch available industries for dropdown
   useEffect(() => {
     const fetchIndustries = async () => {
+      setIsLoadingIndustries(true)
       try {
-        // Query for unique industries from existing case studies
         const { data, error } = await supabase
-          .from('case_studies')
-          .select('industry')
-          .order('industry')
-          
+          .from('industries')
+          .select('name')
+          .order('name')
+        
         if (error) throw error
         
-        // Extract unique industries
-        const uniqueIndustries = data
-          ? [...new Set(data.map(item => item.industry).filter(Boolean))]
-          : []
-          
-        // If we got results, use them
-        if (uniqueIndustries.length > 0) {
-          setIndustries(uniqueIndustries)
-        }
-        // If no results, we keep the default industries set in state
-      } catch (err: any) {
-        console.error('Error fetching industries:', err.message || err)
-        // We already have default industries in state, so no need to set again
+        setIndustries(data.map(item => item.name))
+      } catch (error) {
+        console.error('Error fetching industries:', error)
+      } finally {
+        setIsLoadingIndustries(false)
       }
     }
     
     fetchIndustries()
   }, [])
   
-  // Save as draft
   const saveDraft = async () => {
     if (!validateForm()) return
     
-    const caseStudyData: CaseStudy = {
-      title,
-      slug,
-      client,
-      industry,
-      challenge,
-      solution,
-      results,
-      metrics,
-      gallery,
-      featured_image: featuredImage,
-      meta_title: metaTitle || title,
-      meta_description: metaDescription,
-      status: 'draft'
-    }
+    const data: CaseStudy = {
+      ...formData,
+      status: 'draft',
+      updated_at: new Date().toISOString()
+    } as CaseStudy
     
-    await onSave(caseStudyData)
+    await onSave(data)
   }
   
-  // Publish case study
   const publishCaseStudy = async () => {
     if (!validateForm()) return
     
-    const caseStudyData: CaseStudy = {
-      title,
-      slug,
-      client,
-      industry,
-      challenge,
-      solution,
-      results,
-      metrics,
-      gallery,
-      featured_image: featuredImage,
-      meta_title: metaTitle || title,
-      meta_description: metaDescription,
-      status: 'published'
-    }
+    const data: CaseStudy = {
+      ...formData,
+      status: 'published',
+      published_at: formData.published_at || new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    } as CaseStudy
     
-    await onSave(caseStudyData, true)
+    await onSave(data, true)
   }
   
-  // Validate form
   const validateForm = (): boolean => {
-    if (!title) {
-      setActiveTab('content')
+    // Basic validation
+    if (!formData.title?.trim()) {
+      alert('Please enter a title')
       return false
     }
     
-    if (!slug) {
-      setActiveTab('content')
+    if (!formData.slug?.trim()) {
+      alert('Please enter a slug')
       return false
     }
     
-    if (!client) {
-      setActiveTab('content')
+    if (!formData.client?.trim()) {
+      alert('Please enter a client name')
       return false
     }
     
-    if (!industry) {
-      setActiveTab('content')
+    if (!formData.industry?.trim()) {
+      alert('Please select an industry')
       return false
     }
     
-    if (!challenge) {
-      setActiveTab('content')
+    if (!formData.challenge?.trim()) {
+      alert('Please describe the challenge')
       return false
     }
     
-    if (!solution) {
-      setActiveTab('content')
+    if (!formData.solution?.trim()) {
+      alert('Please describe the solution')
+      return false
+    }
+    
+    if (!formData.results?.trim()) {
+      alert('Please describe the results')
       return false
     }
     
@@ -222,76 +184,99 @@ export default function CaseStudyForm({
         </Alert>
       )}
       
-      <Tabs defaultValue="content" value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="mb-4">
+      <Tabs defaultValue="content" className="w-full">
+        <TabsList>
           <TabsTrigger value="content">Content</TabsTrigger>
-          <TabsTrigger value="media">Media & Gallery</TabsTrigger>
-          <TabsTrigger value="metrics">Results & Metrics</TabsTrigger>
           <TabsTrigger value="seo">SEO</TabsTrigger>
+          <TabsTrigger value="preview">Preview</TabsTrigger>
         </TabsList>
         
-        {/* Content Tab */}
         <TabsContent value="content">
-          <div className="grid gap-6">
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Basic Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-3">
-                  <Label htmlFor="title">Case Study Title <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="title"
-                    placeholder="Enter case study title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="title">Title</Label>
+                    <Input
+                      id="title"
+                      value={formData.title}
+                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                      placeholder="Enter case study title"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="slug">Slug</Label>
+                    <Input
+                      id="slug"
+                      value={formData.slug}
+                      onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                      placeholder="Enter URL slug"
+                    />
+                  </div>
                 </div>
                 
-                <div className="grid gap-3">
-                  <Label htmlFor="slug">Slug <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="slug"
-                    placeholder="URL-friendly slug"
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
-                  />
-                  <p className="text-sm text-gray-500">
-                    Will be used in the URL: /case-studies/{slug}
-                  </p>
-                </div>
-                
-                <div className="grid gap-3">
-                  <Label htmlFor="client">Client Name <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="client"
-                    placeholder="Enter client name"
-                    value={client}
-                    onChange={(e) => setClient(e.target.value)}
-                  />
-                </div>
-                
-                <div className="grid gap-3">
-                  <Label htmlFor="industry">Industry <span className="text-red-500">*</span></Label>
-                  <div className="flex space-x-2">
-                    <Select value={industry} onValueChange={setIndustry}>
-                      <SelectTrigger className="flex-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="client">Client</Label>
+                    <Input
+                      id="client"
+                      value={formData.client}
+                      onChange={(e) => setFormData({ ...formData, client: e.target.value })}
+                      placeholder="Enter client name"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="industry">Industry</Label>
+                    <Select
+                      value={formData.industry}
+                      onValueChange={(value) => setFormData({ ...formData, industry: value })}
+                    >
+                      <SelectTrigger>
                         <SelectValue placeholder="Select industry" />
                       </SelectTrigger>
                       <SelectContent>
-                        {industries.map((ind) => (
-                          <SelectItem key={ind} value={ind}>
-                            {ind}
-                          </SelectItem>
-                        ))}
+                        {isLoadingIndustries ? (
+                          <div className="p-2 text-center">
+                            <Loader2 className="h-4 w-4 animate-spin mx-auto" />
+                          </div>
+                        ) : (
+                          industries.map((industry) => (
+                            <SelectItem key={industry} value={industry}>
+                              {industry}
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
-                    <Input
-                      placeholder="Or type a new industry"
-                      onChange={(e) => setIndustry(e.target.value)}
-                      className="flex-1"
-                    />
                   </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="featured_image">Featured Image URL</Label>
+                  <Input
+                    id="featured_image"
+                    value={formData.featured_image}
+                    onChange={(e) => setFormData({ ...formData, featured_image: e.target.value })}
+                    placeholder="Enter featured image URL"
+                  />
+                  {formData.featured_image && (
+                    <div className="mt-2 relative h-48">
+                      <Image
+                        src={formData.featured_image}
+                        alt="Featured image preview"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover rounded-md"
+                        priority={false}
+                      />
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -307,8 +292,8 @@ export default function CaseStudyForm({
                     id="challenge"
                     placeholder="Describe the client's challenge"
                     className="min-h-[150px]"
-                    value={challenge}
-                    onChange={(e) => setChallenge(e.target.value)}
+                    value={formData.challenge}
+                    onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
                   />
                 </div>
                 
@@ -318,8 +303,8 @@ export default function CaseStudyForm({
                     id="solution"
                     placeholder="Describe your solution to the challenge"
                     className="min-h-[200px]"
-                    value={solution}
-                    onChange={(e) => setSolution(e.target.value)}
+                    value={formData.solution}
+                    onChange={(e) => setFormData({ ...formData, solution: e.target.value })}
                   />
                 </div>
                 
@@ -329,8 +314,8 @@ export default function CaseStudyForm({
                     id="results"
                     placeholder="Describe the results and outcomes"
                     className="min-h-[150px]"
-                    value={results}
-                    onChange={(e) => setResults(e.target.value)}
+                    value={formData.results}
+                    onChange={(e) => setFormData({ ...formData, results: e.target.value })}
                   />
                   <p className="text-sm text-gray-500">
                     You can also add specific metrics in the "Results & Metrics" tab.
@@ -341,51 +326,6 @@ export default function CaseStudyForm({
           </div>
         </TabsContent>
         
-        {/* Media Tab */}
-        <TabsContent value="media">
-          <Card>
-            <CardHeader>
-              <CardTitle>Featured Image</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-3">
-                <Label htmlFor="featuredImage">Featured Image URL</Label>
-                <Input
-                  id="featuredImage"
-                  placeholder="Enter featured image URL"
-                  value={featuredImage || ''}
-                  onChange={(e) => setFeaturedImage(e.target.value)}
-                />
-                {featuredImage && (
-                  <div className="mt-2">
-                    <img 
-                      src={featuredImage} 
-                      alt="Featured preview" 
-                      className="max-w-xs rounded-md border border-gray-200"
-                    />
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-          
-          <div className="mt-6">
-            <GalleryManager 
-              gallery={gallery} 
-              onChange={setGallery} 
-            />
-          </div>
-        </TabsContent>
-        
-        {/* Metrics Tab */}
-        <TabsContent value="metrics">
-          <ResultsMetricsInput 
-            metrics={metrics}
-            onChange={setMetrics}
-          />
-        </TabsContent>
-        
-        {/* SEO Tab */}
         <TabsContent value="seo">
           <Card>
             <CardHeader>
@@ -397,8 +337,8 @@ export default function CaseStudyForm({
                 <Input
                   id="metaTitle"
                   placeholder="Enter meta title (defaults to case study title)"
-                  value={metaTitle}
-                  onChange={(e) => setMetaTitle(e.target.value)}
+                  value={formData.meta_title}
+                  onChange={(e) => setFormData({ ...formData, meta_title: e.target.value })}
                 />
               </div>
               
@@ -408,16 +348,26 @@ export default function CaseStudyForm({
                   id="metaDescription"
                   placeholder="Enter meta description"
                   className="min-h-[100px]"
-                  value={metaDescription}
-                  onChange={(e) => setMetaDescription(e.target.value)}
+                  value={formData.meta_description}
+                  onChange={(e) => setFormData({ ...formData, meta_description: e.target.value })}
                 />
               </div>
             </CardContent>
           </Card>
         </TabsContent>
+        
+        <TabsContent value="preview">
+          <Card>
+            <CardHeader>
+              <CardTitle>Preview</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {/* Preview content will be added here */}
+            </CardContent>
+          </Card>
+        </TabsContent>
       </Tabs>
       
-      {/* Action Buttons */}
       <div className="flex justify-end gap-3">
         <Button
           variant="outline"
@@ -444,7 +394,7 @@ export default function CaseStudyForm({
               Publishing...
             </>
           ) : (
-            initialData?.status === 'published' ? 'Update & Publish' : 'Publish'
+            formData.status === 'published' ? 'Update & Publish' : 'Publish'
           )}
         </Button>
       </div>

@@ -1,10 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable React StrictMode
+  reactStrictMode: true,
+  
+  // Fixes for Windows case sensitivity issues
+  webpack: (config, { isServer, dev }) => {
+    // Add case-sensitive paths plugin when in development
+    if (dev && !isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+
+    return config;
+  },
+  
+  // Additional configurations
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    domains: ['impactoautomationai.com'],
+    domains: ['impactoautomationai.com', 'localhost'],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
@@ -15,10 +32,19 @@ const nextConfig = {
       },
     ],
   },
+  
+  // Apply trailing slash to all routes
+  trailingSlash: false,
+  
+  // Server components external packages
+  serverExternalPackages: [],
+  
+  // Experimental features
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['react-icons', 'lucide-react', 'framer-motion'],
   },
+  
   // Options that were moved out of experimental
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,

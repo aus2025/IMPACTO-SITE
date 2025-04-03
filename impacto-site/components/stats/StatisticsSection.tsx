@@ -206,12 +206,16 @@ const StatisticsSection: React.FC = () => {
           <p className="text-xl text-gray-700 mb-6 max-w-2xl mx-auto">
             Join hundreds of businesses that have transformed their operations with AI solutions
           </p>
-          <a 
-            href="/contact" 
+          <motion.a 
+            href="https://calendly.com/rba-aus" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="cta-button-global"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Schedule Your Free Assessment
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

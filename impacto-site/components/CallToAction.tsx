@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const CallToAction = () => {
   return (
@@ -13,9 +14,16 @@ const CallToAction = () => {
             Schedule a free consultation with our automation experts and discover how our AI solutions can drive your business forward.
           </p>
           <div className="w-full flex flex-col sm:flex-row gap-6 justify-center items-center mt-8">
-            <Link href="/contact" className="cta-button-global">
+            <motion.a 
+              href="https://calendly.com/rba-aus" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-button-global"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Start Your Transformation
-            </Link>
+            </motion.a>
           </div>
         </div>
       </div>

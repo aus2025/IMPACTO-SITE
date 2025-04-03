@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BlogPost } from '@/types/blog';
 import { formatDate } from '@/lib/utils';
 
@@ -18,11 +19,14 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
           className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
         >
           {post.featured_image && (
-            <Link href={`/blog/${post.slug}`} className="block h-48 overflow-hidden">
-              <img 
+            <Link href={`/blog/${post.slug}`} className="block h-48 overflow-hidden relative">
+              <Image 
                 src={post.featured_image} 
-                alt={post.title} 
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                alt={post.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform hover:scale-105 duration-300"
+                priority={false}
               />
             </Link>
           )}

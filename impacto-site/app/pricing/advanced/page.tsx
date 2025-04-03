@@ -13,7 +13,7 @@ export default function AdvancedPackagePage() {
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
       {/* Hero section */}
-      <section className="py-24 bg-gradient-to-br from-blue-800 to-blue-600 text-white w-full">
+      <section className="py-24 bg-gradient-to-br from-blue-800 to-blue-600 text-white w-full" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)', backgroundImage: 'none' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <Link 
@@ -32,19 +32,21 @@ export default function AdvancedPackagePage() {
                 Full-Scale Automation – Maximum Impact
               </p>
               <p className="text-lg md:text-xl mb-6 text-blue-50">
-                Ideal for established businesses seeking custom automation solutions and hands-on expertise.
+                Built for established businesses ready to scale with tailored automation and expert support.
               </p>
               <p className="text-lg mb-10 text-blue-50 max-w-3xl">
-                Our Advanced Package delivers end-to-end automation tailored to your unique processes. From AI chatbots to custom integrations, we build what your business needs to run faster and smarter at scale. Includes dedicated strategy sessions, custom workflows, and priority support.
+                Get end-to-end automation designed around your unique processes — from AI chatbots to custom integrations.
+                Includes dedicated strategy sessions, custom-built workflows, and priority support to help your business run smarter at scale.
               </p>
-              <Button 
-                size="lg" 
-                className="font-medium text-base"
-                onClick={() => router.push('/contact?package=advanced')}
+              <a 
+                href="https://calendly.com/rba-aus"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-4 bg-white text-blue-700"
               >
                 <MessageCircleIcon className="h-4 w-4 mr-2" />
-                Talk to Us
-              </Button>
+                Talk to an Expert
+              </a>
             </div>
           </div>
         </div>

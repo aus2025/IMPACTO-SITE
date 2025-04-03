@@ -96,7 +96,7 @@ export default function CaseStudies() {
       
       <main className="min-h-screen w-full overflow-x-hidden">
         {/* Hero section */}
-        <section className="py-24 bg-blue-700 text-white w-full">
+        <section className="py-24 bg-blue-700 text-white w-full" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)' }}>
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">

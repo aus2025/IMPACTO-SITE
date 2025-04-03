@@ -7,7 +7,7 @@ export default function SocialMediaMarketingClient() {
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
       {/* Hero section */}
-      <section className="py-24 bg-blue-700 text-white w-full">
+      <section className="py-24 bg-blue-700 text-white w-full" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -19,11 +19,11 @@ export default function SocialMediaMarketingClient() {
             <div className="flex flex-wrap justify-center gap-4">
               <a 
                 href="https://calendly.com/rba-aus" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="cta-button-global"
               >
-                Book a Consultation
+                Book a Demo
               </a>
               <Link href="#services" className="cta-button-global">
                 Explore Services
@@ -142,20 +142,20 @@ export default function SocialMediaMarketingClient() {
       </section>
 
       {/* CTA section */}
-      <section className="py-16 bg-blue-700 text-white">
+      <section className="py-16 text-white" style={{ backgroundColor: 'rgba(65, 105, 225, 0.6)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Ready to Boost Your Social Media Presence?</h2>
             <p className="text-xl mb-8">
-              Schedule a free consultation to see how AI-powered social media marketing can transform your online presence.
+              Schedule a demo to see how AI-powered social media marketing can transform your online presence.
             </p>
             <a 
-              href="https://calendly.com/rba-aus" 
-              target="_blank" 
+              href="https://calendly.com/rba-aus"
+              target="_blank"
               rel="noopener noreferrer"
               className="bg-white hover:bg-blue-50 text-blue-600 px-8 py-4 rounded-md font-medium text-lg transition duration-300"
             >
-              Book Your Free Consultation
+              Book a Demo
             </a>
           </div>
         </div>

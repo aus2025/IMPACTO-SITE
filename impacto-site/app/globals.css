@@ -3,8 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --header-height: 11rem; /* Increase header height for initial state */
-  --header-height-scrolled: 11rem; /* Match the initial height for consistency */
+  --header-height: 14rem; /* Increase header height to match the new 140px height */
+  --header-height-scrolled: 14rem; /* Match the initial height for consistency */
 }
 
 @theme inline {
@@ -45,7 +45,7 @@ body {
 
 /* Add space below fixed navbar for all pages */
 .flex-grow {
-  padding-top: var(--header-height) !important; /* Use header height variable */
+  padding-top: 140px !important; /* Fixed exact height instead of variable */
 }
 
 /* Ensure fixed navbar stays above content */
@@ -238,7 +238,7 @@ section.py-24.bg-gradient-to-br.from-blue-800.to-blue-600.text-white,
 section.py-24.bg-gradient-to-br.from-blue-900.to-blue-700.text-white,
 section.py-16.bg-gradient-to-br.from-blue-900.to-indigo-900.text-white,
 section.py-12.bg-gradient-to-br.from-blue-800.to-blue-600.text-white {
-  background: #1D4ED8 !important; /* Match exact blue color from header */
+  background: rgba(65, 105, 225, 0.6) !important; /* Royal Blue at 60% opacity to match CTA section */
   background-image: none !important; /* Remove any gradient */
 }
 
@@ -279,8 +279,8 @@ main.min-h-screen {
   width: 100%;
   overflow-x: hidden;
   position: relative;
-  padding-top: 0; /* Remove fixed padding */
-  margin-top: 0; /* Remove fixed margin */
+  padding-top: 0 !important;
+  margin-top: 0;
 }
 
 /* First section in main doesn't need additional padding */
@@ -302,7 +302,7 @@ main.min-h-screen > section:first-child {
 }
 
 .cta-button-global:hover {
-  transform: translateY(-3px);
+  transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
@@ -426,4 +426,26 @@ body article div[class*="text-gray-"] {
 /* Handle element-specific overrides that might be problematic */
 article li.flex.items-start > span:last-child {
   color: #1f2937 !important; /* Specifically target the results text */
+}
+
+/* For pages with hero sections, reduce the padding */
+main.min-h-screen {
+  padding-top: 0 !important;
+  margin-top: 0;
+}
+
+/* Make hero sections start right after header */
+section.py-24.bg-blue-700,
+section.py-24.bg-gradient-to-br.from-blue-800.to-blue-600.text-white,
+section.py-24.bg-gradient-to-br.from-blue-900.to-blue-700.text-white,
+section.py-16.bg-gradient-to-br.from-blue-900.to-indigo-900.text-white,
+section.py-12.bg-gradient-to-br.from-blue-800.to-blue-600.text-white,
+section[style*="background-color: rgba(65, 105, 225, 0.6)"] {
+  padding-top: 140px !important;
+  margin-top: 0 !important;
+}
+
+/* For pages without hero sections that use negative margin */
+div[style*="margin-top: -100px"] {
+  margin-top: 0 !important;
 }

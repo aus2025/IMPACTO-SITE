@@ -12,6 +12,12 @@ const nextConfig = {
         fs: false,
       };
     }
+    
+    // Exclude admin-backup directory from builds
+    config.watchOptions = config.watchOptions || {};
+    config.watchOptions.ignored = Array.isArray(config.watchOptions.ignored) 
+      ? [...config.watchOptions.ignored, '**/admin-backup/**'] 
+      : ['**/node_modules/**', '**/admin-backup/**'];
 
     return config;
   },
@@ -56,10 +62,8 @@ const nextConfig = {
   },
   typescript: {
     // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
+    // Temporarily commenting out to enable TypeScript error checking during builds
+    // ignoreBuildErrors: true,
   },
   // Explicitly disable static exports for administrative routes
   output: 'standalone',

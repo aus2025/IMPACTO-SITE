@@ -113,12 +113,12 @@ export default function BusinessInfoSection({
         </div>
         
         <div>
-          <Label htmlFor="employees" className="required text-gray-900 font-medium">Number of Employees</Label>
+          <Label htmlFor="employee_count" className="required text-gray-900 font-medium">Number of Employees</Label>
           <Select 
-            value={formData.employees} 
-            onValueChange={(value) => onSelectChange('employees', value)}
+            value={formData.employee_count} 
+            onValueChange={(value) => onSelectChange('employee_count', value)}
           >
-            <SelectTrigger id="employees" className={`mt-1 text-gray-900 ${errors.employees ? 'border-red-500' : ''}`}>
+            <SelectTrigger id="employee_count" className={`mt-1 text-gray-900 ${errors.employee_count ? 'border-red-500' : ''}`}>
               <SelectValue placeholder="Select company size" />
             </SelectTrigger>
             <SelectContent>
@@ -129,8 +129,8 @@ export default function BusinessInfoSection({
               ))}
             </SelectContent>
           </Select>
-          {errors.employees && (
-            <div className="text-red-500 text-sm mt-1">{errors.employees}</div>
+          {errors.employee_count && (
+            <div className="text-red-500 text-sm mt-1">{errors.employee_count}</div>
           )}
         </div>
         
@@ -141,9 +141,9 @@ export default function BusinessInfoSection({
               <div key={goal.value} className="flex items-center space-x-2">
                 <Checkbox 
                   id={`goal-${goal.value}`} 
-                  checked={formData.goals?.includes(goal.value)}
+                  checked={formData.business_goals?.includes(goal.value)}
                   onCheckedChange={(checked) => 
-                    onCheckboxChange('goals', goal.value, checked as boolean)
+                    onCheckboxChange('business_goals', goal.value, checked as boolean)
                   }
                 />
                 <label
@@ -155,8 +155,8 @@ export default function BusinessInfoSection({
               </div>
             ))}
           </div>
-          {errors.goals && (
-            <div className="text-red-500 text-sm mt-1">{errors.goals}</div>
+          {errors.business_goals && (
+            <div className="text-red-500 text-sm mt-1">{errors.business_goals}</div>
           )}
         </div>
         

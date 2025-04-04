@@ -14,6 +14,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Form styles */
+.required::after {
+  content: " *";
+  color: #dc2626; /* text-red-600 */
+  font-weight: bold;
+}
+
 /* Form animations */
 @keyframes fadeIn {
   from {

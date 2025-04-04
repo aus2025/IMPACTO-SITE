@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import BlogImage from './BlogImage';
 import BlogPagination from './BlogPagination';
-import { BlogPost } from '@/lib/static-blog';
+import { BlogPost } from '@/lib/blog-service';
 
 interface BlogContentProps {
   posts: BlogPost[];
@@ -14,7 +14,6 @@ interface BlogContentProps {
   pageBaseUrl: string;
   categoryParam?: string;
   tagParam?: string;
-  searchParam?: string;
 }
 
 export default function BlogContent({
@@ -23,8 +22,7 @@ export default function BlogContent({
   currentPage,
   pageBaseUrl,
   categoryParam,
-  tagParam,
-  searchParam
+  tagParam
 }: BlogContentProps) {
   // Create URLs for pagination
   const createPageUrl = (page: number) => {
@@ -32,7 +30,6 @@ export default function BlogContent({
     if (page > 1) params.set('page', page.toString());
     if (categoryParam) params.set('category', categoryParam);
     if (tagParam) params.set('tag', tagParam);
-    if (searchParam) params.set('search', searchParam);
     return `${pageBaseUrl}?${params.toString()}`;
   };
 
@@ -114,7 +111,7 @@ export default function BlogContent({
         <div className="text-center py-12">
           <h3 className="text-2xl font-semibold text-gray-700 mb-3">No posts found</h3>
           <p className="text-gray-500 mb-6">
-            Try adjusting your search or filter criteria.
+            Try adjusting your filter criteria.
           </p>
         </div>
       )}

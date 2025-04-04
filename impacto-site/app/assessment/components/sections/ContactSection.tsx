@@ -32,17 +32,17 @@ export default function ContactSection({
       
       <div className="space-y-4">
         <div>
-          <Label htmlFor="fullName" className="required text-gray-900 font-medium">Full Name</Label>
+          <Label htmlFor="full_name" className="required text-gray-900 font-medium">Full Name</Label>
           <Input
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
+            id="full_name"
+            name="full_name"
+            value={formData.full_name || ''}
             onChange={onInputChange}
-            className={`mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900 ${errors.fullName ? 'border-red-500' : 'border-gray-300'}`}
+            className={`mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900 ${errors.full_name ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Your full name"
           />
-          {errors.fullName && (
-            <div className="text-red-500 text-sm mt-1">{errors.fullName}</div>
+          {errors.full_name && (
+            <div className="text-red-500 text-sm mt-1">{errors.full_name}</div>
           )}
         </div>
         
@@ -52,7 +52,7 @@ export default function ContactSection({
             id="email"
             name="email"
             type="email"
-            value={formData.email}
+            value={formData.email || ''}
             onChange={onInputChange}
             className={`mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="your.email@example.com"
@@ -68,7 +68,7 @@ export default function ContactSection({
             id="phone"
             name="phone"
             type="tel"
-            value={formData.phone}
+            value={formData.phone || ''}
             onChange={onInputChange}
             className={`mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="(555) 123-4567"
@@ -79,24 +79,27 @@ export default function ContactSection({
         </div>
         
         <div>
-          <Label htmlFor="company" className="text-gray-900 font-medium">Company Name</Label>
+          <Label htmlFor="company_name" className="text-gray-900 font-medium">Company Name</Label>
           <Input
-            id="company"
-            name="company"
-            value={formData.company}
+            id="company_name"
+            name="company_name"
+            value={formData.company_name || ''}
             onChange={onInputChange}
-            className="mt-1 focus:ring-blue-600 focus:border-blue-600 border-gray-300 text-gray-900"
+            className={`mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900 ${errors.company_name ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Your company name"
           />
+          {errors.company_name && (
+            <div className="text-red-500 text-sm mt-1">{errors.company_name}</div>
+          )}
         </div>
         
         <div>
-          <Label htmlFor="role" className="text-gray-900 font-medium">Your Role</Label>
+          <Label htmlFor="job_title" className="text-gray-900 font-medium">Your Role</Label>
           <Select 
-            value={formData.role} 
-            onValueChange={(value) => onSelectChange('role', value)}
+            value={formData.job_title || ''} 
+            onValueChange={(value) => onSelectChange('job_title', value)}
           >
-            <SelectTrigger id="role" className="mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900">
+            <SelectTrigger id="job_title" className={`mt-1 focus:ring-blue-600 focus:border-blue-600 text-gray-900 ${errors.job_title ? 'border-red-500' : 'border-gray-300'}`}>
               <SelectValue placeholder="Select your role" />
             </SelectTrigger>
             <SelectContent>
@@ -107,6 +110,9 @@ export default function ContactSection({
               <SelectItem value="other" className="text-gray-900">Other</SelectItem>
             </SelectContent>
           </Select>
+          {errors.job_title && (
+            <div className="text-red-500 text-sm mt-1">{errors.job_title}</div>
+          )}
           <p className="text-gray-700 text-sm italic mt-1">
             Knowing your role helps us tailor our recommendations to your specific needs and authority level.
           </p>

@@ -216,59 +216,12 @@ export default function AutomationNeedsSection({
         )}
         
         <div>
-          <Label className="text-gray-900 font-medium">Time Spent on Manual Processes</Label>
-          <p className="text-gray-800 mb-2">
-            Estimate how much time your staff spends on manual processes that could be automated.
-          </p>
-          <Select 
-            value={formData.process_time_spent} 
-            onValueChange={(value) => onSelectChange('process_time_spent', value)}
-          >
-            <SelectTrigger id="process_time_spent" className="mt-1 text-gray-900">
-              <SelectValue placeholder="Select time estimate" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="very_low" className="text-gray-900">Minimal (&#60; 5% of work time)</SelectItem>
-              <SelectItem value="low" className="text-gray-900">Low (5-15% of work time)</SelectItem>
-              <SelectItem value="medium" className="text-gray-900">Moderate (15-30% of work time)</SelectItem>
-              <SelectItem value="high" className="text-gray-900">High (30-50% of work time)</SelectItem>
-              <SelectItem value="very_high" className="text-gray-900">Very High (&#62; 50% of work time)</SelectItem>
-            </SelectContent>
-          </Select>
-          <p className="text-gray-800 italic text-sm mt-1">
-            This helps us quantify the potential time savings from automation.
-          </p>
-        </div>
-        
-        <div>
-          <Label className="text-gray-900 font-medium">Error Frequency in Manual Processes</Label>
-          <p className="text-gray-800 mb-2">
-            How often do errors occur in your manual processes?
-          </p>
-          <Select 
-            value={formData.error_frequency} 
-            onValueChange={(value) => onSelectChange('error_frequency', value)}
-          >
-            <SelectTrigger id="error_frequency" className="mt-1 text-gray-900">
-              <SelectValue placeholder="Select error frequency" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="very_rare" className="text-gray-900">Very Rare (Almost Never)</SelectItem>
-              <SelectItem value="rare" className="text-gray-900">Rare (Few Times a Year)</SelectItem>
-              <SelectItem value="occasional" className="text-gray-900">Occasional (Monthly)</SelectItem>
-              <SelectItem value="frequent" className="text-gray-900">Frequent (Weekly)</SelectItem>
-              <SelectItem value="very_frequent" className="text-gray-900">Very Frequent (Daily)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        
-        <div>
-          <Label htmlFor="automation_experience" className="required text-gray-900 font-medium">Current Automation Experience</Label>
+          <Label className="text-gray-900 font-medium">Current Automation Experience</Label>
           <Select 
             value={formData.automation_experience} 
             onValueChange={(value) => onSelectChange('automation_experience', value)}
           >
-            <SelectTrigger id="automation_experience" className={`mt-1 text-gray-900 ${errors.automation_experience ? 'border-red-500' : ''}`}>
+            <SelectTrigger id="automation_experience" className="mt-1 text-gray-900">
               <SelectValue placeholder="Select experience level" />
             </SelectTrigger>
             <SelectContent>
@@ -279,73 +232,40 @@ export default function AutomationNeedsSection({
               ))}
             </SelectContent>
           </Select>
-          {errors.automation_experience && (
-            <div className="text-red-500 text-sm mt-1">{errors.automation_experience}</div>
-          )}
         </div>
         
         <div>
-          <Label className="text-gray-900 font-medium">Existing Systems</Label>
+          <Label className="text-gray-900 font-medium">Implementation Timeline</Label>
           <p className="text-gray-800 mb-2">
-            Select the systems you currently use in your business.
+            When would you like to implement automation solutions?
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-1">
-            {existingSystems.map((system) => (
-              <div key={system.value} className="flex items-center space-x-2">
-                <Checkbox 
-                  id={`system-${system.value}`} 
-                  checked={formData.existing_systems?.includes(system.value)}
-                  onCheckedChange={(checked) => 
-                    onCheckboxChange('existing_systems', system.value, checked as boolean)
-                  }
-                  className="text-gray-900 border-gray-700"
-                />
-                <label
-                  htmlFor={`system-${system.value}`}
-                  className="text-gray-900 text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  {system.label}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        <div>
-          <Label className="text-gray-900 font-medium">Specific Challenges or Requirements</Label>
-          <p className="text-gray-800 mb-2">
-            Please describe any specific challenges or requirements for your automation needs
-          </p>
-          <Textarea 
-            id="specific_challenges" 
-            name="specific_challenges"
-            value={formData.specific_challenges || ''}
-            onChange={onInputChange}
-            placeholder="Please describe any specific challenges or requirements for your automation needs"
-            className="mt-1 text-gray-900 h-24"
-          />
-        </div>
-        
-        <div>
-          <Label htmlFor="automation_timeline" className="required text-gray-900 font-medium">Implementation Timeline</Label>
           <Select 
-            value={formData.automation_timeline} 
-            onValueChange={(value) => onSelectChange('automation_timeline', value)}
+            value={formData.implementation_timeline} 
+            onValueChange={(value) => onSelectChange('implementation_timeline', value)}
           >
-            <SelectTrigger id="automation_timeline" className={`mt-1 text-gray-900 ${errors.automation_timeline ? 'border-red-500' : ''}`}>
+            <SelectTrigger id="implementation_timeline" className="mt-1 text-gray-900">
               <SelectValue placeholder="Select timeline" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="immediate" className="text-gray-900">As soon as possible</SelectItem>
-              <SelectItem value="3months" className="text-gray-900">Within 3 months</SelectItem>
-              <SelectItem value="6months" className="text-gray-900">Within 6 months</SelectItem>
-              <SelectItem value="12months" className="text-gray-900">Within 12 months</SelectItem>
-              <SelectItem value="exploring" className="text-gray-900">Just exploring options for now</SelectItem>
+              {timelineOptions.map((timeline) => (
+                <SelectItem key={timeline.value} value={timeline.value} className="text-gray-900">
+                  {timeline.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
-          {errors.automation_timeline && (
-            <div className="text-red-500 text-sm mt-1">{errors.automation_timeline}</div>
-          )}
+        </div>
+        
+        <div>
+          <Label htmlFor="specific_automation_needs" className="text-gray-900 font-medium">Specific Automation Needs</Label>
+          <Textarea 
+            id="specific_automation_needs" 
+            name="specific_automation_needs"
+            value={formData.specific_automation_needs || ''}
+            onChange={onInputChange}
+            placeholder="Please describe any specific automation requirements or challenges you'd like addressed"
+            className="mt-1 text-gray-900"
+          />
         </div>
       </div>
       

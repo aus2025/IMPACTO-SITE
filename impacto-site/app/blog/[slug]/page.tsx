@@ -1,4 +1,4 @@
-import { getPostBySlug, getAllPosts, getRelatedPosts } from '@/lib/static-blog';
+import { getPostBySlug, getAllPosts, getRelatedPosts } from '@/lib/blog-service';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -199,22 +199,22 @@ export default async function BlogPostPage({
                 <Image 
                   src="/images/impacto-logo-small.svg" 
                   alt="Impacto Automation"
-                  width={60}
-                  height={60}
-                  className="rounded-full mr-4"
+                  width={40}
+                  height={40}
+                  className="rounded-full mr-3"
                 />
                 <div>
-                  <h4 className="font-medium text-gray-900">{post.author}</h4>
+                  <span className="font-semibold text-gray-900">{post.author}</span>
                   <p className="text-sm text-gray-600">Automation Expert</p>
                 </div>
               </div>
-              <p className="text-gray-700">
-                Our team of experts brings years of experience in business process automation,
-                AI implementation, and digital transformation strategy.
+              <p className="text-gray-700 text-sm">
+                Our team of automation specialists brings decades of combined experience in 
+                implementing cutting-edge solutions for businesses of all sizes.
               </p>
             </div>
             
-            {/* Newsletter signup */}
+            {/* Newsletter */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <Newsletter />
             </div>
@@ -225,86 +225,58 @@ export default async function BlogPostPage({
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Related Articles</h3>
                 <div className="space-y-4">
                   {relatedPosts.map((relatedPost) => (
-                    <div key={relatedPost.slug} className="group">
-                      <Link href={`/blog/${relatedPost.slug}`}>
-                        <h4 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors duration-200 mb-1">
+                    <div key={relatedPost.slug} className="flex items-start">
+                      <div className="relative h-16 w-16 flex-shrink-0 rounded overflow-hidden mr-3">
+                        <BlogImage 
+                          src={getBlogImageSrc(relatedPost.slug)}
+                          alt={relatedPost.title}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div>
+                        <Link 
+                          href={`/blog/${relatedPost.slug}`}
+                          className="text-blue-600 hover:text-blue-800 font-medium text-sm line-clamp-2"
+                        >
                           {relatedPost.title}
-                        </h4>
-                      </Link>
-                      <p className="text-sm text-gray-500">{relatedPost.formattedDate}</p>
+                        </Link>
+                        <p className="text-xs text-gray-500 mt-1">{relatedPost.formattedDate}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <Link 
-                    href="/blog" 
-                    className="text-blue-600 hover:text-blue-800 font-medium text-sm"
-                  >
-                    View all articles &rarr;
-                  </Link>
-                </div>
+              </div>
+            )}
+            
+            {/* Categories */}
+            {post.category && (
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Categories</h3>
+                <Link
+                  href={`/blog?category=${encodeURIComponent(post.category.toLowerCase())}`}
+                  className="inline-block bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm hover:bg-blue-100 transition-colors duration-200"
+                >
+                  {post.category}
+                </Link>
               </div>
             )}
           </aside>
         </div>
-        
-        {/* More Articles section */}
-        <section className="mt-16">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">More Articles</h2>
-            <Link
-              href="/blog"
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              View all
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedPosts.map((post) => (
-              <article key={post.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div className="relative h-40 bg-gray-200">
-                  <BlogImage 
-                    src={getBlogImageSrc(post.slug)}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="text-blue-600 text-sm font-medium">
-                      {post.category}
-                    </span>
-                    <span className="text-gray-500 text-sm">
-                      {post.formattedDate}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-gray-900 line-clamp-2">
-                    <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 transition-colors duration-200">
-                      {post.title}
-                    </Link>
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-500">
-                      {post.readingTime}
-                    </span>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                    >
-                      Read more &rarr;
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+      </div>
+      
+      {/* Back to blog */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <Link
+          href="/blog"
+          className="inline-flex items-center text-blue-600 hover:text-blue-800"
+        >
+          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+          </svg>
+          Back to Blog
+        </Link>
       </div>
     </main>
   );

@@ -1,8 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { Suspense } from 'react';
-import { filterPosts, getAllCategories, getAllTags } from '@/lib/static-blog';
-import BlogSearch from './components/BlogSearch';
+import { filterPosts, getAllCategories, getAllTags } from '@/lib/blog-service';
 import BlogSidebar from './components/BlogSidebar';
 import BlogPagination from './components/BlogPagination';
 import BlogCategoriesFilter from './components/BlogCategoriesFilter';
@@ -29,22 +28,36 @@ export default async function BlogPage({
     page?: string; 
     category?: string; 
     tag?: string; 
-    search?: string; 
   };
 }) {
-  // Get current page number from the URL, or default to 1
-  const currentPage = searchParams?.page ? parseInt(searchParams.page) : 1;
-  const category = searchParams?.category;
-  const tag = searchParams?.tag;
-  const search = searchParams?.search;
+  // Safely extract search parameters with proper error handling
+  let currentPage = 1;
+  let category = undefined;
+  let tag = undefined;
+  
+  try {
+    // Extract values from searchParams
+    const { page, category: categoryParam, tag: tagParam } = searchParams;
+    
+    // Convert page to number if it exists
+    currentPage = page ? parseInt(page) : 1;
+    // Handle NaN case
+    if (isNaN(currentPage)) currentPage = 1;
+    
+    // Assign other parameters
+    category = categoryParam;
+    tag = tagParam;
+  } catch (error) {
+    console.error('Error parsing search parameters:', error);
+    // Use defaults in case of errors
+  }
   
   // Get posts with filters and pagination
   const { posts, totalCount, totalPages } = await filterPosts({
     page: currentPage,
     perPage: POSTS_PER_PAGE,
     category,
-    tag,
-    search,
+    tag
   });
 
   // Get categories and tags for filtering
@@ -55,9 +68,8 @@ export default async function BlogPage({
   const createPageUrl = (page: number) => {
     const params = new URLSearchParams();
     if (page > 1) params.set('page', page.toString());
-    if (searchParams?.category) params.set('category', searchParams.category);
-    if (searchParams?.tag) params.set('tag', searchParams.tag);
-    if (searchParams?.search) params.set('search', searchParams.search);
+    if (category) params.set('category', category);
+    if (tag) params.set('tag', tag);
     return `?${params.toString()}`;
   };
 
@@ -79,10 +91,6 @@ export default async function BlogPage({
       </section>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <BlogSearch initialValue={search} />
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar with filters - now hidden */}
           <div className="lg:col-span-1 order-last lg:order-first hidden">
@@ -111,7 +119,6 @@ export default async function BlogPage({
                 pageBaseUrl="/blog"
                 categoryParam={category}
                 tagParam={tag}
-                searchParam={search}
               />
             </Suspense>
           </div>

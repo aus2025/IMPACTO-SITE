@@ -15,6 +15,14 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(url)
     }
     
+    // Handle redirect from /blueprint-assessment to /assessment
+    if (request.nextUrl.pathname === '/blueprint-assessment') {
+      console.log('Redirecting from /blueprint-assessment to /assessment')
+      const url = request.nextUrl.clone()
+      url.pathname = '/assessment'
+      return NextResponse.redirect(url)
+    }
+    
     // Also redirect assessment routes (protected) to home
     if (request.nextUrl.pathname.startsWith('/assessment') || 
         request.nextUrl.pathname.startsWith('/assessments')) {
@@ -35,6 +43,12 @@ export async function middleware(request: NextRequest) {
     
     // Block all API routes
     if (request.nextUrl.pathname.startsWith('/api')) {
+      // Allow access to the assessment submission API
+      if (request.nextUrl.pathname === '/api/submit-assessment') {
+        console.log('Allowing access to assessment submission API in production')
+        return NextResponse.next()
+      }
+      
       console.log('API routes blocked in production')
       return new NextResponse('Not Found', { status: 404 })
     }
@@ -42,6 +56,20 @@ export async function middleware(request: NextRequest) {
   
   // For development only - below code won't run in production
   if (process.env.NODE_ENV !== 'production') {
+    // Handle redirect from /blueprint-assessment to /assessment
+    if (request.nextUrl.pathname === '/blueprint-assessment') {
+      console.log('Redirecting from /blueprint-assessment to /assessment')
+      const url = request.nextUrl.clone()
+      url.pathname = '/assessment'
+      return NextResponse.redirect(url)
+    }
+    
+    // Allow access to all API routes in development
+    if (request.nextUrl.pathname.startsWith('/api')) {
+      console.log('Allowing access to API route:', request.nextUrl.pathname)
+      return NextResponse.next()
+    }
+    
     let supabaseResponse = NextResponse.next({
       request,
     })

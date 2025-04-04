@@ -126,7 +126,7 @@ export default function PricingPage() {
                 variant="outline" 
                 size="lg" 
                 className="font-medium text-base bg-transparent border-white text-white hover:bg-white hover:text-blue-700 cursor-pointer"
-                onClick={() => window.location.href = "/assessment"}
+                onClick={() => window.location.href = "/blueprint-assessment"}
               >
                 Take the Quiz
               </Button>
@@ -261,11 +261,11 @@ export default function PricingPage() {
                   <div className="bg-gradient-to-r from-red-400/40 to-red-500/40 py-8 px-6 border-b">
                     <CardTitle className="text-2xl">Scale Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">$1,499</span>
+                      <span className="text-3xl font-bold">From 1499,00</span>
                       <span className="text-gray-600">/mo</span>
                     </div>
                     <CardDescription className="mt-2 italic text-gray-700">
-                      Premium solution for automation-mature businesses ready to scale.
+                      Premium custom solution perfect for your business.
                     </CardDescription>
                   </div>
                   <CardContent className="pt-6 flex-grow">
@@ -412,7 +412,7 @@ export default function PricingPage() {
             >
               <Button 
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg rounded-lg cursor-pointer"
-                onClick={() => window.location.href = "/assessment"}
+                onClick={() => window.location.href = "/blueprint-assessment"}
               >
                 Take the Quiz
               </Button>
@@ -497,7 +497,7 @@ export default function PricingPage() {
                 <Button 
                   className="bg-white text-blue-700 hover:bg-gray-100 font-semibold text-base px-8 py-6 shadow-lg"
                   size="lg"
-                  onClick={() => window.location.href = "/assessment"}
+                  onClick={() => window.location.href = "/blueprint-assessment"}
                 >
                   Take the Quiz
                 </Button>

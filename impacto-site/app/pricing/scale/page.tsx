@@ -54,10 +54,10 @@ export default function ScalePackagePage() {
                 Scale Package
               </h1>
               <p className="text-xl md:text-2xl mb-4 font-medium text-gray-700 text-center max-w-3xl mx-auto">
-                Enterprise-level Automation for Growing Teams
+                Premium Custom Solution Perfect for Your Business
               </p>
               <p className="text-lg md:text-xl mb-6 text-gray-600 text-center max-w-3xl mx-auto">
-                Custom solutions for businesses ready to transform operations and scale efficiently.
+                From 1499,00/mo - Custom solutions that transform your operations and scale efficiently.
               </p>
               
               <div className="flex flex-wrap gap-4 mt-8 justify-center">
@@ -300,10 +300,10 @@ export default function ScalePackagePage() {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
                   <h3 className="text-2xl md:text-3xl font-bold mb-2">Enterprise Package</h3>
-                  <p className="text-gray-600">Complete automation for growing businesses</p>
+                  <p className="text-gray-600">Premium custom solution perfect for your business.</p>
                 </div>
                 <div className="mt-4 md:mt-0">
-                  <div className="text-3xl font-bold text-red-600">$1,499<span className="text-lg font-normal text-gray-600">/mo</span></div>
+                  <div className="text-3xl font-bold text-red-600">From 1499,00<span className="text-lg font-normal text-gray-600">/mo</span></div>
                   <div className="text-gray-600">Custom pricing for annual plans</div>
                 </div>
               </div>

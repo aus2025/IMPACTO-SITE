@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Clock, DollarSign, Zap, Heart } from 'lucide-react';
+import AutomationServices from '@/components/AutomationServices';
+import AutomationUpgrade from '@/components/AutomationUpgrade';
 
 // This metadata export needs to be moved to a separate layout.tsx file since 
 // this is now a client component
@@ -202,6 +204,68 @@ export default function ServicesPage() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Automation Services Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-blue-50">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="max-w-4xl mx-auto mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">Featured Automation Solutions</h2>
+            <p className="text-xl text-gray-700">
+              Our most popular automation services designed to transform your business operations
+            </p>
+          </motion.div>
+          
+          <AutomationServices />
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-12"
+          >
+            <AutomationUpgrade />
+          </motion.div>
+          
+          {/* Assessment Promotion */}
+          <motion.div 
+            className="max-w-3xl mx-auto mt-16 text-center bg-gradient-to-r from-blue-500 to-purple-500 p-6 rounded-xl shadow-md"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <p className="text-xl font-medium text-white mb-4">
+              Complete this quick assessment to receive your personalized automation blueprint—and unlock an automatic 20% discount.
+            </p>
+            <motion.a 
+              href="/assessment" 
+              className="inline-block px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Assessment
+            </motion.a>
+          </motion.div>
+          
+          <div className="text-center mt-12">
+            <motion.a 
+              href="/assessment" 
+              className="cta-button-global"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Take Our Automation Readiness Assessment
+            </motion.a>
+          </div>
         </div>
       </section>
 

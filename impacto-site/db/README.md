@@ -1,50 +1,54 @@
-# Database Setup for Impacto AI
+# Database Schema Updates
 
-This directory contains database schema files and scripts for the Impacto AI application.
+This directory contains SQL scripts to create and update the database schema for the Impacto application.
 
-## Setting up the Business Assessment Form in Supabase
+## Required Tables
 
-### Prerequisites
-- A Supabase account and project
-- Access to the Supabase SQL Editor
+The application requires the following tables to function properly:
 
-### Steps to Set Up the Business Assessment Table
+1. `assessments` - For storing business assessment form submissions
+2. `contact_submissions` - For storing contact form submissions
 
-1. Log in to your Supabase account and open your project
-2. Navigate to the SQL Editor in the Supabase dashboard
-3. Click "New Query"
-4. Copy the entire contents of `business_assessment_schema.sql` into the SQL editor
-5. Click "Run" to execute the SQL and create the table
+## How to Apply Schema Updates
 
-### Environment Variables
+### Option 1: Using Supabase SQL Editor (Recommended)
 
-After setting up your Supabase project, you need to add your Supabase credentials to the `.env.local` file in the root of the project. Use the `.env.local.example` file as a template.
+1. Login to your Supabase dashboard
+2. Navigate to the SQL Editor
+3. Open the file `manual_update_script.sql` from this directory
+4. Copy and paste the entire contents into the SQL Editor
+5. Click "Run" to execute the SQL
 
-1. Copy `.env.local.example` to `.env.local`
-2. Fill in your Supabase URL and anon key:
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-   ```
+This will create both required tables with appropriate indexes and Row Level Security (RLS) policies.
 
-You can find these values in your Supabase project settings under "API".
+### Option 2: Using the Automated Script (Node.js)
 
-### Testing the Form Submission
+1. Make sure you have Node.js installed
+2. Update the environment variables in `update_schema.bat` with your Supabase URL and service key
+3. Run the batch file `update_schema.bat`
 
-After setting up the table and environment variables:
+### Option 3: Manual Migration
 
-1. Start the development server: `npm run dev`
-2. Navigate to `/assessment` in your browser
-3. Fill out and submit the form
-4. Check your Supabase project's "Table Editor" to see if the data was inserted into the `business_assessments` table
+If you prefer to apply changes manually or one at a time:
 
-### Troubleshooting
+1. Execute `assessments_schema.sql` to create the assessments table
+2. Execute `contact_submissions_schema.sql` to create the contact submissions table
 
-If submissions are failing, check:
+## Verifying the Installation
 
-1. The browser console for detailed error messages
-2. Ensure your Supabase anon key has permissions to insert records
-3. Verify that the `business_assessments` table has the correct structure
-4. Check that your Row Level Security (RLS) policies are correctly configured
+After applying the schema updates, you can verify that they were applied correctly by:
 
-For more details about the database schema and design, refer to the `business_assessment_schema.sql` file. 
+1. Checking that both tables exist in the Supabase Table Editor
+2. Confirming that RLS policies are enabled and configured correctly
+3. Testing the forms on the website to make sure they can submit data successfully
+
+## Troubleshooting
+
+If you encounter issues with the forms not submitting data:
+
+1. Check the browser console for any JavaScript errors
+2. Verify that the table names in the API code match the created tables
+3. Ensure that the RLS policies allow public insertion
+4. Check that the environment variables for Supabase connection are set correctly
+
+For additional help, please contact the development team. 

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Suspense } from 'react';
 import { filterPosts, getAllCategories, getAllTags } from '@/lib/static-blog';
 import BlogSearch from './components/BlogSearch';

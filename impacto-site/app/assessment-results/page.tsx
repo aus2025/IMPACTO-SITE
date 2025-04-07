@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { createClient } from '@supabase/ssr';
-import { ClientLayout, Navbar, Footer } from '@/components/layout';
+import { createBrowserClient } from '@supabase/ssr';
+import { ClientLayout } from '@/components/layout';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import AssessmentResults from '@/components/AssessmentResults';
 import AutomationServices from '@/components/AutomationServices';
 import AutomationUpgrade from '@/components/AutomationUpgrade';
@@ -18,13 +20,13 @@ export default function AssessmentResultsPage() {
 
   useEffect(() => {
     // Initialize Supabase client on client side
-    const supabase = createClient(
+    const supabase = createBrowserClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
     // Get assessment ID from URL query params
-    const assessmentId = searchParams.get('assessmentId');
+    const assessmentId = searchParams?.get('assessmentId');
     
     const fetchAssessmentData = async (id: string) => {
       try {

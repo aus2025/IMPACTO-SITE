@@ -8,10 +8,12 @@ import { Newsletter } from '../components/Newsletter';
 import BlogImage from '../components/BlogImage';
 
 // Define type for page props
-type BlogPageProps = {
-  params: {
-    slug: string
-  }
+interface BlogPageParams {
+  slug: string;
+}
+
+interface BlogPageProps {
+  params: BlogPageParams;
 }
 
 // Generate metadata for the page
@@ -42,7 +44,7 @@ export async function generateMetadata({
 }
 
 // Generate static paths for all blog posts
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<BlogPageParams[]> {
   const posts = await getAllPosts();
   
   return posts.map((post) => ({

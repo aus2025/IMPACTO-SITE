@@ -4,6 +4,7 @@ import React from 'react';
 import { FaLightbulb, FaHandshake, FaTools, FaShieldAlt, FaChartLine } from 'react-icons/fa';
 import { MdOutlineEmojiPeople, MdSettings, MdDevices, MdSupportAgent } from 'react-icons/md';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 // Animation variants
 const fadeIn = {
@@ -139,27 +140,6 @@ export default function AboutPage() {
                   I launched Impacto Automation AI with a simple mission — to make the power of AI accessible to everyone. Whether you&apos;re a small business owner, educator, or creative professional, you deserve tools that work for you — not against you.
                 </p>
               </div>
-            </div>
-            
-            {/* Video placeholder */}
-            <div className="rounded-xl bg-gray-200 p-6 text-center my-6">
-              <div className="rounded-xl overflow-hidden relative bg-gray-300 aspect-video flex items-center justify-center">
-                <span className="text-4xl">🎥</span>
-                <div className="absolute inset-0 flex items-center justify-center flex-col">
-                  <button className="bg-white/80 text-gray-600 rounded-full w-16 h-16 flex items-center justify-center opacity-70 cursor-not-allowed">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
-                    </svg>
-                  </button>
-                  <p className="mt-3 font-medium">Founder Video Coming Soon — Currently Updating</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="prose prose-lg max-w-none">
-              <p>
-                Today, I lead a passionate team committed to helping people harness <span className="font-bold text-blue-600">ethical, practical AI solutions</span> that simplify workflows, spark innovation, and create real impact.
-              </p>
             </div>
           </div>
         </motion.section>
@@ -354,7 +334,7 @@ export default function AboutPage() {
               <p className="text-gray-600 text-sm">Explore our assessment quiz and find your business blueprint without any commitment</p>
             </motion.a>
             <motion.a 
-              href="/services#starter"
+              href="/services#kickstart"
               className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center flex flex-col items-center"
               whileHover={{ y: -5 }}
             >

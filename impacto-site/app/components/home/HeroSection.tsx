@@ -21,7 +21,7 @@ export default function HeroSection() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <MotionLink 
-              href="/pricing/starter" 
+              href="/pricing/kickstart" 
               className="cta-button-global"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

@@ -92,7 +92,7 @@ export default function HomePageClient() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <MotionLink 
-                href="/pricing/starter" 
+                href="/pricing/kickstart" 
                 className="cta-button-global"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -478,7 +478,7 @@ export default function HomePageClient() {
         <ProcessTimeline />
       </div>
 
-      {/* Starter Offer Section */}
+      {/* Kickstart Offer Section */}
       <section className="py-14 bg-gradient-to-br from-amber-50 to-yellow-100 border-y border-amber-200">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">

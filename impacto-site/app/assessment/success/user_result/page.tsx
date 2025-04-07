@@ -27,8 +27,9 @@ const ProductTierContent = ({ score }: ProductTierContentProps) => {
         <div className="bg-white rounded-lg p-6 border border-yellow-200">
           <div className="text-center mb-4">
             <h3 className="text-xl font-bold text-yellow-800">Kickstart Package Pricing</h3>
-            <p className="text-gray-600">Starter Package</p>
-            <p className="text-gray-600">Perfect automation for beginners</p>
+            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Recommended</span>
+            <h3 className="text-lg font-semibold mt-2">Best Fit</h3>
+            <p className="text-gray-600">For businesses new to automation</p>
           </div>
           
           <div className="text-center mb-6">

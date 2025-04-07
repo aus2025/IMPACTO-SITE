@@ -176,7 +176,7 @@ export default function KickstartPackagePage() {
             <div className="bg-yellow-50 rounded-xl p-8 md:p-12 mb-8">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Starter Package</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Kickstart Package</h3>
                   <p className="text-gray-600">Perfect automation for beginners</p>
                 </div>
                 <div className="mt-4 md:mt-0">

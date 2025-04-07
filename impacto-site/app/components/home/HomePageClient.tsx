@@ -34,7 +34,7 @@ export default function HomePageClient() {
         <ProcessTimeline />
       </div>
 
-      {/* Starter Offer Section */}
+      {/* Kickstart Offer Section */}
       <SpecialOfferSection />
 
       {/* Testimonials */}

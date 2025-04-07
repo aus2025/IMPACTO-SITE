@@ -8,7 +8,7 @@ export default function SpecialOfferSection() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">🎉 Starter Offer for New Clients</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">🎉 Kickstart Offer for New Clients</h2>
             <p className="text-lg text-gray-800">
               For a limited time, new Impacto clients receive <span className="font-bold text-amber-700">20% off</span> their first automation project.
             </p>

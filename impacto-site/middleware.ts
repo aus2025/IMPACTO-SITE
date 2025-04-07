@@ -7,6 +7,14 @@ export async function middleware(request: NextRequest) {
   
   // In production, completely disable all protected routes
   if (process.env.NODE_ENV === 'production') {
+    // Redirect /pricing/starter to /pricing/kickstart
+    if (request.nextUrl.pathname === '/pricing/starter') {
+      console.log('Redirecting from /pricing/starter to /pricing/kickstart')
+      const url = request.nextUrl.clone()
+      url.pathname = '/pricing/kickstart'
+      return NextResponse.redirect(url)
+    }
+    
     // Redirect all admin routes to home page
     if (request.nextUrl.pathname.startsWith('/admin')) {
       console.log('Admin routes disabled in production')
@@ -56,6 +64,14 @@ export async function middleware(request: NextRequest) {
   
   // For development only - below code won't run in production
   if (process.env.NODE_ENV !== 'production') {
+    // Redirect /pricing/starter to /pricing/kickstart
+    if (request.nextUrl.pathname === '/pricing/starter') {
+      console.log('Redirecting from /pricing/starter to /pricing/kickstart')
+      const url = request.nextUrl.clone()
+      url.pathname = '/pricing/kickstart'
+      return NextResponse.redirect(url)
+    }
+    
     // Handle redirect from /blueprint-assessment to /assessment
     if (request.nextUrl.pathname === '/blueprint-assessment') {
       console.log('Redirecting from /blueprint-assessment to /assessment')

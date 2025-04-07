@@ -14,6 +14,7 @@ interface BlogPageParams {
 
 interface BlogPageProps {
   params: BlogPageParams;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Generate metadata for the page
@@ -62,6 +63,7 @@ function getBlogImageSrc(slug: string) {
   return '/images/blog/default.svg';
 }
 
+// Server component that can use async/await directly
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const post = await getPostBySlug(params.slug);
   

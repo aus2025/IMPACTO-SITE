@@ -13,15 +13,18 @@ interface BlogPageParams {
 }
 
 interface BlogPageProps {
-  params: BlogPageParams;
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<BlogPageParams>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 // Generate metadata for the page
 export async function generateMetadata({
   params,
-}: BlogPageProps): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+}: {
+  params: Promise<BlogPageParams>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
   
   if (!post) {
     return {
@@ -64,14 +67,19 @@ function getBlogImageSrc(slug: string) {
 }
 
 // Server component that can use async/await directly
-export default async function BlogPostPage({ params }: BlogPageProps) {
-  const post = await getPostBySlug(params.slug);
+export default async function BlogPostPage({ 
+  params 
+}: { 
+  params: Promise<BlogPageParams>;
+}) {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
   
   if (!post) {
     notFound();
   }
   
-  const relatedPosts = await getRelatedPosts(params.slug, 3);
+  const relatedPosts = await getRelatedPosts(resolvedParams.slug, 3);
   
   return (
     <main className="min-h-screen bg-gray-50">

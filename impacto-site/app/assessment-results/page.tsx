@@ -3,9 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { createClient } from '@supabase/ssr';
-import ClientLayout from '@/components/layout/ClientLayout';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
+import { ClientLayout, Navbar, Footer } from '@/components/layout';
 import AssessmentResults from '@/components/AssessmentResults';
 import AutomationServices from '@/components/AutomationServices';
 import AutomationUpgrade from '@/components/AutomationUpgrade';

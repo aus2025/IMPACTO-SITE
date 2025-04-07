@@ -7,12 +7,17 @@ import { FaCalendarAlt, FaUser, FaClock, FaTags } from 'react-icons/fa';
 import { Newsletter } from '../components/Newsletter';
 import BlogImage from '../components/BlogImage';
 
+// Define type for page props
+type BlogPageProps = {
+  params: {
+    slug: string
+  }
+}
+
 // Generate metadata for the page
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: BlogPageProps): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
   
   if (!post) {
@@ -55,11 +60,7 @@ function getBlogImageSrc(slug: string) {
   return '/images/blog/default.svg';
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: BlogPageProps) {
   const post = await getPostBySlug(params.slug);
   
   if (!post) {

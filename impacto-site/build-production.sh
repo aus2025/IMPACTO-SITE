@@ -21,7 +21,6 @@ mv app/assessment .skip/ 2>/dev/null || true
 mv app/assessments .skip/ 2>/dev/null || true
 
 # 4. Legacy and debug pages
-mv pages/blog_old .skip/ 2>/dev/null || true
 mv app/blog/debug* .skip/ 2>/dev/null || true
 mv app/blog/fix* .skip/ 2>/dev/null || true
 mv app/blog/diagnostic* .skip/ 2>/dev/null || true

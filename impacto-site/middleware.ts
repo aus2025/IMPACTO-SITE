@@ -2,15 +2,33 @@ import { NextResponse, type NextRequest } from 'next/server'
 import path from 'path'
 import fs from 'fs'
 
-// Import the blog content check utility
-import { ensureBlogContent } from './lib/ensure-blog-content'
+// Define a fallback function in case the real module can't be imported
+const fallbackEnsureBlogContent = () => {
+  console.log('Using fallback blog content checker - original module unavailable')
+  return true
+}
 
 // Run the blog content check once when the middleware is first imported
 let blogContentChecked = false
 if (!blogContentChecked) {
   try {
     console.log('Middleware startup: Running blog content check')
-    ensureBlogContent()
+    
+    // Use a dynamic import with a fallback to ensure resilience
+    let ensureBlogContentFn = fallbackEnsureBlogContent
+    try {
+      // Try to dynamically import the module
+      const { ensureBlogContent } = require('./lib/ensure-blog-content')
+      if (typeof ensureBlogContent === 'function') {
+        ensureBlogContentFn = ensureBlogContent
+      }
+    } catch (importError) {
+      console.error('Failed to import blog content module, using fallback:', importError)
+    }
+    
+    // Execute the function (either real or fallback)
+    ensureBlogContentFn()
+    
     blogContentChecked = true
     console.log('Middleware startup: Blog content check complete')
   } catch (error) {

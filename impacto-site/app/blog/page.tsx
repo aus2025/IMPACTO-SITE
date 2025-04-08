@@ -21,15 +21,21 @@ export const metadata: Metadata = {
 // Default number of posts per page
 const POSTS_PER_PAGE = 6;
 
+// Define the type for search parameters
+interface BlogSearchParams {
+  page?: string;
+  category?: string;
+  tag?: string;
+}
+
+// Define the type for page props
+interface BlogPageProps {
+  searchParams: BlogSearchParams;
+}
+
 export default async function BlogPage({
   searchParams,
-}: {
-  searchParams: { 
-    page?: string; 
-    category?: string; 
-    tag?: string; 
-  };
-}) {
+}: BlogPageProps) {
   // Safely extract search parameters with proper error handling
   let currentPage = 1;
   let category = undefined;

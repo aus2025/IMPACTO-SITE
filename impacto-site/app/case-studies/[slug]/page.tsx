@@ -253,53 +253,52 @@ function getCaseStudy(slug: string) {
   return caseStudies.find(study => study.id === slug);
 }
 
-// Generate metadata dynamically based on the case study
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+// Define the type for page params
+interface CaseStudyPageParams {
+  slug: string;
+}
+
+// Define the type for page props
+interface CaseStudyPageProps {
+  params: CaseStudyPageParams;
+}
+
+export async function generateMetadata({ params }: { params: CaseStudyPageParams }) {
   const caseStudy = getCaseStudy(params.slug);
   
   if (!caseStudy) {
     return constructMetadata({
       title: 'Case Study Not Found',
       description: 'The requested case study could not be found.',
-      noIndex: true
     });
   }
-
+  
   return constructMetadata({
-    title: `${caseStudy.title} | Case Study`,
+    title: `${caseStudy.title} | Impacto Case Studies`,
     description: caseStudy.description,
-    keywords: [caseStudy.industry, caseStudy.solutionType, 'case study', 'business results', 'AI implementation', 'success story'],
     openGraph: {
-      title: `${caseStudy.title} | Impacto Case Study`,
-      description: caseStudy.description,
-      url: `https://impactoautomation.com/case-studies/${caseStudy.id}`,
       type: 'article',
       images: [
         {
-          url: `https://impactoautomation.com/images/case-studies/${caseStudy.id}.jpg`,
+          url: `https://impactoautomation.com/images/case-studies/default.jpg`,
           width: 1200,
           height: 630,
           alt: caseStudy.title,
         },
       ],
     },
-    twitter: {
-      title: caseStudy.title,
-      description: caseStudy.description,
-    },
-    canonicalUrl: `https://impactoautomation.com/case-studies/${caseStudy.id}`,
   });
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const caseStudy = getCaseStudy(params.slug);
   
   if (!caseStudy) {
     return (
-      <div className="container mx-auto px-4 py-20 text-center">
+      <div className="container mx-auto px-4 py-16 text-center">
         <h1 className="text-3xl font-bold mb-4">Case Study Not Found</h1>
-        <p className="mb-8">The case study you're looking for doesn't exist or has been moved.</p>
-        <Link href="/case-studies" className="cta-button-global">
+        <p className="mb-8">The requested case study could not be found.</p>
+        <Link href="/case-studies" className="btn btn-primary">
           View All Case Studies
         </Link>
       </div>
@@ -456,7 +455,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                     .replace(/([A-Z])/g, (match) => ' ' + match);
                   
                   // Calculate proper width for progress bar
-                  const getProgressWidth = (val) => {
+                  const getProgressWidth = (val: string | number) => {
                     // Extract numeric value from strings like "45%" or "120%"
                     const numericValue = parseInt(val.toString().replace('%', ''));
                     // Cap the width at 100% for display purposes

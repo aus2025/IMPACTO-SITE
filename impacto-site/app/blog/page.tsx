@@ -28,14 +28,15 @@ interface BlogSearchParams {
   tag?: string;
 }
 
-// Define the type for page props
-interface BlogPageProps {
-  searchParams: BlogSearchParams;
-}
-
 export default async function BlogPage({
   searchParams,
-}: BlogPageProps) {
+}: {
+  searchParams: { 
+    page?: string; 
+    category?: string; 
+    tag?: string; 
+  };
+}) {
   // Safely extract search parameters with proper error handling
   let currentPage = 1;
   let category = undefined;

@@ -32,16 +32,29 @@ export type BlogFilter = {
   tag?: string;
   page?: number;
   perPage?: number;
+  search?: string;
 };
 
 export type PaginatedPosts = {
   posts: BlogPost[];
   totalCount: number;
   totalPages: number;
+  page?: number;
+  perPage?: number;
 };
 
+const DEFAULT_PAGE_SIZE = 6;
+
 // Map of blog numbers to titles and dates
-const blogMeta = {
+type BlogMetaType = {
+  [slug: string]: {
+    date: string;
+    tags: string[];
+    category: string;
+  }
+};
+
+const blogMeta: BlogMetaType = {
   'blog-1-autonomous-ai-agents': {
     date: '2025-01-05',
     tags: ['AI', 'Automation', 'Business Strategy'],
@@ -142,74 +155,77 @@ function extractExcerpt(content: string): string {
  */
 export async function getAllPosts(): Promise<BlogPost[]> {
   try {
-    // Make sure the directory exists
-    if (!fs.existsSync(postsDirectory)) {
-      console.error(`Blog posts directory not found: ${postsDirectory}`);
-      return [];
-    }
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
     
-    // Get all markdown files from the posts directory
-    const fileNames = fs.readdirSync(postsDirectory);
+    // Get all markdown file slugs from blogMeta or fetch from API if needed
+    const slugs = Object.keys(blogMeta);
     
-    // Read each file and extract metadata
+    // Fetch each post using fetch() instead of fs
     const allPostsData = await Promise.all(
-      fileNames
-        .filter(fileName => fileName.endsWith('.md'))
-        .map(async (fileName) => {
+      slugs.map(async (slug) => {
+        try {
+          // Fetch markdown file using fetch API
+          const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+          
+          if (!res.ok) {
+            console.error(`Failed to fetch markdown for ${slug}`);
+            return createFallbackPost(slug);
+          }
+          
+          const rawMarkdown = await res.text();
+          
+          // Use gray-matter to parse the post metadata section
+          const matterResult = matter(rawMarkdown);
+          
+          // Extract title from content (first h1)
+          const titleMatch = rawMarkdown.match(/^# (.*)/m);
+          const title = titleMatch ? titleMatch[1] : slug.split('-').slice(1).join(' ').replace(/-/g, ' ');
+          
+          // Get metadata or use defaults
+          const meta = blogMeta[slug] || { 
+            date: new Date().toISOString().split('T')[0],
+            tags: ['AI', 'Automation'],
+            category: 'Technology'
+          };
+          
+          // Convert markdown to HTML
+          let htmlContent;
           try {
-            // Remove ".md" from file name to get slug
-            const slug = fileName.replace(/\.md$/, '');
-            
-            // Read markdown file as string
-            const fullPath = path.join(postsDirectory, fileName);
-            const fileContents = fs.readFileSync(fullPath, 'utf8');
-            
-            // Use gray-matter to parse the post metadata section
-            const matterResult = matter(fileContents);
-            
-            // Extract title from content (first h1)
-            const titleMatch = fileContents.match(/^# (.*)/m);
-            const title = titleMatch ? titleMatch[1] : slug;
-            
-            // Get metadata or use defaults
-            const meta = blogMeta[slug] || { 
-              date: new Date().toISOString().split('T')[0],
-              tags: ['AI', 'Automation'],
-              category: 'Technology'
-            };
-            
-            // Convert markdown to HTML
             const processedContent = await remark()
               .use(html)
               .use(remarkGfm)
               .process(matterResult.content);
-            const htmlContent = processedContent.toString();
-            
-            // Calculate reading time
-            const readingTime = calculateReadingTime(matterResult.content);
-            
-            // Extract excerpt
-            const excerpt = extractExcerpt(matterResult.content);
-            
-            // Return the blog post data
-            return {
-              slug,
-              title,
-              date: meta.date,
-              formattedDate: formatDate(meta.date),
-              content: matterResult.content,
-              htmlContent,
-              excerpt,
-              author: "Impacto Automation",
-              tags: meta.tags,
-              category: meta.category,
-              readingTime
-            };
-          } catch (fileError) {
-            console.error(`Error processing blog file ${fileName}:`, fileError);
-            return null;
+            htmlContent = processedContent.toString();
+          } catch (markdownError) {
+            console.error(`Error converting markdown for ${slug}:`, markdownError);
+            htmlContent = `<p>Error rendering content for ${slug}.</p>`;
           }
-        })
+          
+          // Calculate reading time
+          const readingTime = calculateReadingTime(matterResult.content);
+          
+          // Extract excerpt
+          const excerpt = extractExcerpt(matterResult.content);
+          
+          // Return the blog post data
+          return {
+            slug,
+            title,
+            date: meta.date,
+            formattedDate: formatDate(meta.date),
+            content: matterResult.content,
+            htmlContent,
+            excerpt,
+            author: "Impacto Automation",
+            tags: meta.tags,
+            category: meta.category,
+            readingTime
+          };
+        } catch (fetchError) {
+          console.error(`Error fetching blog post ${slug}:`, fetchError);
+          return createFallbackPost(slug);
+        }
+      })
     );
     
     // Filter out nulls and sort posts by date
@@ -218,14 +234,38 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       .sort((a, b) => (a.date < b.date ? 1 : -1));
   } catch (error) {
     console.error('Error fetching all posts:', error);
-    return [];
+    // Provide fallback content based on blogMeta
+    return Object.keys(blogMeta).map(slug => createFallbackPost(slug));
   }
+}
+
+// Helper function to create fallback post data
+function createFallbackPost(slug: string): BlogPost {
+  const meta = blogMeta[slug] || {
+    date: new Date().toISOString().split('T')[0],
+    tags: ['AI', 'Automation'],
+    category: 'Technology'
+  };
+  
+  return {
+    slug,
+    title: slug.split('-').slice(1).join(' ').replace(/-/g, ' '),
+    date: meta.date,
+    formattedDate: formatDate(meta.date),
+    content: 'Content temporarily unavailable. Please check back later.',
+    htmlContent: '<p>Content temporarily unavailable. Please check back later.</p>',
+    excerpt: 'Content temporarily unavailable. Please check back later.',
+    author: "Impacto Automation",
+    tags: meta.tags || [],
+    category: meta.category || 'Technology',
+    readingTime: '1 min read'
+  };
 }
 
 /**
  * Get a paginated list of published blog posts
  */
-export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<PaginatedPosts> {
+export async function getBlogPosts(filters: BlogFilter = {}): Promise<PaginatedPosts> {
   try {
     // Make sure the directory exists
     if (!fs.existsSync(postsDirectory)) {
@@ -233,7 +273,8 @@ export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<Pagin
       return { posts: [], totalCount: 0, totalPages: 0, page: 1, perPage: DEFAULT_PAGE_SIZE };
     }
     
-    // ... rest of the function ...
+    // Get filtered posts using the filterPosts function
+    return await filterPosts(filters);
   } catch (error) {
     console.error('Error fetching all posts:', error);
     return { posts: [], totalCount: 0, totalPages: 0, page: 1, perPage: DEFAULT_PAGE_SIZE };
@@ -251,69 +292,46 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       return null;
     }
 
-    const fullPath = path.join(postsDirectory, `${slug}.md`);
-    
-    // Check if file exists before reading
-    if (!fs.existsSync(fullPath)) {
-      console.error(`Blog post file not found: ${fullPath}`);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+
+    if (!res.ok) {
+      console.error(`Failed to fetch markdown for ${slug}`);
+      // Return fallback post if file is missing but we have metadata
+      if (Object.keys(blogMeta).includes(slug)) {
+        return createFallbackPost(slug);
+      }
       return null;
     }
+
+    const rawMarkdown = await res.text();
     
-    // Safe file reading with proper error handling
-    let fileContents;
-    try {
-      fileContents = fs.readFileSync(fullPath, 'utf8');
-    } catch (readError) {
-      console.error(`Error reading blog post file ${fullPath}:`, readError);
-      return null;
-    }
+    // Parse frontmatter and content
+    const matterResult = matter(rawMarkdown);
     
-    // Use gray-matter to parse the post metadata section
-    let matterResult;
-    try {
-      matterResult = matter(fileContents);
-    } catch (parseError) {
-      console.error(`Error parsing blog post frontmatter in ${fullPath}:`, parseError);
-      // Try to recover with empty frontmatter
-      matterResult = { data: {}, content: fileContents };
-    }
+    // Extract title from content (first h1)
+    const titleMatch = rawMarkdown.match(/^# (.*)/m);
+    const title = titleMatch ? titleMatch[1] : slug.split('-').slice(1).join(' ').replace(/-/g, ' ');
     
-    // Extract title from content (first h1) with fallback
-    const titleMatch = fileContents.match(/^# (.*)/m);
-    const title = titleMatch ? titleMatch[1] : (slug || 'Untitled Post');
-    
-    // Get metadata with robust fallbacks
+    // Get metadata from our map
     const meta = blogMeta[slug] || { 
       date: new Date().toISOString().split('T')[0],
       tags: ['AI', 'Automation'],
       category: 'Technology'
     };
     
-    // Convert markdown to HTML with error handling
-    let htmlContent = '';
-    try {
-      const processedContent = await remark()
-        .use(html)
-        .use(remarkGfm)
-        .process(matterResult.content);
-      htmlContent = processedContent.toString();
-    } catch (markdownError) {
-      console.error(`Error converting markdown to HTML for ${slug}:`, markdownError);
-      // Fallback to simple HTML
-      htmlContent = `<p>${matterResult.content.replace(/\n/g, '<br>')}</p>`;
-    }
+    // Convert markdown to HTML
+    const processedContent = await remark()
+      .use(html)
+      .use(remarkGfm)
+      .process(matterResult.content);
+    const htmlContent = processedContent.toString();
     
     // Calculate reading time
     const readingTime = calculateReadingTime(matterResult.content);
     
-    // Extract excerpt with fallback
-    let excerpt = '';
-    try {
-      excerpt = extractExcerpt(matterResult.content);
-    } catch (excerptError) {
-      console.error(`Error extracting excerpt for ${slug}:`, excerptError);
-      excerpt = matterResult.content.slice(0, 150) + '...';
-    }
+    // Extract excerpt
+    const excerpt = extractExcerpt(matterResult.content);
     
     // Return the blog post data
     return {
@@ -325,12 +343,16 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       htmlContent,
       excerpt,
       author: "Impacto Automation",
-      tags: meta.tags || [],
+      tags: meta.tags,
       category: meta.category,
       readingTime
     };
   } catch (error) {
-    console.error(`Unexpected error fetching blog post ${slug}:`, error);
+    console.error(`Error fetching blog post: ${slug}`, error);
+    // If we have metadata for this slug, return a fallback
+    if (slug && Object.keys(blogMeta).includes(slug)) {
+      return createFallbackPost(slug);
+    }
     return null;
   }
 }

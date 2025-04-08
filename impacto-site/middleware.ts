@@ -1,4 +1,23 @@
 import { NextResponse, type NextRequest } from 'next/server'
+import path from 'path'
+import fs from 'fs'
+
+// Import the blog content check utility
+import { ensureBlogContent } from './lib/ensure-blog-content'
+
+// Run the blog content check once when the middleware is first imported
+let blogContentChecked = false
+if (!blogContentChecked) {
+  try {
+    console.log('Middleware startup: Running blog content check')
+    ensureBlogContent()
+    blogContentChecked = true
+    console.log('Middleware startup: Blog content check complete')
+  } catch (error) {
+    console.error('Middleware startup: Blog content check failed', error)
+    // Continue even if check fails - we have fallbacks in place
+  }
+}
 
 export async function middleware(request: NextRequest) {
   try {
@@ -11,6 +30,17 @@ export async function middleware(request: NextRequest) {
         const url = request.nextUrl.clone()
         url.pathname = '/assessment'
         return NextResponse.redirect(url)
+      }
+      
+      // Handle blog slugs with proper case sensitivity
+      if (request.nextUrl.pathname.startsWith('/blog/')) {
+        const segments = request.nextUrl.pathname.split('/')
+        const slug = segments[2]
+        
+        // If slug exists and doesn't match an expected pattern, check for case issues
+        if (slug && slug.match(/^blog-\d+-/)) {
+          // No redirect needed here, we handle case sensitivity in getPostBySlug
+        }
       }
       
       // Simply pass through all other requests

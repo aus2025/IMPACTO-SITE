@@ -20,7 +20,15 @@ export type BlogPost = {
 };
 
 // Map of blog numbers to titles and dates
-const blogMeta = {
+type BlogMetaType = {
+  [slug: string]: {
+    date: string;
+    tags: string[];
+    category: string;
+  }
+};
+
+const blogMeta: BlogMetaType = {
   'blog-1-autonomous-ai-agents': {
     date: '2025-01-05',
     tags: ['AI', 'Automation', 'Business Strategy'],
@@ -112,81 +120,105 @@ const postsDirectory = path.join(process.cwd(), 'public/blog-content');
 
 // Get all blog posts
 export async function getAllPosts(): Promise<BlogPost[]> {
-  // Get all markdown files from the posts directory
-  const fileNames = fs.readdirSync(postsDirectory);
-  
-  // Read each file and extract metadata
-  const allPostsData = await Promise.all(
-    fileNames
-      .filter(fileName => fileName.endsWith('.md'))
-      .map(async (fileName) => {
-        // Remove ".md" from file name to get slug
-        const slug = fileName.replace(/\.md$/, '');
-        
-        // Read markdown file as string
-        const fullPath = path.join(postsDirectory, fileName);
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
-        
-        // Use gray-matter to parse the post metadata section
-        const matterResult = matter(fileContents);
-        
-        // Extract title from content (first h1)
-        const titleMatch = fileContents.match(/^# (.*)/m);
-        const title = titleMatch ? titleMatch[1] : slug;
-        
-        // Get metadata or use defaults
-        const meta = blogMeta[slug] || { 
-          date: new Date().toISOString().split('T')[0],
-          tags: ['AI', 'Automation'],
-          category: 'Technology'
-        };
-        
-        // Convert markdown to HTML
-        const processedContent = await remark()
-          .use(html)
-          .use(remarkGfm)
-          .process(matterResult.content);
-        const htmlContent = processedContent.toString();
-        
-        // Calculate reading time
-        const readingTime = calculateReadingTime(matterResult.content);
-        
-        // Extract excerpt
-        const excerpt = extractExcerpt(matterResult.content);
-        
-        // Return the blog post data
-        return {
-          slug,
-          title,
-          date: meta.date,
-          formattedDate: formatDate(meta.date),
-          content: matterResult.content,
-          htmlContent,
-          excerpt,
-          author: "Impacto Automation",
-          tags: meta.tags,
-          category: meta.category,
-          readingTime
-        };
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    
+    // Get all markdown file slugs from blogMeta
+    const slugs = Object.keys(blogMeta);
+    
+    // Fetch each post using fetch() instead of fs
+    const allPostsData = await Promise.all(
+      slugs.map(async (slug) => {
+        try {
+          // Fetch markdown file using fetch API
+          const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+          
+          if (!res.ok) {
+            console.error(`Failed to fetch markdown for ${slug}`);
+            return null;
+          }
+          
+          const rawMarkdown = await res.text();
+          
+          // Use gray-matter to parse the post metadata section
+          const matterResult = matter(rawMarkdown);
+          
+          // Extract title from content (first h1)
+          const titleMatch = rawMarkdown.match(/^# (.*)/m);
+          const title = titleMatch ? titleMatch[1] : slug;
+          
+          // Get metadata or use defaults
+          const meta = blogMeta[slug] || { 
+            date: new Date().toISOString().split('T')[0],
+            tags: ['AI', 'Automation'],
+            category: 'Technology'
+          };
+          
+          // Convert markdown to HTML
+          const processedContent = await remark()
+            .use(html)
+            .use(remarkGfm)
+            .process(matterResult.content);
+          const htmlContent = processedContent.toString();
+          
+          // Calculate reading time
+          const readingTime = calculateReadingTime(matterResult.content);
+          
+          // Extract excerpt
+          const excerpt = extractExcerpt(matterResult.content);
+          
+          // Return the blog post data
+          return {
+            slug,
+            title,
+            date: meta.date,
+            formattedDate: formatDate(meta.date),
+            content: matterResult.content,
+            htmlContent,
+            excerpt,
+            author: "Impacto Automation",
+            tags: meta.tags,
+            category: meta.category,
+            readingTime
+          } as BlogPost;
+        } catch (error) {
+          console.error(`Error fetching post ${slug}:`, error);
+          return null;
+        }
       })
-  );
-  
-  // Sort posts by date
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+    );
+    
+    // Filter out nulls and sort posts by date
+    return allPostsData
+      .filter((post): post is BlogPost => post !== null)
+      .sort((a, b) => a.date < b.date ? 1 : -1);
+  } catch (error) {
+    console.error('Error fetching all posts:', error);
+    return [];
+  }
 }
 
 // Get a specific post by slug
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.md`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-    
-    // Extract title from content (first h1)
-    const titleMatch = fileContents.match(/^# (.*)/m);
-    const title = titleMatch ? titleMatch[1] : slug;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch markdown for ${slug}`);
+    }
+
+    const rawMarkdown = await res.text();
+
+    // Parse frontmatter and content
+    const { data, content } = matter(rawMarkdown);
+
+    // Convert markdown to HTML
+    const processedContent = await remark()
+      .use(html)
+      .use(remarkGfm)
+      .process(content);
+    const htmlContent = processedContent.toString();
     
     // Get metadata or use defaults
     const meta = blogMeta[slug] || { 
@@ -195,26 +227,18 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       category: 'Technology'
     };
     
-    // Convert markdown to HTML
-    const processedContent = await remark()
-      .use(html)
-      .use(remarkGfm)
-      .process(matterResult.content);
-    const htmlContent = processedContent.toString();
-    
     // Calculate reading time
-    const readingTime = calculateReadingTime(matterResult.content);
+    const readingTime = calculateReadingTime(content);
     
     // Extract excerpt
-    const excerpt = extractExcerpt(matterResult.content);
+    const excerpt = extractExcerpt(content);
     
-    // Return the blog post data
     return {
       slug,
-      title,
+      title: data.title || slug,
       date: meta.date,
       formattedDate: formatDate(meta.date),
-      content: matterResult.content,
+      content,
       htmlContent,
       excerpt,
       author: "Impacto Automation",

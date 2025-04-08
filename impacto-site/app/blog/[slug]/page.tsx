@@ -248,48 +248,60 @@ export default async function BlogPostPage({
                 </p>
               </div>
               
-              {/* Newsletter */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <Newsletter />
-              </div>
-              
               {/* Related posts */}
-              {relatedPosts && relatedPosts.length > 0 && (
+              {relatedPosts.length > 0 && (
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">Related Articles</h3>
                   <div className="space-y-4">
                     {relatedPosts.map((relatedPost) => (
-                      <div key={relatedPost.slug} className="flex items-start">
-                        <div className="relative h-16 w-16 flex-shrink-0 rounded overflow-hidden mr-3">
-                          <BlogImage 
-                            src={getBlogImageSrc(relatedPost.slug)}
-                            alt={relatedPost.title}
-                            fill
-                            sizes="64px"
-                            className="object-cover"
-                          />
-                        </div>
-                        <div>
-                          <Link 
-                            href={`/blog/${relatedPost.slug}`}
-                            className="text-blue-600 hover:text-blue-800 font-medium text-sm line-clamp-2"
-                          >
+                      <div key={relatedPost.slug} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                        <Link 
+                          href={`/blog/${relatedPost.slug}`}
+                          className="block"
+                        >
+                          <h4 className="font-semibold text-blue-700 hover:text-blue-800 line-clamp-2 mb-1">
                             {relatedPost.title}
-                          </Link>
-                          <p className="text-xs text-gray-500 mt-1">{relatedPost.formattedDate}</p>
-                        </div>
+                          </h4>
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {relatedPost.excerpt}
+                          </p>
+                        </Link>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
+              
+              {/* Newsletter signup */}
+              <Newsletter />
             </aside>
           </div>
         </div>
       </main>
     );
   } catch (error) {
-    console.error('Error rendering blog post page:', error);
-    notFound(); // Fallback to 404 page which is better than a 500 error
+    console.error(`Error rendering blog post page for slug ${params?.slug}:`, error);
+    
+    // Generic error UI for production
+    return (
+      <main className="min-h-screen bg-gray-50 py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="bg-white rounded-lg shadow-md p-8 text-center">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Sorry, we couldn't load this blog post
+            </h1>
+            <p className="text-gray-600 mb-6">
+              There was a problem loading this content. Please try again later or browse our other articles.
+            </p>
+            <Link
+              href="/blog"
+              className="inline-block bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            >
+              Return to Blog
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
   }
 } 

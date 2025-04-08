@@ -1,0 +1,7 @@
+
+This is a placeholder for the default blog image.
+
+Please replace this with an actual image file named "default.jpg".
+
+The recommended dimensions are 1200x630 pixels.
+  

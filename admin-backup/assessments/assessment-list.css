@@ -1,0 +1,40 @@
+/* Assessment List Page - Global Text Color Styles */
+
+/* Apply black text color to all text elements in the assessment list page */
+.container p,
+.container span,
+.container div,
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6,
+.container li,
+.container label,
+.container th,
+.container td {
+  color: black;
+}
+
+/* Make table elements black */
+table thead th {
+  color: black !important;
+}
+
+table td div {
+  color: black !important;
+}
+
+/* Black text for loading indicators */
+.text-center p {
+  color: black !important;
+}
+
+/* Ensure form preview also has black text */
+.bg-white p,
+.bg-white span,
+.bg-white div,
+.bg-white label {
+  color: black;
+} 

@@ -1,0 +1,346 @@
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
+import remarkGfm from 'remark-gfm';
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  date: string;
+  formattedDate: string;
+  content: string;
+  excerpt: string;
+  author: string;
+  tags: string[];
+  readingTime: string;
+  htmlContent?: string;
+  category?: string;
+};
+
+// Map of blog numbers to titles and dates
+type BlogMetaType = {
+  [slug: string]: {
+    date: string;
+    tags: string[];
+    category: string;
+  }
+};
+
+const blogMeta: BlogMetaType = {
+  'blog-1-autonomous-ai-agents': {
+    date: '2025-01-05',
+    tags: ['AI', 'Automation', 'Business Strategy'],
+    category: 'AI Technology'
+  },
+  'blog-2-orchestration': {
+    date: '2025-01-15', 
+    tags: ['Hyperautomation', 'Process Optimization', 'Workflow'],
+    category: 'Process Automation'
+  },
+  'blog-3-embedded-ai': {
+    date: '2025-01-25',
+    tags: ['AI', 'Product Development', 'Innovation'],
+    category: 'AI Technology'
+  },
+  'blog-4-data-centric-ai': {
+    date: '2025-02-05',
+    tags: ['Data Science', 'AI', 'Information Management'],
+    category: 'Data Strategy'
+  },
+  'blog-5-responsible-ai': {
+    date: '2025-02-12',
+    tags: ['AI Ethics', 'Compliance', 'Risk Management'],
+    category: 'Governance'
+  },
+  'blog-6-workforce-augmentation': {
+    date: '2025-02-18',
+    tags: ['Workplace Transformation', 'Human Resources', 'Productivity'],
+    category: 'Future of Work'
+  },
+  'blog-7-autonomous-ai-implementation': {
+    date: '2025-02-27',
+    tags: ['AI Implementation', 'Change Management', 'Digital Transformation'],
+    category: 'Implementation'
+  },
+  'blog-8-hyperautomation-details': {
+    date: '2025-03-08',
+    tags: ['Hyperautomation', 'RPA', 'Business Process'],
+    category: 'Process Automation'
+  },
+  'blog-9-embedded-ai-strategies': {
+    date: '2025-03-19',
+    tags: ['AI Strategy', 'Product Development', 'Technology Integration'],
+    category: 'AI Technology'
+  },
+  'blog-10-data-centric-implementation': {
+    date: '2025-03-29',
+    tags: ['Data Architecture', 'AI Implementation', 'Information Systems'],
+    category: 'Data Strategy'
+  },
+  'blog-11-ai-trends-implementation': {
+    date: '2025-04-10',
+    tags: ['AI Trends', 'Technology Forecasting', 'Strategic Planning'],
+    category: 'Future of AI'
+  }
+};
+
+// Format date to DD/MM/YYYY
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+}
+
+// Calculate reading time based on word count
+function calculateReadingTime(content: string): string {
+  const wordsPerMinute = 200;
+  const wordCount = content.split(/\s+/).length;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
+  return `${readingTime} min read`;
+}
+
+// Extract excerpt from content (first paragraph)
+function extractExcerpt(content: string): string {
+  // Get the first paragraph after the title
+  const paragraphs = content.split('\n\n');
+  // Skip the title and get the first non-empty paragraph
+  for (let i = 1; i < paragraphs.length; i++) {
+    if (paragraphs[i].trim() && !paragraphs[i].startsWith('#')) {
+      // Remove any markdown formatting
+      const excerpt = paragraphs[i].replace(/[*_`]/g, '');
+      return excerpt.length > 150 ? excerpt.substring(0, 147) + '...' : excerpt;
+    }
+  }
+  return '';
+}
+
+// Path to the blog posts
+const postsDirectory = path.join(process.cwd(), 'public/blog-content');
+
+// Get all blog posts
+export async function getAllPosts(): Promise<BlogPost[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    
+    // Get all markdown file slugs from blogMeta
+    const slugs = Object.keys(blogMeta);
+    
+    // Fetch each post using fetch() instead of fs
+    const allPostsData = await Promise.all(
+      slugs.map(async (slug) => {
+        try {
+          // Fetch markdown file using fetch API
+          const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+          
+          if (!res.ok) {
+            console.error(`Failed to fetch markdown for ${slug}`);
+            return null;
+          }
+          
+          const rawMarkdown = await res.text();
+          
+          // Use gray-matter to parse the post metadata section
+          const matterResult = matter(rawMarkdown);
+          
+          // Extract title from content (first h1)
+          const titleMatch = rawMarkdown.match(/^# (.*)/m);
+          const title = titleMatch ? titleMatch[1] : slug;
+          
+          // Get metadata or use defaults
+          const meta = blogMeta[slug] || { 
+            date: new Date().toISOString().split('T')[0],
+            tags: ['AI', 'Automation'],
+            category: 'Technology'
+          };
+          
+          // Convert markdown to HTML
+          const processedContent = await remark()
+            .use(html)
+            .use(remarkGfm)
+            .process(matterResult.content);
+          const htmlContent = processedContent.toString();
+          
+          // Calculate reading time
+          const readingTime = calculateReadingTime(matterResult.content);
+          
+          // Extract excerpt
+          const excerpt = extractExcerpt(matterResult.content);
+          
+          // Return the blog post data
+          return {
+            slug,
+            title,
+            date: meta.date,
+            formattedDate: formatDate(meta.date),
+            content: matterResult.content,
+            htmlContent,
+            excerpt,
+            author: "Impacto Automation",
+            tags: meta.tags,
+            category: meta.category,
+            readingTime
+          } as BlogPost;
+        } catch (error) {
+          console.error(`Error fetching post ${slug}:`, error);
+          return null;
+        }
+      })
+    );
+    
+    // Filter out nulls and sort posts by date
+    return allPostsData
+      .filter((post): post is BlogPost => post !== null)
+      .sort((a, b) => a.date < b.date ? 1 : -1);
+  } catch (error) {
+    console.error('Error fetching all posts:', error);
+    return [];
+  }
+}
+
+// Get a specific post by slug
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch markdown for ${slug}`);
+    }
+
+    const rawMarkdown = await res.text();
+
+    // Parse frontmatter and content
+    const { data, content } = matter(rawMarkdown);
+
+    // Convert markdown to HTML
+    const processedContent = await remark()
+      .use(html)
+      .use(remarkGfm)
+      .process(content);
+    const htmlContent = processedContent.toString();
+    
+    // Get metadata or use defaults
+    const meta = blogMeta[slug] || { 
+      date: new Date().toISOString().split('T')[0],
+      tags: ['AI', 'Automation'],
+      category: 'Technology'
+    };
+    
+    // Calculate reading time
+    const readingTime = calculateReadingTime(content);
+    
+    // Extract excerpt
+    const excerpt = extractExcerpt(content);
+    
+    return {
+      slug,
+      title: data.title || slug,
+      date: meta.date,
+      formattedDate: formatDate(meta.date),
+      content,
+      htmlContent,
+      excerpt,
+      author: "Impacto Automation",
+      tags: meta.tags,
+      category: meta.category,
+      readingTime
+    };
+  } catch (error) {
+    console.error(`Error reading post ${slug}:`, error);
+    return null;
+  }
+}
+
+// Get all unique categories from posts
+export async function getAllCategories(): Promise<string[]> {
+  const posts = await getAllPosts();
+  const categories = new Set(posts.map(post => post.category || 'Uncategorized'));
+  return Array.from(categories);
+}
+
+// Get all unique tags from posts
+export async function getAllTags(): Promise<string[]> {
+  const posts = await getAllPosts();
+  const tagsSet = new Set<string>();
+  
+  posts.forEach(post => {
+    post.tags.forEach(tag => tagsSet.add(tag));
+  });
+  
+  return Array.from(tagsSet);
+}
+
+// Get related posts by category or tags
+export async function getRelatedPosts(currentSlug: string, limit: number = 3): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
+  const currentPost = posts.find(post => post.slug === currentSlug);
+  
+  if (!currentPost) return [];
+  
+  const relatedPosts = posts
+    .filter(post => post.slug !== currentSlug) // Exclude current post
+    .sort((a, b) => {
+      // Calculate relevance score based on shared categories and tags
+      const aScore = (a.category === currentPost.category ? 3 : 0) + 
+                    a.tags.filter(tag => currentPost.tags.includes(tag)).length;
+      const bScore = (b.category === currentPost.category ? 3 : 0) + 
+                    b.tags.filter(tag => currentPost.tags.includes(tag)).length;
+      
+      return bScore - aScore; // Sort by relevance score (highest first)
+    })
+    .slice(0, limit);
+  
+  return relatedPosts;
+}
+
+// Filter posts by search query, category, or tag
+export async function filterPosts(options: {
+  search?: string;
+  category?: string;
+  tag?: string;
+  page?: number;
+  perPage?: number;
+}): Promise<{
+  posts: BlogPost[];
+  totalCount: number;
+  totalPages: number;
+}> {
+  const { search, category, tag, page = 1, perPage = 6 } = options;
+  const allPosts = await getAllPosts();
+  
+  // Apply filters
+  let filteredPosts = allPosts;
+  
+  if (search) {
+    const searchLower = search.toLowerCase();
+    filteredPosts = filteredPosts.filter(post => 
+      post.title.toLowerCase().includes(searchLower) || 
+      post.content.toLowerCase().includes(searchLower) ||
+      post.excerpt.toLowerCase().includes(searchLower)
+    );
+  }
+  
+  if (category) {
+    filteredPosts = filteredPosts.filter(post => 
+      post.category && post.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+  
+  if (tag) {
+    filteredPosts = filteredPosts.filter(post => 
+      post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+    );
+  }
+  
+  // Calculate pagination
+  const totalCount = filteredPosts.length;
+  const totalPages = Math.ceil(totalCount / perPage);
+  const paginatedPosts = filteredPosts.slice((page - 1) * perPage, page * perPage);
+  
+  return {
+    posts: paginatedPosts,
+    totalCount,
+    totalPages
+  };
+} 

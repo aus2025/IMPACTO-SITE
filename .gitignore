@@ -51,7 +51,6 @@ public/uploads/
 
 # Production
 /build
-/dist
 
 # Misc
 .DS_Store
@@ -64,7 +63,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # Local env files
-.env
 .env*.local
 
 # Vercel
@@ -74,11 +72,18 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# IDE specific files
-.idea/
-.vscode/
-*.swp
-*.swo
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
 
 # Cursor specific
 .cursor/ 

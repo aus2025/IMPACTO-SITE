@@ -1,7 +1,0 @@
-
-This is a placeholder for blog-3.jpg.
-
-Please replace this with an actual image file with the same name.
-
-The recommended dimensions are 1200x630 pixels.
-    

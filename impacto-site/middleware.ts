@@ -5,6 +5,19 @@ export async function middleware(request: NextRequest) {
   // For debugging - log all requests
   console.log('Middleware processing:', request.nextUrl.pathname)
   
+  // Redirect old case studies URLs to the blog page - retail-automation, finance-data-analytics, etc.
+  if (request.nextUrl.pathname.startsWith('/blog/retail-automation') || 
+      request.nextUrl.pathname.startsWith('/blog/healthcare-workflow') ||
+      request.nextUrl.pathname.startsWith('/blog/finance-data-analytics') ||
+      request.nextUrl.pathname.startsWith('/blog/manufacturing-ai') ||
+      request.nextUrl.pathname.startsWith('/blog/education-platform') ||
+      request.nextUrl.pathname.startsWith('/blog/saas-social-media')) {
+    console.log('Redirecting old case study URL to blog homepage')
+    const url = request.nextUrl.clone()
+    url.pathname = '/blog'
+    return NextResponse.redirect(url)
+  }
+  
   // In production, completely disable all protected routes
   if (process.env.NODE_ENV === 'production') {
     // Redirect /pricing/starter to /pricing/kickstart
@@ -12,14 +25,6 @@ export async function middleware(request: NextRequest) {
       console.log('Redirecting from /pricing/starter to /pricing/kickstart')
       const url = request.nextUrl.clone()
       url.pathname = '/pricing/kickstart'
-      return NextResponse.redirect(url)
-    }
-    
-    // Redirect all admin routes to home page
-    if (request.nextUrl.pathname.startsWith('/admin')) {
-      console.log('Admin routes disabled in production')
-      const url = request.nextUrl.clone()
-      url.pathname = '/'
       return NextResponse.redirect(url)
     }
     
@@ -129,25 +134,6 @@ export async function middleware(request: NextRequest) {
         url.pathname = '/login'
         return NextResponse.redirect(url)
       }
-    }
-
-    // For admin routes, require authentication only (temporarily skip role check)
-    // Exclude login and forgot-password pages from this check
-    if (
-      request.nextUrl.pathname.startsWith('/admin') && 
-      !request.nextUrl.pathname.startsWith('/admin/login') &&
-      !request.nextUrl.pathname.startsWith('/admin/forgot-password')
-    ) {
-      if (!user) {
-        console.log('Redirecting to admin login (no user)')
-        const url = request.nextUrl.clone()
-        url.pathname = '/admin/login'
-        return NextResponse.redirect(url)
-      }
-
-      // TEMPORARILY SKIP DATABASE ROLE CHECK DUE TO RLS ISSUES
-      // We'll implement proper role checking after fixing the database policies
-      console.log('Admin access granted to:', request.nextUrl.pathname)
     }
 
     return supabaseResponse

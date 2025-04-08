@@ -198,46 +198,34 @@ export default function EnhancedBlogContent({ content, className = '' }: Enhance
     // Add a table of contents if there are at least 3 headings
     const headings = contentRef.current.querySelectorAll('h2, h3');
     if (headings.length >= 3) {
-      const tocContainer = document.createElement('div');
-      tocContainer.className = 'bg-gray-50 rounded-lg p-5 my-8 border border-gray-200';
-      
-      const tocTitle = document.createElement('h4');
-      tocTitle.className = 'text-lg font-bold mb-3 text-gray-900';
-      tocTitle.textContent = 'Table of Contents';
-      tocContainer.appendChild(tocTitle);
-      
-      const tocList = document.createElement('ul');
-      tocList.className = 'space-y-2';
-      
-      headings.forEach((heading, index) => {
-        // Add IDs to headings for anchor links
-        const headingId = `heading-${index}`;
-        heading.id = headingId;
-        
-        const listItem = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = `#${headingId}`;
-        link.className = heading.tagName === 'H2' 
-          ? 'text-blue-600 hover:text-blue-800 font-medium' 
-          : 'text-blue-600 hover:text-blue-800 ml-4 text-sm';
-        link.textContent = heading.textContent || '';
-        listItem.appendChild(link);
-        tocList.appendChild(listItem);
-      });
-      
-      tocContainer.appendChild(tocList);
-      
-      // Insert table of contents after the first paragraph
-      const firstParagraph = contentRef.current.querySelector('p');
-      if (firstParagraph) {
-        firstParagraph.parentNode?.insertBefore(tocContainer, firstParagraph.nextSibling);
-      }
+      const toc = document.createElement('div');
+      toc.className = 'bg-gray-50 p-5 rounded-lg mb-6';
+      toc.innerHTML = `
+        <h3 class="text-lg font-semibold mb-3">Table of Contents</h3>
+        <nav>
+          <ul class="space-y-2">
+            ${Array.from(headings).map((heading, index) => {
+              const level = parseInt(heading.tagName.substring(1));
+              const id = `heading-${index}`;
+              heading.id = id;
+              return `
+                <li class="${level === 2 ? 'pl-0' : 'pl-4'} text-gray-700">
+                  <a href="#${id}" class="hover:text-blue-700 transition-colors text-sm">
+                    ${heading.textContent}
+                  </a>
+                </li>
+              `;
+            }).join('')}
+          </ul>
+        </nav>
+      `;
+      contentRef.current.insertBefore(toc, contentRef.current.firstChild);
     }
   }, [content]);
-  
+
   return (
     <div className={`enhanced-blog-content ${className} text-gray-700`} ref={contentRef}>
-      <BlogContent content={content} />
+      <div dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
 } 

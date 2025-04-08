@@ -1,5 +1,14 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, Zap, TrendingUp, Award, ChevronRight } from 'lucide-react';
+
+// Add type declaration for gtag
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params: any) => void;
+  }
+}
 
 interface AssessmentResultsProps {
   automationScore: number;

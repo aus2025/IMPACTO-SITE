@@ -86,23 +86,6 @@ nav.nav-scrolled {
   margin-right: auto;
 }
 
-/* Hide header and footer on admin pages */
-.admin-page > nav.fixed.top-0,
-.admin-page > div > nav.fixed.top-0,
-.admin-page ~ nav.fixed.top-0,
-.admin-page ~ footer,
-.admin-page ~ div > footer {
-  display: none !important;
-}
-
-/* Make admin page fill screen space */
-.admin-page {
-  min-height: 100vh;
-  position: relative;
-  z-index: 100;
-  background-color: white;
-}
-
 /* Timeline Component Styles */
 .timeline-container {
   max-width: 768px;

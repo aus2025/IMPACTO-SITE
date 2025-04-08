@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+import dynamic, { DynamicOptionsLoadingProps } from 'next/dynamic';
 import React, { Suspense, ComponentType, ReactNode } from 'react';
 
 interface DynamicImportProps {
@@ -27,7 +27,7 @@ export const createDynamicComponent = <P extends object>(
   importFn: () => Promise<{ default: ComponentType<P> }>,
   options: {
     ssr?: boolean;
-    loading?: ComponentType;
+    loading?: ((loadingProps: DynamicOptionsLoadingProps) => ReactNode);
     prefetch?: boolean;
   } = {}
 ) => {
@@ -109,7 +109,6 @@ export default function DynamicImport({
   // If using Suspense, render with Suspense
   if (useSuspense) {
     const DynamicComponentWithSuspense = dynamic(importFn, {
-      suspense: true,
       ssr: false,
     });
     

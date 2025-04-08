@@ -1,12 +1,29 @@
-import Link from 'next/link';
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Assessment Submitted | Impacto Automation Solutions',
-  description: 'Thank you for submitting your business assessment. Our team will analyze your needs and create a personalized automation blueprint.',
-};
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AssessmentSuccessPage() {
+  const [redirecting, setRedirecting] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if we have a stored assessment ID that we can use to redirect
+    const assessmentId = sessionStorage.getItem('last_assessment_id');
+    
+    if (assessmentId) {
+      // Set a short delay to ensure the page loads completely first
+      const timer = setTimeout(() => {
+        setRedirecting(true);
+        // Redirect to user results page which will handle fetching data
+        router.push(`/assessment/success/user_result?assessmentId=${assessmentId}`);
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [router]);
+
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 py-16 sm:py-24">
       <div className="container mx-auto px-4">
@@ -35,44 +52,53 @@ export default function AssessmentSuccessPage() {
               </p>
             </div>
             
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-8">
-              <h2 className="text-xl font-semibold text-blue-800 mb-3">What happens next?</h2>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-blue-200 text-blue-700 font-semibold text-sm mr-3 mt-0.5">
-                    1
-                  </div>
-                  <p className="text-gray-700">
-                    <strong className="text-gray-900">Analysis:</strong> Our team will review your answers and analyze your business needs.
-                  </p>
-                </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-blue-200 text-blue-700 font-semibold text-sm mr-3 mt-0.5">
-                    2
-                  </div>
-                  <p className="text-gray-700">
-                    <strong className="text-gray-900">Blueprint creation:</strong> We'll create a personalized automation blueprint specifically for your business.
-                  </p>
-                </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-blue-200 text-blue-700 font-semibold text-sm mr-3 mt-0.5">
-                    3
-                  </div>
-                  <p className="text-gray-700">
-                    <strong className="text-gray-900">Consultation:</strong> A member of our team will contact you to discuss your automation blueprint and next steps.
-                  </p>
-                </div>
+            {redirecting ? (
+              <div className="text-center mb-8">
+                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-500 border-r-transparent"></div>
+                <p className="mt-4">Preparing your assessment results...</p>
               </div>
-            </div>
-            
-            <div className="text-center mb-8">
-              <Link
-                href="/assessment/success/user_result"
-                className="inline-block px-8 py-4 bg-blue-600 text-white text-xl font-bold rounded-lg hover:bg-blue-700 transition duration-150 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              >
-                Get Your Assessment NOW
-              </Link>
-            </div>
+            ) : (
+              <>
+                <div className="mb-10">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4">What Happens Next?</h2>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 mr-3">
+                        1
+                      </div>
+                      <div>
+                        <p className="text-gray-600">Your responses will be analyzed by our automation experts.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 mr-3">
+                        2
+                      </div>
+                      <div>
+                        <p className="text-gray-600">You'll receive a personalized automation blueprint based on your needs.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 mr-3">
+                        3
+                      </div>
+                      <div>
+                        <p className="text-gray-600">Our team will reach out to schedule a consultation to discuss your options.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-8">
+                  <Link
+                    href="/assessment/success/user_result"
+                    className="inline-block px-8 py-4 bg-blue-600 text-white text-xl font-bold rounded-lg hover:bg-blue-700 transition duration-150 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  >
+                    Get Your Assessment NOW
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

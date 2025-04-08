@@ -3,10 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { BlogTag } from '@/types/blog';
+
+interface SimpleBlogTag {
+  name: string;
+  slug: string;
+}
 
 interface BlogTagsFilterProps {
-  tags: BlogTag[];
+  tags: SimpleBlogTag[];
   currentTag?: string;
 }
 
@@ -19,7 +23,7 @@ export default function BlogTagsFilter({
 
   // Create a URL for a tag filter
   const createTagUrl = (tagSlug: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() || '');
     
     if (tagSlug) {
       params.set('tag', tagSlug);
@@ -32,6 +36,14 @@ export default function BlogTagsFilter({
     // Reset to page 1 when changing tag
     params.delete('page');
     
+    return `${pathname}?${params.toString()}`;
+  };
+
+  // Create URL to clear the tag filter
+  const clearTagUrl = () => {
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    params.delete('tag');
+    params.delete('page');
     return `${pathname}?${params.toString()}`;
   };
 
@@ -53,7 +65,7 @@ export default function BlogTagsFilter({
       
       {currentTag && (
         <Link
-          href={createTagUrl('')}
+          href={clearTagUrl()}
           className="inline-block px-3 py-1 rounded-full text-xs bg-red-100 text-red-800 hover:bg-red-200"
         >
           Clear Tag

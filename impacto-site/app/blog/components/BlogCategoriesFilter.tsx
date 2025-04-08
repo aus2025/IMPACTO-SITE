@@ -3,10 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { BlogCategory } from '@/types/blog';
+
+interface SimpleBlogCategory {
+  name: string;
+  slug: string;
+}
 
 interface BlogCategoriesFilterProps {
-  categories: BlogCategory[];
+  categories: SimpleBlogCategory[];
   currentCategory?: string;
 }
 
@@ -19,7 +23,7 @@ export default function BlogCategoriesFilter({
 
   // Create a URL for a category filter
   const createCategoryUrl = (categorySlug: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() || '');
     
     if (categorySlug) {
       params.set('category', categorySlug);
@@ -35,7 +39,7 @@ export default function BlogCategoriesFilter({
 
   // Create URL to clear the category filter
   const clearCategoryUrl = () => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() || '');
     params.delete('category');
     params.delete('page');
     return `${pathname}?${params.toString()}`;

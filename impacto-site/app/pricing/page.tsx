@@ -59,8 +59,8 @@ export default function PricingPage() {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const handleIconFlip = (index: number) => {
-    setFlippedIcon(flippedIcon === index ? null : index);
+  const handleIconFlip = (index: number | null) => {
+    setFlippedIcon(index);
   };
 
   const benefitIcons = [

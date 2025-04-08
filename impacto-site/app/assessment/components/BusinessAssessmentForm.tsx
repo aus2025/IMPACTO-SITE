@@ -172,6 +172,9 @@ export default function BusinessAssessmentForm() {
             // Save the assessment ID for redirect
             if (responseData.assessmentId) {
               assessmentId = responseData.assessmentId;
+              
+              // Store assessmentId in sessionStorage for retrieval on success page
+              sessionStorage.setItem('last_assessment_id', assessmentId);
             }
           } catch (e) {
             console.warn('Failed to parse response JSON', e);
@@ -189,15 +192,10 @@ export default function BusinessAssessmentForm() {
         
         // Set completed state whether API worked or fallback was used
         setIsCompleted(true);
-        setIsSubmitting(false);
         
-        // Try to redirect to results page if we have an assessment ID
-        if (assessmentId) {
-          window.location.href = `/assessment-results?assessmentId=${assessmentId}`;
-        } else {
-          // Otherwise redirect to generic success page
-          window.location.href = '/assessment/success';
-        }
+        // FIXED: Always redirect to success page first to avoid error flash
+        // then let the success page handle the redirect to results
+        window.location.href = '/assessment/success';
       } catch (error) {
         console.error('Error in submission process:', error);
         setSubmitError((error as Error).message || 'An error occurred while submitting your assessment. Please try again.');

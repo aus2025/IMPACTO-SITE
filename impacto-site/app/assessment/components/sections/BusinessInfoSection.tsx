@@ -19,6 +19,7 @@ export type BusinessInfoSectionProps = {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSelectChange: (name: string, value: string) => void;
   onCheckboxChange: (name: string, value: string, checked: boolean) => void;
+  onCheckboxSingleChange: (name: string, checked: boolean) => void;
   onPrev: () => void;
   onNext: () => void;
 };
@@ -29,6 +30,7 @@ export default function BusinessInfoSection({
   onInputChange, 
   onSelectChange, 
   onCheckboxChange,
+  onCheckboxSingleChange,
   onPrev,
   onNext 
 }: BusinessInfoSectionProps) {

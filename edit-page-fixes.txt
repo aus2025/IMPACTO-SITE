@@ -1,0 +1,21 @@
+import React from 'react';
+import { notFound } from 'next/navigation';
+import BlogPostForm from '../../components/BlogPostForm';
+import { getBlogPostBySlug, getBlogCategories, getBlogTags } from '@/lib/blog-pages';
+import { Metadata } from 'next';
+
+// 2. Update the post retrieval logic
+// From:
+const post = await getBlogPostById(params.id);
+
+// To:
+// blog-pages.ts uses getBlogPostBySlug which expects a slug, not an ID
+// You'll need to fetch the post by slug, which means the route parameter would need to be a slug
+const post = await getBlogPostBySlug(params.id, true); // includeUnpublished=true
+
+// 3. Important note:
+// This is a significant change because the route parameter is now expected to be a slug rather than an ID.
+// If your route truly uses numeric IDs, you might need a different approach, such as:
+// - Modifying blog-pages.ts to add a getBlogPostById function
+// - Updating your routes to use slugs instead of IDs
+// - Or creating a workaround function that first retrieves all posts and then filters by ID 

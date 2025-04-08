@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/ssr';
-
-// Initialize Supabase client with service key for admin privileges
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY! // Make sure this environment variable is set
-);
+import { createServerSupabaseClient } from '@/utils/supabase';
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Supabase client
+    const supabase = await createServerSupabaseClient();
+    
     // Parse the request body
     const data = await request.json();
     

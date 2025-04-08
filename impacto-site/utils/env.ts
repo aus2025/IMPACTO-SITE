@@ -12,24 +12,24 @@ type EnvVariables = {
 };
 
 /**
- * Validates that all required environment variables are present
- * Throws an error if any are missing
+ * Validates environment variables and provides defaults if missing
+ * Logs warnings instead of throwing errors to prevent app crashes
  */
 export function validateEnv(): EnvVariables {
   // Required variables with validation
   const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
   if (!NEXT_PUBLIC_SUPABASE_URL) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_URL is required');
+    console.warn('NEXT_PUBLIC_SUPABASE_URL is missing - check your environment variables');
   }
   
   const NEXT_PUBLIC_SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY is required');
+    console.warn('NEXT_PUBLIC_SUPABASE_ANON_KEY is missing - check your environment variables');
   }
 
   return {
-    NEXT_PUBLIC_SUPABASE_URL,
-    NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_SUPABASE_URL: NEXT_PUBLIC_SUPABASE_URL || '',
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
   };
 }
 

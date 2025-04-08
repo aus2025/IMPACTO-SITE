@@ -249,8 +249,8 @@ export async function getRelatedPosts(
   if (tagIds.length > 0 && (!categoryId || relatedPosts.length < limit)) {
     // Sort by number of matching tags
     relatedPosts.sort((a, b) => {
-      const aMatches = a.tags?.filter(tag => tagIds.includes(tag.id)).length || 0;
-      const bMatches = b.tags?.filter(tag => tagIds.includes(tag.id)).length || 0;
+      const aMatches = a.tags?.filter((tag: BlogTag) => tagIds.includes(tag.id)).length || 0;
+      const bMatches = b.tags?.filter((tag: BlogTag) => tagIds.includes(tag.id)).length || 0;
       return bMatches - aMatches;
     });
   }

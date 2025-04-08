@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from "@/components/layout";
 import { defaultSEO } from "@/utils/seo";
-import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -85,23 +84,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        
-        {/* Google Analytics script will be added when you have a valid ID */}
-        {/* Uncomment and replace 'G-XXXXXXXXXX' with your actual ID when ready */}
-        {/*
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script>
-        */}
       </body>
     </html>
   );

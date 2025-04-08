@@ -11,7 +11,18 @@ import ProductTierContent from './product-tier-content';
 export default function UserResultContent() {
   const [analysisComplete, setAnalysisComplete] = useState<boolean>(false);
   const [score, setScore] = useState<number | null>(null);
-  const [assessmentData, setAssessmentData] = useState<any>(null);
+  const [assessmentData, setAssessmentData] = useState<{
+    id: string;
+    automation_experience?: string;
+    current_tools?: string[];
+    pain_points?: string[];
+    company_size?: string;
+    business_goals?: string[];
+    automation_needs?: string[];
+    document_volume?: string;
+    timeline?: string;
+    budget_range?: string;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const blueprintRef = useRef<HTMLDivElement>(null);
@@ -325,7 +336,17 @@ export default function UserResultContent() {
   );
 }
 
-function calculateAutomationScore(assessmentData: any): number {
+function calculateAutomationScore(assessmentData: {
+  automation_experience?: string;
+  current_tools?: string[];
+  pain_points?: string[];
+  company_size?: string;
+  business_goals?: string[];
+  automation_needs?: string[];
+  document_volume?: string;
+  timeline?: string;
+  budget_range?: string;
+}): number {
   // Extract relevant responses from the assessment data
   const {
     automation_experience,

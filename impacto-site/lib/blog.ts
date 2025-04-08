@@ -80,7 +80,7 @@ export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<Pagin
   }
   
   // Process the response to format the nested tags array
-  const formattedPosts = posts?.map(post => {
+  const formattedPosts = posts?.map((post: any) => {
     // Extract tags from the nested structure
     const tags = post.tags
       ? post.tags.map((tagItem: any) => tagItem.tag)
@@ -197,7 +197,7 @@ export async function getBlogTags(): Promise<BlogTag[]> {
  */
 export async function createBlogPost(postData: BlogPostInput, selectedTags?: string[]): Promise<number | null> {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
     
     // Create the blog post
     const { data, error } = await supabase
@@ -500,7 +500,7 @@ export async function getRelatedPosts(postId: number, categoryId?: number, tagId
  */
 export async function getBlogPostById(id: number | string): Promise<BlogPost | null> {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
     const postId = typeof id === 'string' ? parseInt(id, 10) : id;
     
     if (isNaN(postId)) {

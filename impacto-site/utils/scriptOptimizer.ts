@@ -46,16 +46,29 @@ export const loadScript = (config: ScriptConfig): Promise<void> => {
       });
     }
     
-    script.onload = () => {
+    // Define event handlers
+    const handleLoad = () => {
+      // Clean up event listeners to prevent memory leaks
+      script.removeEventListener('load', handleLoad);
+      script.removeEventListener('error', handleError);
+      
       if (config.onLoad) config.onLoad();
       resolve();
     };
     
-    script.onerror = () => {
+    const handleError = () => {
+      // Clean up event listeners to prevent memory leaks
+      script.removeEventListener('load', handleLoad);
+      script.removeEventListener('error', handleError);
+      
       reject(new Error(`Failed to load script: ${config.src}`));
       // Cleanup failed script
       script.remove();
     };
+    
+    // Add event listeners
+    script.addEventListener('load', handleLoad);
+    script.addEventListener('error', handleError);
     
     document.body.appendChild(script);
   });

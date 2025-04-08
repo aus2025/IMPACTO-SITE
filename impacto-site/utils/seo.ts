@@ -65,21 +65,30 @@ export function constructMetadata({
     keywords: keywords || defaultSEO.keywords,
     openGraph: {
       ...defaultSEO.openGraph,
-      title: openGraph?.title || title || defaultSEO.openGraph.title,
-      description: openGraph?.description || description || defaultSEO.openGraph.description,
+      ...openGraph,
+      title: (openGraph as any)?.title || title || (defaultSEO.openGraph as any).title,
+      description: (openGraph as any)?.description || description || (defaultSEO.openGraph as any).description,
       url: canonicalUrl || defaultSEO.openGraph.url,
       images: openGraph?.images || defaultSEO.openGraph.images,
-      ...openGraph,
     },
     twitter: {
       ...defaultSEO.twitter,
-      title: twitter?.title || title || defaultSEO.twitter.handle,
-      description: twitter?.title || description || defaultSEO.description,
       ...twitter,
+      title: (twitter as any)?.title || title || defaultSEO.twitter.handle,
+      description: (twitter as any)?.description || description || defaultSEO.description,
     },
     robots: noIndex
-      ? { index: false, follow: false }
-      : defaultSEO.robots,
+      ? 'noindex, nofollow'
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
+        },
     alternates: {
       canonical: canonicalUrl,
     },

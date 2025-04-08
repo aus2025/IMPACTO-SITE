@@ -155,24 +155,35 @@ function extractExcerpt(content: string): string {
  */
 export async function getAllPosts(): Promise<BlogPost[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    // Check if the directory exists
+    if (!fs.existsSync(postsDirectory)) {
+      console.error(`Blog posts directory not found: ${postsDirectory}`);
+      return Object.keys(blogMeta).map(slug => createFallbackPost(slug));
+    }
     
-    // Get all markdown file slugs from blogMeta or fetch from API if needed
-    const slugs = Object.keys(blogMeta);
+    // Read all .md files from the blog content directory
+    const fileNames = fs.readdirSync(postsDirectory)
+      .filter(fileName => fileName.endsWith('.md'));
     
-    // Fetch each post using fetch() instead of fs
+    // If no markdown files found, fallback to slugs from blogMeta
+    const slugs = fileNames.length > 0 
+      ? fileNames.map(fileName => fileName.replace(/\.md$/, '')) 
+      : Object.keys(blogMeta);
+    
+    // Process each blog post
     const allPostsData = await Promise.all(
       slugs.map(async (slug) => {
         try {
-          // Fetch markdown file using fetch API
-          const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
+          const fullPath = path.join(postsDirectory, `${slug}.md`);
           
-          if (!res.ok) {
-            console.error(`Failed to fetch markdown for ${slug}`);
+          // Check if file exists
+          if (!fs.existsSync(fullPath)) {
+            console.error(`Markdown file not found: ${fullPath}`);
             return createFallbackPost(slug);
           }
           
-          const rawMarkdown = await res.text();
+          // Read file content
+          const rawMarkdown = fs.readFileSync(fullPath, 'utf8');
           
           // Use gray-matter to parse the post metadata section
           const matterResult = matter(rawMarkdown);
@@ -221,8 +232,8 @@ export async function getAllPosts(): Promise<BlogPost[]> {
             category: meta.category,
             readingTime
           };
-        } catch (fetchError) {
-          console.error(`Error fetching blog post ${slug}:`, fetchError);
+        } catch (error) {
+          console.error(`Error processing blog post ${slug}:`, error);
           return createFallbackPost(slug);
         }
       })
@@ -292,11 +303,12 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       return null;
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/blog-content/${slug}.md`);
-
-    if (!res.ok) {
-      console.error(`Failed to fetch markdown for ${slug}`);
+    // Load the markdown file from the filesystem
+    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    
+    // Check if file exists
+    if (!fs.existsSync(fullPath)) {
+      console.error(`Markdown file not found: ${fullPath}`);
       // Return fallback post if file is missing but we have metadata
       if (Object.keys(blogMeta).includes(slug)) {
         return createFallbackPost(slug);
@@ -304,7 +316,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       return null;
     }
 
-    const rawMarkdown = await res.text();
+    // Read file content
+    const rawMarkdown = fs.readFileSync(fullPath, 'utf8');
     
     // Parse frontmatter and content
     const matterResult = matter(rawMarkdown);
@@ -348,7 +361,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       readingTime
     };
   } catch (error) {
-    console.error(`Error fetching blog post: ${slug}`, error);
+    console.error(`Error reading blog post: ${slug}`, error);
     // If we have metadata for this slug, return a fallback
     if (slug && Object.keys(blogMeta).includes(slug)) {
       return createFallbackPost(slug);

@@ -317,27 +317,27 @@ export default function GrowthPackagePage() {
                   <ul className="space-y-3">
                   <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Multi-Platform Social Automation</span>
+                      <span className="text-gray-800">Social Media Automation (AI copy & scheduling for 3+ platforms)</span>
                   </li>
                   <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Advanced Lead Capture & CRM Integration</span>
+                      <span className="text-gray-800">Enhanced CRM Integration (lead capture with advanced tagging)</span>
                   </li>
                   <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Email & SMS Nurture Sequences</span>
+                      <span className="text-gray-800">Automated Email & SMS Sequences (multi-step nurture campaigns)</span>
                   </li>
                   <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Team Calendar Coordination</span>
+                      <span className="text-gray-800">Appointment Scheduling Automation (sync calendars & reminders)</span>
                   </li>
                   <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Enhanced AI Chatbot</span>
+                      <span className="text-gray-800">Basic Chatbot for Website (handles FAQs or booking)</span>
                   </li>
                   <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Monthly Optimization Reports</span>
+                      <span className="text-gray-800">Support: Priority email & chat support, quarterly tune-ups</span>
                   </li>
                 </ul>
                 </div>

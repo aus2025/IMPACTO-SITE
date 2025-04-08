@@ -92,8 +92,8 @@ export async function safeGetBlogPosts(filters: BlogPostFilters = {}): Promise<P
       tags: [] // Empty tags array since we're not fetching them in this simplified query
     }));
     
-    // Calculate total pages
-    const totalCount = count || 0;
+    // Calculate total pages - ensure count is defined
+    const totalCount = count ?? 0;
     const totalPages = Math.ceil(totalCount / perPage);
     
     return {

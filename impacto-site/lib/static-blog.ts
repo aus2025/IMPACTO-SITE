@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
@@ -114,9 +112,6 @@ function extractExcerpt(content: string): string {
   }
   return '';
 }
-
-// Path to the blog posts
-const postsDirectory = path.join(process.cwd(), 'public/blog-content');
 
 // Get all blog posts
 export async function getAllPosts(): Promise<BlogPost[]> {

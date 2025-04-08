@@ -42,31 +42,25 @@ export default function ProductTierContent({ score }: ProductTierContentProps) {
                 <svg className="w-5 h-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-800">AI Social Posts</span>
+                <span className="text-gray-800">Social Media Scheduling (1-2 platforms)</span>
               </li>
               <li className="flex items-center">
                 <svg className="w-5 h-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-800">Basic Lead Capture System</span>
+                <span className="text-gray-800">Lead Capture to CRM (web forms)</span>
               </li>
               <li className="flex items-center">
                 <svg className="w-5 h-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-800">Email Welcome Sequences</span>
+                <span className="text-gray-800">Email Welcome Flow (3-step)</span>
               </li>
               <li className="flex items-center">
                 <svg className="w-5 h-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-800">Appointment Booking</span>
-              </li>
-              <li className="flex items-center">
-                <svg className="w-5 h-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span className="text-gray-800">Basic Chatbot</span>
+                <span className="text-gray-800">Support: Email support</span>
               </li>
             </ul>
           </div>
@@ -109,8 +103,7 @@ export default function ProductTierContent({ score }: ProductTierContentProps) {
           </div>
           
           <div className="text-center mb-6">
-            <p className="text-3xl font-bold">$349<span className="text-base font-normal">/mo</span></p>
-            <p className="text-gray-600">or $1,199 one-time setup</p>
+            <p className="text-3xl font-bold">$599<span className="text-base font-normal">/mo</span></p>
           </div>
           
           <div className="flex flex-col space-y-3">
@@ -151,8 +144,7 @@ export default function ProductTierContent({ score }: ProductTierContentProps) {
           </div>
           
           <div className="text-center mb-6">
-            <p className="text-3xl font-bold">Custom<span className="text-base font-normal"></span></p>
-            <p className="text-gray-600">Starting at $799/mo</p>
+            <p className="text-3xl font-bold">$1,499<span className="text-base font-normal">/mo</span></p>
           </div>
           
           <div className="flex flex-col space-y-3">

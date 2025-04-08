@@ -92,13 +92,13 @@ export default function KickstartPackagePage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Try for $99
+                  Try for $149
                 </motion.a>
                 <motion.a 
                   href="https://calendly.com/rba-aus"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-yellow-600 text-yellow-700 hover:bg-yellow-100/50"
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-yellow-600 text-yellow-700 hover:bg-yellow-50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -128,10 +128,10 @@ export default function KickstartPackagePage() {
               <div className="bg-blue-50 rounded-lg p-6">
                 <div className="flex items-center mb-4">
                   <SmartphoneIcon className="text-blue-600 mr-3 h-6 w-6" />
-                  <h3 className="font-bold text-lg">Social Media Posts</h3>
+                  <h3 className="font-bold text-lg">Social Media Scheduling</h3>
                 </div>
                 <p className="text-gray-800">
-                  AI-crafted content for consistent posting without the daily hassle.
+                  Scheduled posts for 1-2 platforms to maintain consistent presence.
                 </p>
               </div>
               
@@ -141,7 +141,7 @@ export default function KickstartPackagePage() {
                   <h3 className="font-bold text-lg">Lead Capture</h3>
                 </div>
                 <p className="text-gray-800">
-                  Automatically collect and organize potential client information.
+                  Capture leads from web forms directly to your CRM.
                 </p>
               </div>
               
@@ -151,7 +151,7 @@ export default function KickstartPackagePage() {
                   <h3 className="font-bold text-lg">Email Welcome Flow</h3>
                 </div>
                 <p className="text-gray-800">
-                  Turn prospects into clients with automated email sequences.
+                  3-step email welcome sequence for new leads and customers.
                 </p>
               </div>
             </div>
@@ -191,23 +191,19 @@ export default function KickstartPackagePage() {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">AI Social Posts</span>
+                      <span className="text-gray-800">Social Media Scheduling (1-2 platforms)</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Basic Lead Capture System</span>
+                      <span className="text-gray-800">Lead Capture to CRM (web forms)</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Email Welcome Sequences</span>
+                      <span className="text-gray-800">Email Welcome Flow (3-step)</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Appointment Booking</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Basic Chatbot</span>
+                      <span className="text-gray-800">Support: Email support</span>
                     </li>
                   </ul>
                 </div>

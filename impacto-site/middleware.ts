@@ -17,17 +17,21 @@ if (!blogContentChecked) {
     // Use a dynamic import with a fallback to ensure resilience
     let ensureBlogContentFn = fallbackEnsureBlogContent
     try {
-      // Try to dynamically import the module
-      const { ensureBlogContent } = require('./lib/ensure-blog-content')
-      if (typeof ensureBlogContent === 'function') {
-        ensureBlogContentFn = ensureBlogContent
-      }
+      // Use a safer dynamic import pattern
+      import('./lib/ensure-blog-content')
+        .then(module => {
+          if (typeof module.ensureBlogContent === 'function') {
+            module.ensureBlogContent()
+          }
+        })
+        .catch(importError => {
+          console.error('Failed to import blog content module, using fallback:', importError)
+          fallbackEnsureBlogContent()
+        })
     } catch (importError) {
       console.error('Failed to import blog content module, using fallback:', importError)
+      fallbackEnsureBlogContent()
     }
-    
-    // Execute the function (either real or fallback)
-    ensureBlogContentFn()
     
     blogContentChecked = true
     console.log('Middleware startup: Blog content check complete')

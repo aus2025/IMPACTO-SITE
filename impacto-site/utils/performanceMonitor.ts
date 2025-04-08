@@ -64,7 +64,7 @@ export const initPerformanceMonitor = (): void => {
       const firstEntry = entries[0];
       
       if (firstEntry) {
-        metrics.FID = firstEntry.processingStart - firstEntry.startTime;
+        metrics.FID = (firstEntry as any).processingStart - firstEntry.startTime;
         reportMetrics(metrics);
       }
     }).observe({ type: 'first-input', buffered: true });
@@ -82,8 +82,8 @@ export const initPerformanceMonitor = (): void => {
       entries.forEach(entry => {
         // Only count layout shifts without recent user input
         if (
-          !entry.hadRecentInput && 
-          entry instanceof PerformanceLayoutShift
+          !(entry as any).hadRecentInput &&
+          entry.entryType === 'layout-shift'
         ) {
           const firstSessionEntry = sessionEntries[0];
           const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
@@ -95,10 +95,10 @@ export const initPerformanceMonitor = (): void => {
             entry.startTime - lastSessionEntry.startTime < 1000 &&
             entry.startTime - firstSessionEntry.startTime < 5000
           ) {
-            sessionValue += entry.value;
+            sessionValue += (entry as any).value;
             sessionEntries.push(entry);
           } else {
-            sessionValue = entry.value;
+            sessionValue = (entry as any).value;
             sessionEntries = [entry];
           }
           

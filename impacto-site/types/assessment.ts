@@ -6,18 +6,18 @@ export interface BusinessAssessment {
   created_at: string;
   updated_at?: string;
   form_id?: string;
-  assessment_data?: Record<string, any>;
+  assessment_data?: Record<string, string | number | boolean | null>;
   status?: string;
-  contact?: Record<string, any>;
-  business_info?: Record<string, any>;
-  automation_needs?: Record<string, any>;
-  budget?: Record<string, any>;
-  additional_info?: Record<string, any>;
+  contact?: Record<string, string | number | boolean | null>;
+  business_info?: Record<string, string | number | boolean | null>;
+  automation_needs?: Record<string, string | number | boolean | null>;
+  budget?: Record<string, string | number | boolean | null>;
+  additional_info?: Record<string, string | number | boolean | null>;
   user_id?: string;
   completed?: boolean;
   score?: number;
   recommendations?: string;
-  report_data?: Record<string, any>;
+  report_data?: Record<string, string | number | boolean | null>;
 }
 
 export interface AssessmentForm {
@@ -55,11 +55,11 @@ export interface FormField {
   placeholder?: string;
   required?: boolean;
   options?: FormFieldOption[];
-  defaultValue?: any;
+  defaultValue?: string | number | boolean | null;
   help_text?: string;
   validation?: FormFieldValidation;
   conditional_logic?: ConditionalLogic;
-  properties?: Record<string, any>;
+  properties?: Record<string, string | number | boolean | null>;
   order?: number;
 }
 
@@ -84,7 +84,7 @@ export interface ConditionalLogic {
 export interface ConditionalRule {
   field: string;
   operator: 'equals' | 'not_equals' | 'contains' | 'not_contains' | 'greater_than' | 'less_than';
-  value: any;
+  value: string | number | boolean | null;
 }
 
 export interface FormSettings {

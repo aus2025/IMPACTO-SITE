@@ -14,7 +14,17 @@ import {
 } from '@/components/ui/select';
 
 export type BusinessInfoSectionProps = {
-  formData: any;
+  formData: {
+    company_name?: string;
+    industry?: string;
+    employee_count?: string;
+    business_goals?: string[];
+    pain_points?: string[];
+    compliance_concerns?: string[];
+    automation_experience?: string;
+    current_tools?: string[];
+    additional_business_info?: string;
+  };
   errors: Record<string, string>;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSelectChange: (name: string, value: string) => void;
@@ -195,8 +205,8 @@ export default function BusinessInfoSection({
           <div>
             <Label htmlFor="patient_data" className="text-gray-900 font-medium">Patient Data Handling</Label>
             <Select 
-              value={formData.patient_data} 
-              onValueChange={(value) => onSelectChange('patient_data', value)}
+              value={formData.automation_experience} 
+              onValueChange={(value) => onSelectChange('automation_experience', value)}
             >
               <SelectTrigger id="patient_data" className="mt-1 text-gray-900">
                 <SelectValue placeholder="Select patient data level" />
@@ -252,7 +262,15 @@ export default function BusinessInfoSection({
         </Button>
         <Button 
           type="button" 
-          onClick={onNext}
+          id="business-info-next-button"
+          onClick={(e) => {
+            // Make sure we don't submit the form
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Next button clicked from BusinessInfoSection');
+            // Call the next function explicitly
+            onNext();
+          }}
           className="bg-blue-600 hover:bg-blue-700 text-white"
         >
           Next

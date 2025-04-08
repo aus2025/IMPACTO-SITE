@@ -13,7 +13,14 @@ import {
 } from '@/components/ui/select';
 
 export type BudgetSectionProps = {
-  formData: any;
+  formData: {
+    budget_range?: string;
+    funding_source?: string;
+    timeline?: string;
+    roi_expectations?: string;
+    budget_constraints?: string[];
+    additional_budget_notes?: string;
+  };
   errors: Record<string, string>;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSelectChange: (name: string, value: string) => void;
@@ -196,7 +203,7 @@ export default function BudgetSection({
           <Textarea 
             id="budget_constraints" 
             name="budget_constraints"
-            value={formData.budget_constraints || ''}
+            value={formData.budget_constraints?.join('\n') || ''}
             onChange={onInputChange}
             placeholder="Please describe any budget constraints or considerations"
             className="mt-1 text-gray-900 h-24"

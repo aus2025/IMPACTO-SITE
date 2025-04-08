@@ -28,9 +28,9 @@ export async function createClient() {
           },
           setAll(cookiesToSet) {
             try {
-              cookiesToSet.forEach(({ name, value, options }) =>
+              cookiesToSet.forEach(({ name, value, options }) => {
                 cookieStore.set(name, value, options)
-              )
+              })
             } catch (error) {
               // The `setAll` method was called from a Server Component.
               // This can be ignored if you have middleware refreshing
@@ -53,6 +53,42 @@ export async function createClient() {
  * Used as a fallback when environment variables are missing
  */
 function createMockClient() {
+  // Create a mock filter builder with all the expected methods
+  const createMockFilterBuilder = () => {
+    const mockBuilder: Record<string, any> = {
+      eq: () => mockBuilder,
+      neq: () => mockBuilder,
+      gt: () => mockBuilder,
+      gte: () => mockBuilder,
+      lt: () => mockBuilder,
+      lte: () => mockBuilder,
+      like: () => mockBuilder,
+      ilike: () => mockBuilder,
+      is: () => mockBuilder,
+      in: () => mockBuilder,
+      contains: () => mockBuilder,
+      containedBy: () => mockBuilder,
+      rangeGt: () => mockBuilder,
+      rangeGte: () => mockBuilder,
+      rangeLt: () => mockBuilder,
+      rangeLte: () => mockBuilder,
+      rangeAdjacent: () => mockBuilder,
+      overlaps: () => mockBuilder,
+      textSearch: () => mockBuilder,
+      filter: () => mockBuilder,
+      not: () => mockBuilder,
+      or: () => mockBuilder,
+      and: () => mockBuilder,
+      order: () => mockBuilder,
+      limit: () => mockBuilder,
+      range: () => mockBuilder,
+      single: async () => ({ data: null, error: null }),
+      maybeSingle: async () => ({ data: null, error: null }),
+      execute: async () => ({ data: [], count: 0, error: null })
+    };
+    return mockBuilder;
+  };
+
   // Return an object that mimics the Supabase client API but returns empty results
   return {
     auth: {
@@ -60,26 +96,24 @@ function createMockClient() {
       getSession: async () => ({ data: { session: null }, error: null }),
       signOut: async () => ({ error: null })
     },
-    from: () => ({
-      select: () => ({
-        eq: () => ({
-          single: async () => ({ data: null, error: null }),
-          maybeSingle: async () => ({ data: null, error: null }),
-          execute: async () => ({ data: [], error: null })
-        }),
-        execute: async () => ({ data: [], error: null })
-      }),
-      insert: () => ({
-        select: () => ({
-          single: async () => ({ data: null, error: null })
+    from: (table: string) => ({
+      select: (columns?: string) => createMockFilterBuilder(),
+      insert: (values: any) => ({
+        select: (columns?: string) => ({
+          single: async () => ({ data: { id: 0 }, error: null })
         })
       }),
-      update: () => ({
-        eq: () => ({
+      update: (values: any) => ({
+        eq: (column: string, value: any) => ({
+          execute: async () => ({ data: null, error: null })
+        })
+      }),
+      delete: () => ({
+        eq: (column: string, value: any) => ({
           execute: async () => ({ data: null, error: null })
         })
       })
     }),
-    rpc: () => ({ data: null, error: null })
+    rpc: (fn: string, params?: any) => ({ data: null, error: null })
   };
 } 

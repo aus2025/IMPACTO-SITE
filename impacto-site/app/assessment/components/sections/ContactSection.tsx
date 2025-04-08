@@ -12,7 +12,14 @@ import {
 } from '@/components/ui/select';
 
 type ContactSectionProps = {
-  formData: any;
+  formData: {
+    full_name?: string;
+    email?: string;
+    phone?: string;
+    company_name?: string;
+    job_title?: string;
+    preferred_contact_method?: string;
+  };
   errors: Record<string, string>;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSelectChange: (name: string, value: string) => void;

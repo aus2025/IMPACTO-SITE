@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import ProcessTimeline from '@/components/ProcessTimeline';
-import QuickConsultationForm from '@/components/QuickConsultationForm';
 import StatisticsSection from '@/components/stats/StatisticsSection';
 import CounterCard from '@/components/stats/CounterCard';
 import { TrendingUp, AlertTriangle, Calendar, Zap, Rocket, BarChart2, DollarSign, Share2, Cpu } from 'lucide-react';
@@ -13,15 +12,6 @@ import { motion } from 'framer-motion';
 const MotionLink = motion(Link);
 
 // Animation variants
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6 }
-  }
-};
-
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -63,12 +53,6 @@ const iconAnimation = {
  * 4. Ensure responsive design, optimized for desktop and mobile views.
  * 5. Enhance bullet points and numbered lists for readability and quick scanning.
  */
-
-// Ensure all images use proper casing with lowercase paths
-const fixImagePath = (path: string) => {
-  if (!path) return path;
-  return path.toLowerCase();
-};
 
 export default function HomePageClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);

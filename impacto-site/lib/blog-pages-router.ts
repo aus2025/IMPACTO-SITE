@@ -11,15 +11,12 @@ import {
 import { NextApiRequest, NextApiResponse } from 'next';
 
 /**
- * Get blog posts with pagination and filtering
+ * Get blog posts with pagination and filtering for pages router
  */
-export async function getBlogPosts(
-  filters: BlogPostFilters = {},
-  req?: NextApiRequest,
-  res?: NextApiResponse
-): Promise<PaginatedBlogPosts> {
+export async function getBlogPosts(filters: BlogPostFilters = {}, req?: NextApiRequest, res?: NextApiResponse): Promise<PaginatedBlogPosts> {
   try {
-    const { page = 1, perPage = 5, search, category, tag, status, authorId, excludeId } = filters;
+    const { page = 1, perPage = 5, search, category, tag, status, authorId } = filters;
+    const excludeId = (filters as any).excludeId; // Type-safe access to optional property
     
     const supabase = await createClient(req, res);
     
@@ -68,7 +65,7 @@ export async function getBlogPosts(
     const to = from + perPage - 1;
     
     query = query
-      .order('published_at', { ascending: false, nullsLast: true })
+      .order('published_at', { ascending: false })
       .range(from, to);
     
     // Execute the query
@@ -81,6 +78,7 @@ export async function getBlogPosts(
         totalCount: 0,
         totalPages: 0,
         page: 1,
+        perPage
       };
     }
     
@@ -103,6 +101,7 @@ export async function getBlogPosts(
       totalCount: count || 0,
       totalPages,
       page,
+      perPage
     };
   } catch (error) {
     console.error('Error in getBlogPosts:', error);
@@ -111,6 +110,7 @@ export async function getBlogPosts(
       totalCount: 0,
       totalPages: 0,
       page: 1,
+      perPage: 5
     };
   }
 }

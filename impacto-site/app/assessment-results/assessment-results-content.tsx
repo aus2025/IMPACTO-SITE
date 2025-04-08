@@ -9,7 +9,21 @@ import AutomationUpgrade from '@/components/AutomationUpgrade';
 
 export default function AssessmentResultsContent() {
   const searchParams = useSearchParams();
-  const [assessmentData, setAssessmentData] = useState<any>(null);
+  const [assessmentData, setAssessmentData] = useState<{
+    id: string;
+    automation_areas?: string[];
+    current_automation?: string;
+    current_tools?: string[];
+    automation_experience?: string;
+    pain_points?: string[];
+    company_size?: string;
+    business_goals?: string[];
+    automation_needs?: string[];
+    document_volume?: string;
+    timeline?: string;
+    budget_range?: string;
+    [key: string]: any; // Allow for flexibility in fields
+  } | null>(null);
   const [automationScore, setAutomationScore] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showServices, setShowServices] = useState(false);
@@ -27,7 +41,34 @@ export default function AssessmentResultsContent() {
     
     const fetchAssessmentData = async (id: string) => {
       try {
-        // Fetch from your Supabase client
+        // Check if this is a demo ID
+        if (id.startsWith('demo-')) {
+          // Use mock data for demo purposes
+          const demoData = {
+            id: id,
+            automation_areas: ['document_processing', 'workflow', 'data_extraction'],
+            current_automation: 'basic',
+            current_tools: ['excel', 'email'],
+            automation_experience: 'basic',
+            pain_points: ['manual_data_entry', 'process_bottlenecks', 'duplicate_work'],
+            company_size: 'small',
+            business_goals: ['efficiency', 'cost_reduction', 'growth'],
+            automation_needs: ['document_processing', 'workflow_automation'],
+            document_volume: 'medium',
+            timeline: '1-3months',
+            budget_range: '5k-15k'
+          };
+          
+          setAssessmentData(demoData);
+          const score = calculateAutomationScore(demoData);
+          setAutomationScore(score);
+          setShowServices(true);
+          setHasExistingAutomation(true);
+          setIsLoading(false);
+          return;
+        }
+        
+        // Regular Supabase fetch for non-demo IDs
         const { data, error } = await supabase
           .from('assessments')
           .select('*')
@@ -104,11 +145,30 @@ export default function AssessmentResultsContent() {
     );
   }
 
+  // Create the specific props needed for AssessmentResults
+  const assessmentProps = {
+    automationScore: automationScore || 0,
+    assessmentData: {
+      id: assessmentData.id,
+      automation_areas: assessmentData.automation_areas || [],
+      current_automation: assessmentData.current_automation || '',
+      current_tools: assessmentData.current_tools || [],
+      automation_experience: assessmentData.automation_experience || '',
+      pain_points: assessmentData.pain_points || [],
+      company_size: assessmentData.company_size || '',
+      business_goals: assessmentData.business_goals || [],
+      automation_needs: assessmentData.automation_needs || [],
+      document_volume: assessmentData.document_volume || '',
+      timeline: assessmentData.timeline || '',
+      budget_range: assessmentData.budget_range || '',
+    }
+  };
+
   return (
     <>
       <AssessmentResults 
-        automationScore={automationScore!} 
-        assessmentData={assessmentData}
+        automationScore={assessmentProps.automationScore} 
+        assessmentData={assessmentProps.assessmentData}
       />
       
       {/* Show options based on assessment results */}
@@ -126,7 +186,19 @@ export default function AssessmentResultsContent() {
   );
 }
 
-function calculateAutomationScore(assessmentData: any): number {
+function calculateAutomationScore(assessmentData: {
+  id?: string;
+  automation_experience?: string;
+  current_tools?: string[];
+  pain_points?: string[];
+  company_size?: string;
+  business_goals?: string[];
+  automation_needs?: string[];
+  document_volume?: string;
+  timeline?: string;
+  budget_range?: string;
+  [key: string]: any; // Allow for other fields
+}): number {
   // Extract relevant responses from the assessment data
   const {
     automation_experience,

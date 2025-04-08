@@ -72,10 +72,12 @@ export type Author = {
 
 export type BlogPostInput = {
   title: string;
+  slug?: string;
   excerpt?: string;
   content?: string;
   featured_image?: string;
   category_id?: number;
+  author_id?: string;
   status: 'draft' | 'published' | 'archived';
   published_at?: string;
   meta_title?: string;
@@ -84,7 +86,6 @@ export type BlogPostInput = {
 };
 
 export type BlogPostUpdate = Partial<BlogPostInput> & {
-  slug?: string;
   view_count?: number;
 };
 
@@ -96,6 +97,7 @@ export type BlogPostFilters = {
   search?: string;
   status?: 'draft' | 'published' | 'archived';
   authorId?: string;
+  excludeId?: number;
 };
 
 export type PaginatedBlogPosts = {

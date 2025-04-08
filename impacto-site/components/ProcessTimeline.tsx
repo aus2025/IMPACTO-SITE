@@ -3,9 +3,25 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 
+interface TimelineStep {
+  title: string;
+  description: string;
+  additionalInfo: string;
+  icon: React.ReactNode;
+  color: string;
+  activeBgColor: string;
+  iconColor: string;
+}
+
+interface Metric {
+  value: string;
+  label: string;
+  icon: React.ReactNode;
+}
+
 const ProcessTimeline = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const timelineRef = useRef(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   
   // Auto-advance the active step every 3 seconds
   useEffect(() => {
@@ -16,7 +32,7 @@ const ProcessTimeline = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const steps = [
+  const steps: TimelineStep[] = [
     {
       title: "Discovery & Analysis",
       description: "We dive into your business to find inefficiencies and opportunities for automation. This thorough analysis lets us understand your workflows and where AI can help the most.",
@@ -76,7 +92,7 @@ const ProcessTimeline = () => {
     },
   ];
 
-  const metrics = [
+  const metrics: Metric[] = [
     {
       value: "+60%",
       label: "Increased Productivity",

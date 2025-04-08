@@ -21,7 +21,8 @@ function createClient() {
  */
 export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<PaginatedBlogPosts> {
   try {
-    const { page = 1, perPage = 5, search, category, tag, status, authorId, excludeId } = filters;
+    const { page = 1, perPage = 5, search, category, tag, status, authorId } = filters;
+    const excludeId = (filters as any).excludeId; // Type-safe access to optional property
     
     const supabase = createClient();
     
@@ -70,7 +71,7 @@ export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<Pagin
     const to = from + perPage - 1;
     
     query = query
-      .order('published_at', { ascending: false, nullsLast: true })
+      .order('published_at', { ascending: false })
       .range(from, to);
     
     // Execute the query
@@ -83,6 +84,7 @@ export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<Pagin
         totalCount: 0,
         totalPages: 0,
         page: 1,
+        perPage
       };
     }
     
@@ -105,6 +107,7 @@ export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<Pagin
       totalCount: count || 0,
       totalPages,
       page,
+      perPage
     };
   } catch (error) {
     console.error('Error in getBlogPosts:', error);
@@ -113,6 +116,7 @@ export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<Pagin
       totalCount: 0,
       totalPages: 0,
       page: 1,
+      perPage: 5
     };
   }
 }

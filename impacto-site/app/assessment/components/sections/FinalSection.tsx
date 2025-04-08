@@ -14,7 +14,15 @@ import {
 } from '@/components/ui/select';
 
 export type FinalSectionProps = {
-  formData: any;
+  formData: {
+    referral_source?: string;
+    consultation_preferences?: string[];
+    consultation_preference?: string;
+    additional_notes?: string;
+    terms_accepted?: boolean;
+    marketing_consent?: boolean;
+    additional_comments?: string;
+  };
   errors: Record<string, string>;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSelectChange: (name: string, value: string) => void;
@@ -102,7 +110,7 @@ export default function FinalSection({
           <Textarea 
             id="additional_comments" 
             name="additional_comments"
-            value={formData.additional_comments || ''}
+            value={formData.additional_comments || formData.additional_notes || ''}
             onChange={onInputChange}
             placeholder="Any additional information you'd like to share"
             className="mt-1 text-gray-900"
@@ -177,7 +185,13 @@ export default function FinalSection({
           </Button>
           <Button 
             type="button" 
-            onClick={onSubmit}
+            id="final-submit-button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Submit button clicked from FinalSection');
+              onSubmit();
+            }}
             className="bg-blue-600 hover:bg-blue-700 text-white"
             disabled={isSubmitting}
           >

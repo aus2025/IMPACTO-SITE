@@ -14,7 +14,15 @@ import {
 } from '@/components/ui/select';
 
 export type AutomationNeedsSectionProps = {
-  formData: any;
+  formData: {
+    automation_areas?: string[];
+    document_types?: string[];
+    document_volume?: string;
+    automation_goals?: string[];
+    current_automation?: string;
+    current_tools?: string[];
+    pain_points?: string[];
+  };
   errors: Record<string, string>;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSelectChange: (name: string, value: string) => void;

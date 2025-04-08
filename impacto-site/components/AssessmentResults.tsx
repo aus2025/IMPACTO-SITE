@@ -6,13 +6,24 @@ import { CheckCircle, Zap, TrendingUp, Award, ChevronRight } from 'lucide-react'
 // Add type declaration for gtag
 declare global {
   interface Window {
-    gtag: (command: string, action: string, params: any) => void;
+    gtag: (command: string, action: string, params: {
+      score?: number;
+      recommended_plan?: string;
+      category?: string;
+      plan?: string;
+      action?: string;
+    }) => void;
   }
+}
+
+interface AssessmentData {
+  name?: string;
+  // Add other assessment data fields as needed
 }
 
 interface AssessmentResultsProps {
   automationScore: number;
-  assessmentData?: any; // Add specific type based on your data structure
+  assessmentData?: AssessmentData;
 }
 
 const AssessmentResults: React.FC<AssessmentResultsProps> = ({

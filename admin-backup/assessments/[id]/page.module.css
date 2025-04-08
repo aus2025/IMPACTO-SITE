@@ -1,0 +1,34 @@
+/* Assessment detail page styles */
+.assessmentContainer {
+  color: black;
+}
+
+.assessmentContainer p,
+.assessmentContainer span,
+.assessmentContainer div,
+.assessmentContainer h1,
+.assessmentContainer h2,
+.assessmentContainer h3,
+.assessmentContainer h4,
+.assessmentContainer h5,
+.assessmentContainer h6,
+.assessmentContainer li,
+.assessmentContainer label {
+  color: black;
+}
+
+.listItem {
+  color: black;
+  font-weight: 500;
+}
+
+.sectionTitle {
+  color: black;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.ratingLabel {
+  color: black;
+  font-weight: 500;
+} 

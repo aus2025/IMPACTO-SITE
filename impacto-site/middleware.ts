@@ -30,8 +30,18 @@ export async function middleware(request: NextRequest) {
     // Simply return next() for all routes in development
     return NextResponse.next()
   } catch (error) {
+    // Enhanced error logging
     console.error('Middleware critical error:', error)
+    
+    // Log additional context information
+    console.error('Error context:', { 
+      path: request.nextUrl.pathname,
+      method: request.method,
+      headers: Object.fromEntries(request.headers.entries())
+    })
+    
     // Always return a valid response even on error
+    // To ensure the application doesn't crash with a 500 error
     return NextResponse.next()
   }
 }

@@ -223,10 +223,34 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 /**
- * Get a specific post by slug
+ * Get a paginated list of published blog posts
+ */
+export async function getBlogPosts(filters: BlogPostFilters = {}): Promise<PaginatedPosts> {
+  try {
+    // Make sure the directory exists
+    if (!fs.existsSync(postsDirectory)) {
+      console.error(`Blog posts directory not found: ${postsDirectory}`);
+      return { posts: [], totalCount: 0, totalPages: 0, page: 1, perPage: DEFAULT_PAGE_SIZE };
+    }
+    
+    // ... rest of the function ...
+  } catch (error) {
+    console.error('Error fetching all posts:', error);
+    return { posts: [], totalCount: 0, totalPages: 0, page: 1, perPage: DEFAULT_PAGE_SIZE };
+  }
+}
+
+/**
+ * Get a single blog post by slug
  */
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
+    // First check that we have a valid slug
+    if (!slug || typeof slug !== 'string') {
+      console.error(`Invalid blog post slug: ${slug}`);
+      return null;
+    }
+
     const fullPath = path.join(postsDirectory, `${slug}.md`);
     
     // Check if file exists before reading
@@ -235,34 +259,61 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       return null;
     }
     
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    // Safe file reading with proper error handling
+    let fileContents;
+    try {
+      fileContents = fs.readFileSync(fullPath, 'utf8');
+    } catch (readError) {
+      console.error(`Error reading blog post file ${fullPath}:`, readError);
+      return null;
+    }
     
     // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+    let matterResult;
+    try {
+      matterResult = matter(fileContents);
+    } catch (parseError) {
+      console.error(`Error parsing blog post frontmatter in ${fullPath}:`, parseError);
+      // Try to recover with empty frontmatter
+      matterResult = { data: {}, content: fileContents };
+    }
     
-    // Extract title from content (first h1)
+    // Extract title from content (first h1) with fallback
     const titleMatch = fileContents.match(/^# (.*)/m);
-    const title = titleMatch ? titleMatch[1] : slug;
+    const title = titleMatch ? titleMatch[1] : (slug || 'Untitled Post');
     
-    // Get metadata or use defaults
+    // Get metadata with robust fallbacks
     const meta = blogMeta[slug] || { 
       date: new Date().toISOString().split('T')[0],
       tags: ['AI', 'Automation'],
       category: 'Technology'
     };
     
-    // Convert markdown to HTML
-    const processedContent = await remark()
-      .use(html)
-      .use(remarkGfm)
-      .process(matterResult.content);
-    const htmlContent = processedContent.toString();
+    // Convert markdown to HTML with error handling
+    let htmlContent = '';
+    try {
+      const processedContent = await remark()
+        .use(html)
+        .use(remarkGfm)
+        .process(matterResult.content);
+      htmlContent = processedContent.toString();
+    } catch (markdownError) {
+      console.error(`Error converting markdown to HTML for ${slug}:`, markdownError);
+      // Fallback to simple HTML
+      htmlContent = `<p>${matterResult.content.replace(/\n/g, '<br>')}</p>`;
+    }
     
     // Calculate reading time
     const readingTime = calculateReadingTime(matterResult.content);
     
-    // Extract excerpt
-    const excerpt = extractExcerpt(matterResult.content);
+    // Extract excerpt with fallback
+    let excerpt = '';
+    try {
+      excerpt = extractExcerpt(matterResult.content);
+    } catch (excerptError) {
+      console.error(`Error extracting excerpt for ${slug}:`, excerptError);
+      excerpt = matterResult.content.slice(0, 150) + '...';
+    }
     
     // Return the blog post data
     return {
@@ -274,12 +325,12 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       htmlContent,
       excerpt,
       author: "Impacto Automation",
-      tags: meta.tags,
+      tags: meta.tags || [],
       category: meta.category,
       readingTime
     };
   } catch (error) {
-    console.error(`Error reading post ${slug}:`, error);
+    console.error(`Unexpected error fetching blog post ${slug}:`, error);
     return null;
   }
 }

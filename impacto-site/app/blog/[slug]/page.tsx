@@ -13,44 +13,62 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
-  
-  if (!post) {
+  try {
+    const post = await getPostBySlug(params.slug);
+    
+    if (!post) {
+      return {
+        title: 'Blog Post Not Found',
+        description: 'The requested blog post could not be found.',
+      };
+    }
+    
     return {
-      title: 'Blog Post Not Found',
-      description: 'The requested blog post could not be found.',
+      title: `${post.title} | Impacto Blog`,
+      description: post.excerpt || 'Impacto Blog',
+      openGraph: {
+        title: post.title,
+        description: post.excerpt || 'Impacto Blog',
+        type: 'article',
+        publishedTime: post.date,
+        authors: [post.author],
+        tags: post.tags,
+      },
+    };
+  } catch (error) {
+    console.error(`Error generating metadata for blog post: ${params.slug}`, error);
+    // Provide fallback metadata
+    return {
+      title: 'Impacto Blog',
+      description: 'Explore our blog articles on automation and AI',
     };
   }
-  
-  return {
-    title: `${post.title} | Impacto Blog`,
-    description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: 'article',
-      publishedTime: post.date,
-      authors: [post.author],
-      tags: post.tags,
-    },
-  };
 }
 
 // Generate static paths for all blog posts
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    const posts = await getAllPosts();
+    
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for blog posts:', error);
+    return []; // Return empty array in case of error
+  }
 }
 
 // Function to get blog image source
 function getBlogImageSrc(slug: string) {
-  // Extract the blog number from the slug (e.g., "blog-1-title" => "1")
-  const match = slug.match(/^blog-(\d+)/);
-  if (match && match[1]) {
-    return `/images/blog/blog-${match[1]}.svg`;
+  try {
+    // Extract the blog number from the slug (e.g., "blog-1-title" => "1")
+    const match = slug.match(/^blog-(\d+)/);
+    if (match && match[1]) {
+      return `/images/blog/blog-${match[1]}.svg`;
+    }
+  } catch (error) {
+    console.error(`Error getting blog image for ${slug}:`, error);
   }
   return '/images/blog/default.svg';
 }
@@ -62,6 +80,12 @@ export default async function BlogPostPage({
   params: { slug: string } 
 }) {
   try {
+    // Validate slug parameter
+    if (!params?.slug) {
+      console.error('Blog post page called with empty slug');
+      notFound();
+    }
+    
     const post = await getPostBySlug(params.slug);
     
     if (!post) {
@@ -69,7 +93,14 @@ export default async function BlogPostPage({
       notFound();
     }
     
-    const relatedPosts = await getRelatedPosts(params.slug, 3);
+    // Safely get related posts with fallback to empty array
+    let relatedPosts = [];
+    try {
+      relatedPosts = await getRelatedPosts(params.slug, 3);
+    } catch (error) {
+      console.error(`Error fetching related posts for ${params.slug}:`, error);
+      // Continue with empty related posts
+    }
     
     return (
       <main className="min-h-screen bg-gray-50">
@@ -156,11 +187,11 @@ export default async function BlogPostPage({
                   prose-ul:my-4 prose-ol:my-4 prose-li:ml-4
                   prose-code:text-blue-700 prose-code:bg-blue-50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
                   prose-hr:my-8 prose-hr:border-gray-200"
-                dangerouslySetInnerHTML={{ __html: post.htmlContent || '' }}
+                dangerouslySetInnerHTML={{ __html: post.htmlContent || '<p>Content unavailable</p>' }}
               />
               
               {/* Tags */}
-              {post.tags.length > 0 && (
+              {post.tags && post.tags.length > 0 && (
                 <div className="mt-12 pt-6 border-t border-gray-200">
                   <div className="flex items-center flex-wrap gap-2">
                     <FaTags className="text-gray-500 mr-2" />
@@ -223,7 +254,7 @@ export default async function BlogPostPage({
               </div>
               
               {/* Related posts */}
-              {relatedPosts.length > 0 && (
+              {relatedPosts && relatedPosts.length > 0 && (
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">Related Articles</h3>
                   <div className="space-y-4">
@@ -252,39 +283,13 @@ export default async function BlogPostPage({
                   </div>
                 </div>
               )}
-              
-              {/* Categories */}
-              {post.category && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Categories</h3>
-                  <Link
-                    href={`/blog?category=${encodeURIComponent(post.category.toLowerCase())}`}
-                    className="inline-block bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm hover:bg-blue-100 transition-colors duration-200"
-                  >
-                    {post.category}
-                  </Link>
-                </div>
-              )}
             </aside>
           </div>
-        </div>
-        
-        {/* Back to blog */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-          <Link
-            href="/blog"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800"
-          >
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Back to Blog
-          </Link>
         </div>
       </main>
     );
   } catch (error) {
-    console.error('Error in BlogPostPage:', error);
-    notFound();
+    console.error('Error rendering blog post page:', error);
+    notFound(); // Fallback to 404 page which is better than a 500 error
   }
 } 

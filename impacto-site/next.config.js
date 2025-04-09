@@ -50,9 +50,6 @@ const nextConfig = {
   // Apply trailing slash to all routes
   trailingSlash: false,
   
-  // Server components external packages
-  serverExternalPackages: [],
-  
   // Experimental features
   experimental: {
     optimizeCss: true,

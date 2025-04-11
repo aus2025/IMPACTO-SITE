@@ -309,7 +309,7 @@ export default function HomePageClient() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link href="/services/social-media" className="text-purple-700 hover:text-purple-900 font-medium flex items-center">
+                <Link href="/services/social-media-marketing" className="text-purple-700 hover:text-purple-900 font-medium flex items-center">
                   Learn more
                   <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

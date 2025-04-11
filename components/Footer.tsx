@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -26,7 +26,7 @@ export default function Footer() {
               <h3 className="font-medium text-gray-800 mb-3">Connect</h3>
               <div className="flex space-x-4">
                 <a 
-                  href="https://www.facebook.com/profile.php?id=61574682826413" 
+                  href="https://www.facebook.com/share/12JPDhyARMb/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-blue-600"
@@ -35,31 +35,43 @@ export default function Footer() {
                   <Facebook size={24} />
                 </a>
                 <a 
-                  href="#" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-pink-600"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={24} />
-                </a>
-                <a 
-                  href="#" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-blue-600"
-                  aria-label="Twitter"
-                >
-                  <Twitter size={24} />
-                </a>
-                <a 
-                  href="#" 
+                  href="https://www.linkedin.com/in/impacto-automation?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-blue-700"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={24} />
+                </a>
+                <a 
+                  href="https://www.threads.net/@impactoautomation.com.au" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-black"
+                  aria-label="Threads"
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <path d="M17.5 6.5h-11c-3 0-3 4.5 0 4.5s3 0 3 0v7c0 3 4.5 3 4.5 0 0 0 0-3 0-3h3.5c3 0 3-4.5 0-4.5s-3 0-3 0" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.instagram.com/impactoautomation.com.au/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-pink-600"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={24} />
                 </a>
               </div>
             </div>

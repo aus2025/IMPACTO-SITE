@@ -28,7 +28,7 @@ const AutomationServices = () => {
             </li>
           </ul>
           
-          <Link href="/services/social-media-automation" className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+          <Link href="/services/social-media-marketing" className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
             Explore Social Media Automation
           </Link>
         </div>
@@ -56,7 +56,7 @@ const AutomationServices = () => {
             </li>
           </ul>
           
-          <Link href="/services/workflow-automation" className="inline-block px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors">
+          <Link href="/services/automation-services" className="inline-block px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors">
             Explore Workflow Automation
           </Link>
         </div>

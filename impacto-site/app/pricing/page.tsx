@@ -105,7 +105,7 @@ export default function PricingPage() {
     },
     {
       question: "What if I need help after implementation?",
-      answer: "All plans include support. Kickstart includes email support, Growth adds priority chat, and Scale includes dedicated phone support and strategy sessions."
+      answer: "All plans include support for a 30-day implementation period. Ongoing automation support and training can be arranged upon prior request."
     }
   ];
 
@@ -116,10 +116,10 @@ export default function PricingPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              More Time, Lower Costs, and Peace of Mind
+              Transparent Pricing for Real Results
             </h1>
             <p className="text-xl md:text-2xl mb-10">
-              Automation that works for your business — so you can focus on growth without the burnout.
+              Clear and flexible automation packages designed to fit your business goals and budget. Get measurable results and maximize your investment.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button 
@@ -153,35 +153,38 @@ export default function PricingPage() {
                   <div className="bg-gradient-to-r from-yellow-400/40 to-yellow-500/40 py-8 px-6 border-b">
                     <CardTitle className="text-2xl">Kickstart Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">$149</span>
-                      <span className="text-gray-600">/mo</span>
-                      <span className="block text-sm text-gray-600 mt-1">or $499 one-time</span>
+                      <span className="text-3xl font-bold">$1,500+</span>
+                      <span className="text-gray-600"> (one-time setup)</span>
                     </div>
                     <CardDescription className="mt-2 italic text-gray-700">
-                      Best for solopreneurs & small teams new to automation.
+                      Best for solopreneurs & small teams starting their automation journey.
                     </CardDescription>
                   </div>
                   <CardContent className="pt-6 flex-grow">
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Social Media Scheduling (1-2 platforms)</span>
+                        <span>Up to 2 simple automation workflows</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Lead Capture to CRM (web forms)</span>
+                        <span>Automated lead capture with instant CRM integration</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Email Welcome Flow (3-step)</span>
+                        <span>Immediate email follow-up to leads</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span><strong>Support:</strong> Email support</span>
+                        <span>Automated invoicing reminders</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                        <span>1-month post-launch support included (email)</span>
                       </li>
                       <li className="flex items-start mt-4 text-yellow-600">
                         <CheckIcon className="h-5 w-5 text-yellow-600 mr-2 mt-0.5" />
-                        <span className="font-medium">Great first step to start seeing automation in action</span>
+                        <span className="font-medium">Ideal entry-level solution delivering immediate efficiency and measurable ROI</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -190,7 +193,7 @@ export default function PricingPage() {
                       e.stopPropagation();
                       window.location.href = "/pricing/kickstart";
                     }}>
-                      Start Free
+                      Get Started
                     </Button>
                   </CardFooter>
                 </Card>
@@ -205,42 +208,46 @@ export default function PricingPage() {
                   <div className="bg-gradient-to-r from-green-400/40 to-green-500/40 py-8 px-6 border-b rounded-t-lg">
                     <CardTitle className="text-2xl">Growth Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">$599</span>
-                      <span className="text-gray-600">/mo</span>
+                      <span className="text-3xl font-bold">$3,000–$5,000</span>
+                      <span className="text-gray-600"> (one-time setup)</span>
                     </div>
                     <CardDescription className="mt-2 italic text-gray-700">
-                      For businesses ready to expand with multi-channel automation.
+                      Perfect for growing businesses ready for multi-channel automation.
                     </CardDescription>
                   </div>
                   <CardContent className="pt-6 flex-grow">
                     <ul className="space-y-3">
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Social Media Automation (AI copy & scheduling for 3+ platforms)</span>
+                        <span>3–5 integrated workflows tailored to your needs</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Enhanced CRM Integration (lead capture with advanced tagging)</span>
+                        <span>Social Media Automation (AI-generated posts & scheduling across multiple platforms)</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Automated Email & SMS Sequences (multi-step nurture campaigns)</span>
+                        <span>Advanced CRM integration with real-time data synchronization</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Appointment Scheduling Automation (sync calendars & reminders)</span>
+                        <span>Client onboarding automation (welcome emails, digital contracts, scheduling)</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Basic Chatbot for Website (handles FAQs or booking)</span>
+                        <span>Administrative & back-office automation (scheduling, invoicing, reporting)</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span><strong>Support:</strong> Priority email & chat support, quarterly tune-ups</span>
+                        <span>Automated multi-step email & SMS nurture sequences</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                        <span>Priority support with quarterly workflow optimizations (email & chat)</span>
                       </li>
                       <li className="flex items-start mt-4 text-green-600">
                         <CheckIcon className="h-5 w-5 text-green-600 mr-2 mt-0.5" />
-                        <span className="font-medium">Full execution with measurable time & cost savings</span>
+                        <span className="font-medium">Comprehensive solution to streamline multiple business operations simultaneously</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -261,38 +268,46 @@ export default function PricingPage() {
                   <div className="bg-gradient-to-r from-red-400/40 to-red-500/40 py-8 px-6 border-b">
                     <CardTitle className="text-2xl">Scale Plan</CardTitle>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">From 1499,00</span>
-                      <span className="text-gray-600">/mo</span>
+                      <span className="text-3xl font-bold">From $10,000+</span>
+                      <span className="text-gray-600"> (custom setup, value-based pricing)</span>
                     </div>
                     <CardDescription className="mt-2 italic text-gray-700">
-                      Premium custom solution perfect for your business.
+                      Fully customized, premium automation solutions designed to transform your business.
                     </CardDescription>
                   </div>
                   <CardContent className="pt-6 flex-grow">
                     <ul className="space-y-3">
                       <li className="flex items-start font-medium">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>All features of Growth, plus:</span>
+                        <span>All features of the Growth Plan, plus:</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Advanced Chatbot Integration (AI chatbot tailored to your business)</span>
+                        <span>Comprehensive end-to-end workflow automation</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Custom Workflow Automation (tailored scripts or integrations unique to your processes)</span>
+                        <span>Advanced AI-driven chatbot fully tailored to your business</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>Multi-platform Social & Ads Automation (expand to advertising workflows)</span>
+                        <span>Custom-built automation scripts and integrations for unique processes</span>
                       </li>
                       <li className="flex items-start">
                         <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
-                        <span>VIP Support & Strategy (dedicated automation strategist, phone support)</span>
+                        <span>Multi-platform social media and advertising automation</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                        <span>Ongoing optimization & dedicated automation strategist</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                        <span>VIP-level support (phone, priority email, strategic advisory)</span>
                       </li>
                       <li className="flex items-start mt-4 text-red-600">
                         <CheckIcon className="h-5 w-5 text-red-600 mr-2 mt-0.5" />
-                        <span className="font-medium">Premium solution only for automation-mature clients</span>
+                        <span className="font-medium">Ultimate automation package delivering maximum efficiency, scalability, and business impact</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -309,6 +324,43 @@ export default function PricingPage() {
                     </Button>
                   </CardFooter>
                 </Card>
+              </div>
+            </div>
+            
+            {/* Support Section */}
+            <div className="mt-16 p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold mb-6 text-center text-blue-700">Ongoing Automation Support</h3>
+              <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+                Keep your automation systems running at peak performance with our flexible monthly support options.
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-blue-500 text-4xl mb-4 flex justify-center">🔄</div>
+                  <h4 className="font-bold text-lg mb-3 text-center text-blue-700">Continuous Monitoring</h4>
+                  <p className="text-gray-600 text-center">Regular updates and enhancements to keep your workflows running smoothly</p>
+                </div>
+                
+                <div className="bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-blue-500 text-4xl mb-4 flex justify-center">📈</div>
+                  <h4 className="font-bold text-lg mb-3 text-center text-blue-700">Proactive Improvements</h4>
+                  <p className="text-gray-600 text-center">Monthly adjustments to optimize performance and address changing needs</p>
+                </div>
+                
+                <div className="bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="text-blue-500 text-4xl mb-4 flex justify-center">🔧</div>
+                  <h4 className="font-bold text-lg mb-3 text-center text-blue-700">Flexible Retainer Models</h4>
+                  <p className="text-gray-600 text-center">Customized support packages that evolve with your business needs</p>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <Link 
+                  href="/contact" 
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300 shadow-sm"
+                >
+                  Contact us to discuss support options
+                </Link>
               </div>
             </div>
           </div>

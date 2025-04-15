@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Clock, DollarSign, Zap, Heart } from 'lucide-react';
 import AutomationServices from '@/components/AutomationServices';
-import AutomationUpgrade from '@/components/AutomationUpgrade';
 
 // This metadata export needs to be moved to a separate layout.tsx file since 
 // this is now a client component
@@ -224,48 +223,6 @@ export default function ServicesPage() {
           </motion.div>
           
           <AutomationServices />
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-12"
-          >
-            <AutomationUpgrade />
-          </motion.div>
-          
-          {/* Assessment Promotion */}
-          <motion.div 
-            className="max-w-3xl mx-auto mt-16 text-center bg-gradient-to-r from-blue-500 to-purple-500 p-6 rounded-xl shadow-md"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <p className="text-xl font-medium text-white mb-4">
-              Complete this quick assessment to receive your personalized automation blueprint—and unlock an automatic 20% discount.
-            </p>
-            <motion.a 
-              href="/assessment" 
-              className="inline-block px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Start Assessment
-            </motion.a>
-          </motion.div>
-          
-          <div className="text-center mt-12">
-            <motion.a 
-              href="/assessment" 
-              className="cta-button-global"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Take Our Automation Readiness Assessment
-            </motion.a>
-          </div>
         </div>
       </section>
 
@@ -381,182 +338,129 @@ export default function ServicesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Our AI-Powered Solutions
+            Most Requested Automations
           </motion.h2>
           
           <motion.div 
-            className="max-w-5xl mx-auto space-y-12"
+            className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {/* Social Media Marketing */}
+            {/* Lead Capture & Follow-Up Automation */}
             <motion.div 
-              className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-8 shadow-sm"
+              className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-8 shadow-sm h-full"
               variants={itemVariants}
-              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", transition: { duration: 0.2 } }}
             >
               <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                <motion.span 
-                  className="text-blue-600 mr-3"
-                  initial="initial"
-                  whileHover="flip"
-                  variants={iconVariants}
-                >
-                  🌐
-                </motion.span>
-                Social Media Marketing Automation
+                <span className="text-blue-600 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                  </svg>
+                </span>
+                Lead Capture & Follow-Up Automation
               </h3>
               <p className="text-gray-700 mb-6">
-                Save time and boost your online visibility with AI-crafted content that engages your audience effectively—without manual effort.
+                Automatically capture new inquiries and immediately follow up, improving response times and lead conversions.
               </p>
-              <motion.ul 
-                className="space-y-3 mb-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <motion.li 
-                  className="flex items-start" 
-                  variants={itemVariants}
-                >
-                  <motion.svg 
-                    className="w-5 h-5 text-green-500 mr-2 mt-1" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-blue-800"><strong>Automated content creation & scheduling:</strong> Post consistently without daily input.</span>
-                </motion.li>
-                <motion.li 
-                  className="flex items-start"
-                  variants={itemVariants}
-                >
-                  <motion.svg 
-                    className="w-5 h-5 text-green-500 mr-2 mt-1" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-blue-800"><strong>AI-driven audience targeting:</strong> Reach exactly who matters most.</span>
-                </motion.li>
-                <motion.li 
-                  className="flex items-start"
-                  variants={itemVariants}
-                >
-                  <motion.svg 
-                    className="w-5 h-5 text-green-500 mr-2 mt-1" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-blue-800"><strong>Real-time analytics:</strong> Continuously optimize your performance.</span>
-                </motion.li>
-              </motion.ul>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link 
-                  href="/services/social-media-marketing" 
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition duration-300"
-                >
-                  Explore Social Media Automation
-                </Link>
-              </motion.div>
             </motion.div>
 
+            {/* CRM Integration & Data Sync */}
             <motion.div 
-              className="border-t border-gray-200 w-full my-8"
-              initial={{ opacity: 0, scaleX: 0 }}
-              whileInView={{ opacity: 1, scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            ></motion.div>
-
-            {/* Business Workflow Automation */}
-            <motion.div 
-              className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 shadow-sm"
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 shadow-sm h-full"
               variants={itemVariants}
-              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", transition: { duration: 0.2 } }}
             >
               <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                <motion.span 
-                  className="text-blue-600 mr-3"
-                  initial="initial"
-                  whileHover="flip"
-                  variants={iconVariants}
-                >
-                  🤖
-                </motion.span>
-                Business Workflow Automation
+                <span className="text-blue-600 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </span>
+                CRM Integration & Data Sync
               </h3>
               <p className="text-gray-700 mb-6">
-                Simplify your daily operations and eliminate manual tasks—allowing your business to scale effortlessly.
+                Ensure your customer data is instantly updated and synchronized across all business applications, reducing manual entry and errors.
               </p>
-              <motion.ul 
-                className="space-y-3 mb-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <motion.li 
-                  className="flex items-start"
-                  variants={itemVariants}
-                >
-                  <motion.svg 
-                    className="w-5 h-5 text-green-500 mr-2 mt-1" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-blue-800"><strong>Tailored workflow solutions:</strong> Built to fit your exact business processes.</span>
-                </motion.li>
-                <motion.li 
-                  className="flex items-start"
-                  variants={itemVariants}
-                >
-                  <motion.svg 
-                    className="w-5 h-5 text-green-500 mr-2 mt-1" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-blue-800"><strong>Easy integration:</strong> Connect smoothly with your existing tools (CRM, Email, ERP, and more).</span>
-                </motion.li>
-                <motion.li 
-                  className="flex items-start"
-                  variants={itemVariants}
-                >
-                  <motion.svg 
-                    className="w-5 h-5 text-green-500 mr-2 mt-1" 
-                    fill="currentColor" 
-                    viewBox="0 0 20 20"
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                  >
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-blue-800"><strong>Reduce costs, minimize errors:</strong> Increase efficiency and profitability.</span>
-                </motion.li>
-              </motion.ul>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link 
-                  href="/services/automation-services" 
-                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition duration-300"
-                >
-                  Explore Workflow Automation
-                </Link>
-              </motion.div>
+            </motion.div>
+
+            {/* Client Onboarding Flows */}
+            <motion.div 
+              className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 shadow-sm h-full"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", transition: { duration: 0.2 } }}
+            >
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-green-600 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </span>
+                Client Onboarding Flows
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Streamline your onboarding process with automated welcome emails, digital contracts, and scheduling, delivering a professional first impression.
+              </p>
+            </motion.div>
+
+            {/* Administrative & Back-Office Automation */}
+            <motion.div 
+              className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-8 shadow-sm h-full"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", transition: { duration: 0.2 } }}
+            >
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-amber-600 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </span>
+                Administrative & Back-Office Automation
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Automate invoicing, scheduling, reminders, and reporting, drastically reducing daily administrative tasks.
+              </p>
+            </motion.div>
+
+            {/* Marketing & Engagement Automation */}
+            <motion.div 
+              className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-xl p-8 shadow-sm h-full"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", transition: { duration: 0.2 } }}
+            >
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-rose-600 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                  </svg>
+                </span>
+                Marketing & Engagement Automation
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Automate newsletters, social media posts, and review generation, maintaining consistent engagement with your customers.
+              </p>
+            </motion.div>
+
+            {/* Custom Automation Solutions */}
+            <motion.div 
+              className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-xl p-8 shadow-sm h-full"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)", transition: { duration: 0.2 } }}
+            >
+              <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                <span className="text-violet-600 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </span>
+                Custom Automation Solutions
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Tailored automation workflows uniquely designed to solve your specific operational challenges and deliver significant business improvements.
+              </p>
             </motion.div>
           </motion.div>
         </div>

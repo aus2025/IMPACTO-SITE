@@ -92,7 +92,7 @@ export default function KickstartPackagePage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Try for $149
+                  Get Started
                 </motion.a>
                 <motion.a 
                   href="https://calendly.com/rba-aus"
@@ -128,10 +128,10 @@ export default function KickstartPackagePage() {
               <div className="bg-blue-50 rounded-lg p-6">
                 <div className="flex items-center mb-4">
                   <SmartphoneIcon className="text-blue-600 mr-3 h-6 w-6" />
-                  <h3 className="font-bold text-lg">Social Media Scheduling</h3>
+                  <h3 className="font-bold text-lg">Simple Automation Workflows</h3>
                 </div>
                 <p className="text-gray-800">
-                  Scheduled posts for 1-2 platforms to maintain consistent presence.
+                  Up to 2 simple automation workflows tailored to your most immediate needs.
                 </p>
               </div>
               
@@ -141,17 +141,17 @@ export default function KickstartPackagePage() {
                   <h3 className="font-bold text-lg">Lead Capture</h3>
                 </div>
                 <p className="text-gray-800">
-                  Capture leads from web forms directly to your CRM.
+                  Automated lead capture with instant CRM integration for seamless follow-up.
                 </p>
               </div>
               
               <div className="bg-blue-50 rounded-lg p-6">
                 <div className="flex items-center mb-4">
                   <MailIcon className="text-blue-600 mr-3 h-6 w-6" />
-                  <h3 className="font-bold text-lg">Email Welcome Flow</h3>
+                  <h3 className="font-bold text-lg">Email Follow-up</h3>
                 </div>
                 <p className="text-gray-800">
-                  3-step email welcome sequence for new leads and customers.
+                  Immediate email follow-up to leads and automated invoicing reminders.
                 </p>
               </div>
             </div>
@@ -177,11 +177,10 @@ export default function KickstartPackagePage() {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
                   <h3 className="text-2xl md:text-3xl font-bold mb-2">Kickstart Package</h3>
-                  <p className="text-gray-600">Perfect automation for beginners</p>
+                  <p className="text-gray-600">Best for solopreneurs & small teams starting their automation journey</p>
                 </div>
                 <div className="mt-4 md:mt-0">
-                  <div className="text-3xl font-bold text-yellow-600">$149<span className="text-lg font-normal text-gray-600">/mo</span></div>
-                  <div className="text-gray-600">or $499 one-time setup</div>
+                  <div className="text-3xl font-bold text-yellow-600">$1,500+<span className="text-lg font-normal text-gray-600"> (one-time setup)</span></div>
                 </div>
               </div>
               
@@ -191,19 +190,23 @@ export default function KickstartPackagePage() {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Social Media Scheduling (1-2 platforms)</span>
+                      <span className="text-gray-800">Up to 2 simple automation workflows</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Lead Capture to CRM (web forms)</span>
+                      <span className="text-gray-800">Automated lead capture with instant CRM integration</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Email Welcome Flow (3-step)</span>
+                      <span className="text-gray-800">Immediate email follow-up to leads</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Support: Email support</span>
+                      <span className="text-gray-800">Automated invoicing reminders</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-800">1-month post-launch support included (email)</span>
                     </li>
                   </ul>
                 </div>
@@ -212,76 +215,25 @@ export default function KickstartPackagePage() {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">No setup fee for monthly plan</span>
+                      <span className="text-gray-800">Custom configuration to your specific needs</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Cancel anytime</span>
+                      <span className="text-gray-800">Integration with your existing tools</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Free strategy session</span>
+                      <span className="text-gray-800">Clear documentation and training</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Basic analytics reporting</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Email support</span>
+                      <CheckIcon className="h-5 w-5 text-yellow-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-yellow-600 font-medium">Ideal entry-level solution delivering immediate efficiency and measurable ROI</span>
                     </li>
                   </ul>
                 </div>
               </div>
               
-              {/* ROI Calculator */}
-              <div className="bg-white p-6 rounded-lg mb-8">
-                <h4 className="font-bold text-lg mb-4 text-center">Return on Investment</h4>
-                <p className="mb-4 text-center">Most users save 8 hours/week — that's like hiring a $25/hr assistant for just $149/mo.</p>
-                <div className="flex flex-col md:flex-row justify-center items-center bg-yellow-50 p-6 rounded-lg">
-                  <div className="text-center mb-4 md:mb-0 md:mr-10">
-                    <div className="text-sm text-gray-600 mb-2 font-medium">Monthly time saved</div>
-                    <div className="text-2xl font-bold text-green-600">32+ hours</div>
-                  </div>
-                  <div className="text-center mb-4 md:mb-0 md:mx-10">
-                    <div className="text-sm text-gray-600 mb-2 font-medium">Value of time saved</div>
-                    <div className="text-2xl font-bold text-green-600">$800</div>
-                  </div>
-                  <div className="text-center md:ml-10">
-                    <div className="text-sm text-gray-600 mb-2 font-medium">ROI</div>
-                    <div className="text-2xl font-bold text-green-600">8x</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Optional Add-ons */}
-              <div className="mb-8">
-                <h4 className="font-bold text-lg mb-4 text-center">Optional Add-ons</h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="p-4 border border-gray-200 rounded-lg">
-                    <div className="font-medium mb-2 text-yellow-600">Extra Platform Integration</div>
-                    <div className="text-gray-600 mb-2">Add another social media or marketing platform</div>
-                    <div className="font-bold text-gray-800">+$50/mo</div>
-                  </div>
-                  <div className="p-4 border border-gray-200 rounded-lg">
-                    <div className="font-medium mb-2 text-yellow-600">Advanced Chatbot Config</div>
-                    <div className="text-gray-600 mb-2">More custom responses and advanced routing</div>
-                    <div className="font-bold text-gray-800">+$100/mo</div>
-                  </div>
-                </div>
-              </div>
-              
               <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <motion.a 
-                  href="https://calendly.com/rba-aus"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-yellow-600 text-white"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Start for $149
-                </motion.a>
                 <motion.a 
                   href="https://calendly.com/rba-aus"
                   target="_blank"
@@ -316,22 +268,12 @@ export default function KickstartPackagePage() {
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <motion.a 
-                href="#pricing"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-yellow-600 text-white"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Start for $149
-              </motion.a>
-              <motion.a 
-                href="https://calendly.com/rba-aus"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-yellow-600 text-yellow-700 hover:bg-yellow-100/50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Talk to an Expert
+                Contact Us
               </motion.a>
             </div>
           </motion.div>
@@ -339,20 +281,12 @@ export default function KickstartPackagePage() {
       </section>
       
       {/* Mobile CTA Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-yellow-500 text-white p-4 flex justify-between z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-yellow-500 text-white p-4 flex justify-center z-50">
         <a
-          href="#pricing"
+          href="/contact"
           className="font-medium"
         >
-          Start for $149
-        </a>
-        <a
-          href="https://calendly.com/rba-aus"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium"
-        >
-          Book Free Call
+          Contact Us
         </a>
       </div>
     </main>

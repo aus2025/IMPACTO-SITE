@@ -55,10 +55,7 @@ export default function GrowthPackagePage() {
                 Growth Package
               </h1>
               <p className="text-xl md:text-2xl mb-4 font-medium text-gray-700 text-center max-w-3xl mx-auto">
-                Advanced Automation to Accelerate Your Business
-              </p>
-              <p className="text-lg md:text-xl mb-6 text-gray-600 text-center max-w-3xl mx-auto">
-                Perfect for established businesses ready to scale operations and boost productivity.
+                Perfect for growing businesses ready for multi-channel automation.
               </p>
               
               {/* Simple workflow visual */}
@@ -84,7 +81,7 @@ export default function GrowthPackagePage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Get Started
+                  Talk to an Expert
                 </motion.a>
                 <motion.a 
                 href="https://calendly.com/rba-aus"
@@ -123,9 +120,9 @@ export default function GrowthPackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">📱</div>
-                <h3 className="text-xl font-bold mb-2">Multi-Platform Social Automation</h3>
-                <p className="text-gray-800 flex-grow">AI content creation and scheduling across multiple social platforms with targeted audience segmentation.</p>
-                <div className="mt-4 text-green-600 font-medium">Save 15+ hours per week</div>
+                <h3 className="text-xl font-bold mb-2">Multi-Platform Social Media</h3>
+                <p className="text-gray-800 flex-grow">AI-generated posts & scheduling across multiple platforms to maintain a consistent presence.</p>
+                <div className="mt-4 text-green-600 font-medium">Save 10+ hours per week</div>
               </motion.div>
               
               <motion.div 
@@ -134,9 +131,9 @@ export default function GrowthPackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">📊</div>
-                <h3 className="text-xl font-bold mb-2">Advanced Lead Capture & CRM</h3>
-                <p className="text-gray-800 flex-grow">Integrated lead scoring, tagging, and qualification that feeds directly into your sales process.</p>
-                <div className="mt-4 text-green-600 font-medium">Increase conversion rates by 35%</div>
+                <h3 className="text-xl font-bold mb-2">Advanced CRM Integration</h3>
+                <p className="text-gray-800 flex-grow">Real-time data synchronization for improved lead tracking and conversion optimization.</p>
+                <div className="mt-4 text-green-600 font-medium">Boost conversion rates by 30%</div>
               </motion.div>
               
               <motion.div 
@@ -145,9 +142,9 @@ export default function GrowthPackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">📧</div>
-                <h3 className="text-xl font-bold mb-2">Email & SMS Nurture Sequences</h3>
-                <p className="text-gray-800 flex-grow">Behavior-triggered multi-channel messaging that responds to prospect actions for higher engagement.</p>
-                <div className="mt-4 text-green-600 font-medium">2.5x higher engagement rates</div>
+                <h3 className="text-xl font-bold mb-2">Client Onboarding Automation</h3>
+                <p className="text-gray-800 flex-grow">Welcome emails, digital contracts and scheduling to create a seamless client experience.</p>
+                <div className="mt-4 text-green-600 font-medium">Improved client satisfaction</div>
               </motion.div>
               
               <motion.div 
@@ -156,9 +153,9 @@ export default function GrowthPackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">📆</div>
-                <h3 className="text-xl font-bold mb-2">Team Calendar Coordination</h3>
-                <p className="text-gray-800 flex-grow">Smart scheduling that routes meetings to the right team member and prevents overbooking.</p>
-                <div className="mt-4 text-green-600 font-medium">Eliminate scheduling headaches</div>
+                <h3 className="text-xl font-bold mb-2">Administrative Automation</h3>
+                <p className="text-gray-800 flex-grow">Streamlined scheduling, invoicing, and reporting to reduce manual back-office tasks.</p>
+                <div className="mt-4 text-green-600 font-medium">Eliminate administrative headaches</div>
               </motion.div>
               
               <motion.div 
@@ -167,9 +164,9 @@ export default function GrowthPackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">🤖</div>
-                <h3 className="text-xl font-bold mb-2">AI Chatbot (Enhanced)</h3>
-                <p className="text-gray-800 flex-grow">Advanced conversational bot that can handle complex inquiries, schedule meetings, and qualify leads.</p>
-                <div className="mt-4 text-green-600 font-medium">24/7 intelligent customer service</div>
+                <h3 className="text-xl font-bold mb-2">Multi-Step Email & SMS Sequences</h3>
+                <p className="text-gray-800 flex-grow">Automated nurture campaigns that engage prospects across multiple channels for higher conversion.</p>
+                <div className="mt-4 text-green-600 font-medium">2x higher engagement rates</div>
               </motion.div>
               
               <motion.div 
@@ -178,9 +175,9 @@ export default function GrowthPackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">📈</div>
-                <h3 className="text-xl font-bold mb-2">Monthly Optimization Reports</h3>
-                <p className="text-gray-800 flex-grow">Detailed analytics and expert recommendations to continuously improve your automation performance.</p>
-                <div className="mt-4 text-green-600 font-medium">Data-driven optimization</div>
+                <h3 className="text-xl font-bold mb-2">Priority Support & Optimization</h3>
+                <p className="text-gray-800 flex-grow">Email & chat support with quarterly workflow optimizations to ensure your systems keep improving.</p>
+                <div className="mt-4 text-green-600 font-medium">Continuous improvement</div>
               </motion.div>
             </div>
           </motion.div>
@@ -279,7 +276,7 @@ export default function GrowthPackagePage() {
       </section>
       
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gray-50">
+      <section id="pricing" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div 
             className="max-w-4xl mx-auto"
@@ -289,127 +286,81 @@ export default function GrowthPackagePage() {
             variants={fadeIn}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-              💰 Growth Package Pricing
+              💸 Growth Package Pricing
             </h2>
             
-            <div className="bg-white rounded-xl shadow-lg p-8 md:p-12 border-t-4 border-green-500">
+            <div className="bg-green-50 rounded-xl p-8 md:p-12 mb-8">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
                   <h3 className="text-2xl md:text-3xl font-bold mb-2">Growth Package</h3>
-                  <p className="text-gray-600">Advanced automation for established businesses</p>
+                  <p className="text-gray-600">Perfect for growing businesses ready for multi-channel automation</p>
                 </div>
-                <div className="mt-4 md:mt-0 text-right">
-                  <div className="text-3xl font-bold text-green-600">$599<span className="text-lg font-normal text-gray-600">/mo</span></div>
-                  <div className="text-gray-500">or custom quote for annual plan</div>
+                <div className="mt-4 md:mt-0">
+                  <div className="text-3xl font-bold text-green-600">$3,000–$5,000<span className="text-lg font-normal text-gray-600"> (one-time setup)</span></div>
                 </div>
               </div>
               
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <h4 className="text-lg font-bold mb-4 flex items-center">
-                    <span className="text-green-500 mr-2">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM8 15L3 10L4.41 8.59L8 12.17L15.59 4.58L17 6L8 15Z" fill="currentColor"/>
-                      </svg>
-                    </span>
-                    Core Features
-                  </h4>
-                  <ul className="space-y-3">
-                  <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Social Media Automation (AI copy & scheduling for 3+ platforms)</span>
-                  </li>
-                  <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Enhanced CRM Integration (lead capture with advanced tagging)</span>
-                  </li>
-                  <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Automated Email & SMS Sequences (multi-step nurture campaigns)</span>
-                  </li>
-                  <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Appointment Scheduling Automation (sync calendars & reminders)</span>
-                  </li>
-                  <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Basic Chatbot for Website (handles FAQs or booking)</span>
-                  </li>
-                  <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Support: Priority email & chat support, quarterly tune-ups</span>
-                  </li>
-                </ul>
-                </div>
-                
-                <div>
-                  <h4 className="text-lg font-bold mb-4 flex items-center">
-                    <span className="text-green-500 mr-2">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18ZM9 5H11V11H9V5ZM9 13H11V15H9V13Z" fill="currentColor"/>
-                      </svg>
-                    </span>
-                    Additional Benefits
-                  </h4>
+                  <h4 className="font-bold text-lg mb-4">Core Features</h4>
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Priority support response (under 4 hours)</span>
+                      <span className="text-gray-800">3–5 integrated workflows tailored to your needs</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Quarterly strategy sessions</span>
+                      <span className="text-gray-800">Social Media Automation (AI-generated posts & scheduling across multiple platforms)</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Access to our automation template library</span>
+                      <span className="text-gray-800">Advanced CRM integration with real-time data synchronization</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Team training sessions (2 per quarter)</span>
+                      <span className="text-gray-800">Client onboarding automation (welcome emails, digital contracts, scheduling)</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Custom workflow design</span>
+                      <span className="text-gray-800">Administrative & back-office automation (scheduling, invoicing, reporting)</span>
                     </li>
                   </ul>
                 </div>
-                </div>
-                
-              <div className="bg-green-50 p-6 rounded-lg mb-8">
-                <h4 className="font-bold text-lg mb-2 text-green-700">Optional Add-ons</h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <div className="font-medium mb-1 text-gray-800">Custom API Integration</div>
-                    <div className="text-sm text-gray-800 mb-1">Connect with specialized tools and platforms</div>
-                    <div className="mt-2 text-green-600 font-bold">+$150/mo</div>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <div className="font-medium mb-1 text-gray-800">Advanced Analytics Dashboard</div>
-                    <div className="text-sm text-gray-800 mb-1">Real-time business intelligence reporting</div>
-                    <div className="mt-2 text-green-600 font-bold">+$200/mo</div>
-                  </div>
+                <div>
+                  <h4 className="font-bold text-lg mb-4">Additional Features</h4>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-800">Automated multi-step email & SMS nurture sequences</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-800">Priority support with quarterly workflow optimizations (email & chat)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-800">Integration with your existing tools and systems</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-800">Detailed documentation and team training</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckIcon className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-green-600 font-medium">Comprehensive solution to streamline multiple business operations simultaneously</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
               
               <div className="flex flex-col md:flex-row gap-4 justify-center">
                 <motion.a 
-                  href="https://calendly.com/rba-aus"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/contact"
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-green-600 text-white"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Schedule a Demo
-                </motion.a>
-                <motion.a 
-                  href="mailto:contact@impactoautomation.com"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border border-green-600 text-green-700 hover:bg-green-50"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Request Custom Quote
+                  Contact Us
                 </motion.a>
             </div>
             </div>
@@ -435,22 +386,12 @@ export default function GrowthPackagePage() {
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <motion.a 
-                href="#pricing"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-green-600 text-white"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started Now
-              </motion.a>
-              <motion.a 
-                href="https://calendly.com/rba-aus"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-green-600 text-green-700 hover:bg-green-100/50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Schedule a Demo
+                Contact Us
               </motion.a>
             </div>
           </motion.div>
@@ -458,20 +399,12 @@ export default function GrowthPackagePage() {
       </section>
       
       {/* Mobile CTA Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-green-500 text-white p-4 flex justify-between z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-green-500 text-white p-4 flex justify-center z-50">
         <a
-          href="#pricing"
+          href="/contact"
           className="font-medium"
         >
-          Get Started
-        </a>
-        <a
-          href="https://calendly.com/rba-aus"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium"
-        >
-          Book Demo
+          Contact Us
         </a>
       </div>
     </main>

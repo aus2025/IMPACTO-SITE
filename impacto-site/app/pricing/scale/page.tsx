@@ -54,11 +54,24 @@ export default function ScalePackagePage() {
                 Scale Package
               </h1>
               <p className="text-xl md:text-2xl mb-4 font-medium text-gray-700 text-center max-w-3xl mx-auto">
-                Premium Custom Solution Perfect for Your Business
+                Fully customized, premium automation solutions designed to transform your business.
               </p>
-              <p className="text-lg md:text-xl mb-6 text-gray-600 text-center max-w-3xl mx-auto">
-                From 1499,00/mo - Custom solutions that transform your operations and scale efficiently.
-              </p>
+              
+              {/* Simple workflow visual */}
+              <div className="grid grid-cols-3 gap-3 mt-8 mb-8 bg-red-500/30 p-4 rounded-lg max-w-2xl mx-auto">
+                <div className="bg-white/20 rounded-lg p-4 text-center">
+                  <div className="text-3xl mb-2">⚡</div>
+                  <div className="text-sm font-medium">Transform</div>
+                </div>
+                <div className="bg-white/20 rounded-lg p-4 text-center">
+                  <div className="text-3xl mb-2">🚀</div>
+                  <div className="text-sm font-medium">Scale</div>
+                </div>
+                <div className="bg-white/20 rounded-lg p-4 text-center">
+                  <div className="text-3xl mb-2">💼</div>
+                  <div className="text-sm font-medium">Maximize</div>
+                </div>
+              </div>
               
               <div className="flex flex-wrap gap-4 mt-8 justify-center">
                 <motion.a 
@@ -69,7 +82,7 @@ export default function ScalePackagePage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Book Strategy Session
+                  Talk to Us
                 </motion.a>
                 <motion.a 
                   href="https://calendly.com/rba-aus"
@@ -108,7 +121,7 @@ export default function ScalePackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">🔄</div>
-                <h3 className="text-xl font-bold mb-2">Workflow Automation</h3>
+                <h3 className="text-xl font-bold mb-2">Comprehensive Workflow Automation</h3>
                 <p className="text-gray-800 flex-grow">End-to-end business process automation across multiple departments and systems.</p>
                 <div className="mt-4 text-red-600 font-medium">Eliminates operational bottlenecks</div>
               </motion.div>
@@ -119,9 +132,9 @@ export default function ScalePackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">🤖</div>
-                <h3 className="text-xl font-bold mb-2">Advanced AI Assistants</h3>
-                <p className="text-gray-800 flex-grow">Custom-trained AI assistants that understand your business processes and can handle complex tasks.</p>
-                <div className="mt-4 text-red-600 font-medium">Reduces manual work by 70%+</div>
+                <h3 className="text-xl font-bold mb-2">Advanced AI Chatbot</h3>
+                <p className="text-gray-800 flex-grow">AI-driven chatbot fully tailored to your business, capable of handling complex interactions.</p>
+                <div className="mt-4 text-red-600 font-medium">24/7 intelligent customer service</div>
               </motion.div>
               
               <motion.div 
@@ -129,10 +142,10 @@ export default function ScalePackagePage() {
                 variants={fadeIn}
                 whileHover={{ y: -5 }}
               >
-                <div className="text-4xl mb-4">📊</div>
-                <h3 className="text-xl font-bold mb-2">Analytics & Reporting</h3>
-                <p className="text-gray-800 flex-grow">Custom dashboards and reporting systems that provide real-time insights into your business.</p>
-                <div className="mt-4 text-red-600 font-medium">Data-driven decision making</div>
+                <div className="text-4xl mb-4">💻</div>
+                <h3 className="text-xl font-bold mb-2">Custom Automation Scripts</h3>
+                <p className="text-gray-800 flex-grow">Custom-built automation scripts and integrations designed specifically for your unique processes.</p>
+                <div className="mt-4 text-red-600 font-medium">Tailored to your exact needs</div>
               </motion.div>
               
               <motion.div 
@@ -140,10 +153,10 @@ export default function ScalePackagePage() {
                 variants={fadeIn}
                 whileHover={{ y: -5 }}
               >
-                <div className="text-4xl mb-4">🔌</div>
-                <h3 className="text-xl font-bold mb-2">System Integrations</h3>
-                <p className="text-gray-800 flex-grow">Connect all your business tools and systems into a unified operational ecosystem.</p>
-                <div className="mt-4 text-red-600 font-medium">Seamless data flow across platforms</div>
+                <div className="text-4xl mb-4">📱</div>
+                <h3 className="text-xl font-bold mb-2">Multi-Platform Marketing</h3>
+                <p className="text-gray-800 flex-grow">Sophisticated social media and advertising automation across all relevant platforms.</p>
+                <div className="mt-4 text-red-600 font-medium">Maximized digital presence</div>
               </motion.div>
               
               <motion.div 
@@ -151,10 +164,10 @@ export default function ScalePackagePage() {
                 variants={fadeIn}
                 whileHover={{ y: -5 }}
               >
-                <div className="text-4xl mb-4">🛡️</div>
-                <h3 className="text-xl font-bold mb-2">Enterprise Security</h3>
-                <p className="text-gray-800 flex-grow">Industry-leading security protocols and compliance measures for your automated systems.</p>
-                <div className="mt-4 text-red-600 font-medium">SOC 2 & GDPR compliant</div>
+                <div className="text-4xl mb-4">📈</div>
+                <h3 className="text-xl font-bold mb-2">Ongoing Optimization</h3>
+                <p className="text-gray-800 flex-grow">Continuous improvement with a dedicated automation strategist assigned to your account.</p>
+                <div className="mt-4 text-red-600 font-medium">Never-ending enhancement</div>
               </motion.div>
               
               <motion.div 
@@ -163,9 +176,9 @@ export default function ScalePackagePage() {
                 whileHover={{ y: -5 }}
               >
                 <div className="text-4xl mb-4">👥</div>
-                <h3 className="text-xl font-bold mb-2">Dedicated Support Team</h3>
-                <p className="text-gray-800 flex-grow">A team of experts assigned to your account for ongoing support, optimization, and training.</p>
-                <div className="mt-4 text-red-600 font-medium">Proactive assistance & optimization</div>
+                <h3 className="text-xl font-bold mb-2">VIP-Level Support</h3>
+                <p className="text-gray-800 flex-grow">Premium support including phone, priority email, and strategic advisory services.</p>
+                <div className="mt-4 text-red-600 font-medium">White-glove service experience</div>
               </motion.div>
             </div>
           </motion.div>
@@ -293,18 +306,17 @@ export default function ScalePackagePage() {
             variants={fadeIn}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-              💰 Scale Package Pricing
+              💸 Scale Package Pricing
             </h2>
             
             <div className="bg-red-50 rounded-xl p-8 md:p-12 mb-8">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Enterprise Package</h3>
-                  <p className="text-gray-600">Premium custom solution perfect for your business.</p>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Scale Package</h3>
+                  <p className="text-gray-600">Fully customized, premium automation solutions designed to transform your business</p>
                 </div>
                 <div className="mt-4 md:mt-0">
-                  <div className="text-3xl font-bold text-red-600">From 1499,00<span className="text-lg font-normal text-gray-600">/mo</span></div>
-                  <div className="text-gray-600">Custom pricing for annual plans</div>
+                  <div className="text-3xl font-bold text-red-600">From $10,000+<span className="text-lg font-normal text-gray-600"> (custom setup, value-based pricing)</span></div>
                 </div>
               </div>
               
@@ -312,121 +324,64 @@ export default function ScalePackagePage() {
                 <div>
                   <h4 className="font-bold text-lg mb-4">Core Features</h4>
                   <ul className="space-y-3">
-                    <li className="flex items-start">
+                    <li className="flex items-start font-medium">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Custom Workflow Automation</span>
+                      <span className="text-gray-800">All features of the Growth Plan, plus:</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Enterprise AI Assistants</span>
+                      <span className="text-gray-800">Comprehensive end-to-end workflow automation</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Advanced Analytics Dashboard</span>
+                      <span className="text-gray-800">Advanced AI-driven chatbot fully tailored to your business</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Multi-System Integrations</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Custom API Development</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Enterprise Security Protocols</span>
+                      <span className="text-gray-800">Custom-built automation scripts and integrations for unique processes</span>
                     </li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-4">Additional Benefits</h4>
+                  <h4 className="font-bold text-lg mb-4">Additional Features</h4>
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Dedicated account manager</span>
+                      <span className="text-gray-800">Multi-platform social media and advertising automation</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Monthly strategy sessions</span>
+                      <span className="text-gray-800">Ongoing optimization & dedicated automation strategist</span>
                     </li>
                     <li className="flex items-start">
                       <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Priority 24/7 support</span>
+                      <span className="text-gray-800">VIP-level support (phone, priority email, strategic advisory)</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Custom training for your team</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">Quarterly performance reviews</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckIcon className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-800">ROI optimization insights</span>
+                      <CheckIcon className="h-5 w-5 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-red-600 font-medium">Ultimate automation package delivering maximum efficiency, scalability, and business impact</span>
                     </li>
                   </ul>
                 </div>
               </div>
               
-              {/* ROI Calculator */}
-              <div className="bg-white p-6 rounded-lg mb-8">
-                <h4 className="font-bold text-lg mb-4 text-center">Enterprise ROI Analysis</h4>
-                <p className="mb-4 text-center">On average, our Scale Package clients achieve operational cost reduction of 35% and productivity increases of 40%.</p>
-                <div className="flex flex-col md:flex-row justify-center items-center bg-red-50 p-6 rounded-lg">
-                  <div className="text-center mb-4 md:mb-0 md:mr-10">
-                    <div className="text-sm text-gray-600 mb-2 font-medium">Annual savings</div>
-                    <div className="text-2xl font-bold text-green-600">$120,000+</div>
-                  </div>
-                  <div className="text-center mb-4 md:mb-0 md:mx-10">
-                    <div className="text-sm text-gray-600 mb-2 font-medium">Productivity gain</div>
-                    <div className="text-2xl font-bold text-green-600">40%</div>
-                  </div>
-                  <div className="text-center md:ml-10">
-                    <div className="text-sm text-gray-600 mb-2 font-medium">Typical ROI</div>
-                    <div className="text-2xl font-bold text-green-600">10-15x</div>
-                  </div>
+              <div className="bg-white p-6 rounded-lg">
+                <h4 className="font-bold text-lg mb-4 text-center">Value-Based Investment</h4>
+                <p className="text-gray-800 mb-4 text-center">
+                  Our Scale Package is designed for businesses seeking transformative automation. Pricing is customized based on your specific needs, expected ROI, and the scope of implementation.
+                </p>
+                <div className="text-center">
+                  <motion.a 
+                    href="https://calendly.com/rba-aus"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 hover:bg-red-700 text-white px-6 py-3"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Schedule a Strategic Assessment
+                  </motion.a>
                 </div>
-              </div>
-              
-              {/* Optional Add-ons */}
-              <div className="mb-8">
-                <h4 className="font-bold text-lg mb-4 text-center">Enterprise Add-ons</h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="p-4 border border-gray-200 rounded-lg">
-                    <div className="font-medium mb-2 text-red-600">Custom ML/AI Models</div>
-                    <div className="text-gray-800 mb-2">Specialized machine learning models trained on your data</div>
-                    <div className="font-bold text-gray-800">Custom pricing</div>
-                  </div>
-                  <div className="p-4 border border-gray-200 rounded-lg">
-                    <div className="font-medium mb-2 text-red-600">White-label Solutions</div>
-                    <div className="text-gray-800 mb-2">Branded customer-facing automation tools</div>
-                    <div className="font-bold text-gray-800">Custom pricing</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <motion.a 
-                  href="https://calendly.com/rba-aus"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-red-600 text-white"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Book Strategy Session
-                </motion.a>
-                <motion.a 
-                  href="https://calendly.com/rba-aus"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border border-red-600 text-red-700 hover:bg-red-50"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Request Custom Quote
-                </motion.a>
               </div>
             </div>
           </motion.div>
@@ -451,19 +406,7 @@ export default function ScalePackagePage() {
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <motion.a 
-                href="https://calendly.com/rba-aus"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-red-600 text-white"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Book Your Strategy Session
-              </motion.a>
-              <motion.a 
-                href="https://calendly.com/rba-aus"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-red-600 text-red-700 hover:bg-red-100/50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -476,22 +419,12 @@ export default function ScalePackagePage() {
       </section>
       
       {/* Mobile CTA Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-red-500 text-white p-4 flex justify-between z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-red-500 text-white p-4 flex justify-center z-50">
         <a
-          href="https://calendly.com/rba-aus"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/contact"
           className="font-medium"
         >
-          Book Session
-        </a>
-        <a
-          href="https://calendly.com/rba-aus"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium"
-        >
-          Get Quote
+          Get a Quote
         </a>
       </div>
     </main>

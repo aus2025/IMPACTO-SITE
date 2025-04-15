@@ -343,7 +343,7 @@ export default function AboutPage() {
               <p className="text-gray-600 text-sm">Get started with our beginner-friendly automation packages</p>
             </motion.a>
             <motion.a 
-              href="/services#advanced"
+              href="/pricing/scale"
               className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center flex flex-col items-center"
               whileHover={{ y: -5 }}
             >

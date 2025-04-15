@@ -76,14 +76,6 @@ export default function GrowthPackagePage() {
               
               <div className="flex flex-wrap gap-4 mt-8 justify-center">
                 <motion.a 
-                  href="#pricing"
-                  className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-6 bg-green-600 text-white"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Talk to an Expert
-                </motion.a>
-                <motion.a 
                 href="https://calendly.com/rba-aus"
                 target="_blank"
                 rel="noopener noreferrer"

@@ -207,7 +207,7 @@ const StatisticsSection: React.FC = () => {
             Join hundreds of businesses that have transformed their operations with AI solutions
           </p>
           <motion.a 
-            href="https://calendly.com/rba-aus" 
+            href="https://calendly.com/impactoautomation-ai" 
             target="_blank"
             rel="noopener noreferrer"
             className="cta-button-global"

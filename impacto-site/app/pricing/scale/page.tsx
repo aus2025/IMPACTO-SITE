@@ -75,7 +75,7 @@ export default function ScalePackagePage() {
               
               <div className="flex flex-wrap gap-4 mt-8 justify-center">
                 <motion.a 
-                  href="https://calendly.com/rba-aus"
+                  href="https://calendly.com/impactoautomation-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-red-600 text-red-700 hover:bg-red-100/50"
@@ -362,7 +362,7 @@ export default function ScalePackagePage() {
                 </p>
                 <div className="text-center">
                   <motion.a 
-                    href="https://calendly.com/rba-aus"
+                    href="https://calendly.com/impactoautomation-ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 hover:bg-red-700 text-white px-6 py-3"

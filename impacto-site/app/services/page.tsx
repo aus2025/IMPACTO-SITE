@@ -696,7 +696,7 @@ export default function ServicesPage() {
             
             <div className="text-center mt-12">
               <motion.a 
-                href="https://calendly.com/rba-aus"
+                href="https://calendly.com/impactoautomation-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300"
@@ -943,7 +943,7 @@ export default function ServicesPage() {
               whileTap={{ scale: 0.95 }}
             >
               <a
-                href="https://calendly.com/rba-aus"
+                href="https://calendly.com/impactoautomation-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow-md transition-colors duration-200 min-w-[200px]"
@@ -985,7 +985,7 @@ export default function ServicesPage() {
               Schedule your free, no-pressure call and discover exactly how AI can transform your day-to-day.
             </motion.p>
             <motion.a 
-              href="https://calendly.com/rba-aus"
+              href="https://calendly.com/impactoautomation-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-md text-lg transition duration-300"

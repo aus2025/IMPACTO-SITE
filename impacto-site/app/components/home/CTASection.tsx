@@ -14,7 +14,7 @@ export default function CTASection() {
           </p>
           <div className="w-full flex flex-col sm:flex-row gap-6 justify-center items-center mt-8">
             <motion.a
-              href="https://calendly.com/rba-aus"
+              href="https://calendly.com/impactoautomation-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-button-global"

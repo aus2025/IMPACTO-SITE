@@ -133,7 +133,7 @@ export default function AutomationPageClient() {
             </div>
             
             <div className="mt-12 text-center">
-              <a href="https://calendly.com/rba-aus" className="cta-button-global">Schedule Your Automation Consultation</a>
+              <a href="https://calendly.com/impactoautomation-ai" className="cta-button-global">Schedule Your Automation Consultation</a>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export interface ProductTierContentProps {
   score: number;
@@ -72,14 +73,16 @@ export default function ProductTierContent({ score }: ProductTierContentProps) {
             >
               Send Us a Message
             </Link>
-            <Link
-              href="https://calendly.com/rba-aus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 px-4 bg-white border border-yellow-500 text-yellow-600 font-bold rounded-lg hover:bg-yellow-50 transition duration-150 text-center"
-            >
-              Talk to an Expert
-            </Link>
+            <Button asChild>
+              <Link
+                href="https://calendly.com/impactoautomation-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Book a 15-Minute Discovery Call
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -113,14 +116,16 @@ export default function ProductTierContent({ score }: ProductTierContentProps) {
             >
               Send Us a Message
             </Link>
-            <Link
-              href="https://calendly.com/rba-aus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 px-4 bg-white border border-green-500 text-green-600 font-bold rounded-lg hover:bg-green-50 transition duration-150 text-center"
-            >
-              Talk to an Expert
-            </Link>
+            <Button asChild>
+              <Link
+                href="https://calendly.com/impactoautomation-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white"
+              >
+                Book a 15-Minute Discovery Call
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -154,14 +159,16 @@ export default function ProductTierContent({ score }: ProductTierContentProps) {
             >
               Request a Quote
             </Link>
-            <Link
-              href="https://calendly.com/rba-aus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 px-4 bg-white border border-red-500 text-red-600 font-bold rounded-lg hover:bg-red-50 transition duration-150 text-center"
-            >
-              Schedule a Demo
-            </Link>
+            <Button asChild>
+              <Link
+                href="https://calendly.com/impactoautomation-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mt-4 bg-red-600 hover:bg-red-700 text-white"
+              >
+                Book a 15-Minute Discovery Call
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

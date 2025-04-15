@@ -134,7 +134,7 @@ export default function SocialMediaMarketingClient() {
             </div>
             
             <div className="mt-12 text-center">
-              <a href="https://calendly.com/rba-aus" className="cta-button-global">Book a Free Discovery Call</a>
+              <a href="https://calendly.com/impactoautomation-ai" className="cta-button-global">Book a Free Discovery Call</a>
             </div>
           </div>
         </div>

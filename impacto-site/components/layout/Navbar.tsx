@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,7 +60,7 @@ export default function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <a
-              href="https://calendly.com/rba-aus"
+              href="https://calendly.com/impactoautomation-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-md transition duration-300 font-medium text-lg"
@@ -129,7 +130,7 @@ export default function Navbar() {
             ))}
             <div className="mt-4 pt-4 border-t border-gray-100">
               <a
-                href="https://calendly.com/rba-aus"
+                href="https://calendly.com/impactoautomation-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center px-5 py-4 rounded-md transition duration-300 font-medium text-lg"

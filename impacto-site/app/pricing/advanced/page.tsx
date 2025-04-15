@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, CheckIcon, ArrowLeft, MessageCircleIcon, PhoneIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function AdvancedPackagePage() {
   const router = useRouter();
@@ -38,15 +39,16 @@ export default function AdvancedPackagePage() {
                 Get end-to-end automation designed around your unique processes — from AI chatbots to custom integrations.
                 Includes dedicated strategy sessions, custom-built workflows, and priority support to help your business run smarter at scale.
               </p>
-              <a 
-                href="https://calendly.com/rba-aus"
+              <motion.a 
+                href="https://calendly.com/impactoautomation-ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-4 bg-white text-blue-700"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 px-8 py-6 border-2 border-purple-600 text-purple-700 hover:bg-purple-100/50"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <MessageCircleIcon className="h-4 w-4 mr-2" />
-                Talk to an Expert
-              </a>
+                Request Solution Overview
+              </motion.a>
             </div>
           </div>
         </div>

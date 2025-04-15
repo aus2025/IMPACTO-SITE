@@ -390,7 +390,7 @@ export default function AboutPage() {
                 Schedule your free, no-pressure call and discover exactly how AI can transform your day-to-day.
               </motion.p>
               <motion.a 
-                href="https://calendly.com/rba-aus"
+                href="https://calendly.com/impactoautomation-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-white hover:bg-gray-100 text-blue-700 font-semibold py-4 px-10 rounded-md text-lg transition duration-300"
@@ -414,7 +414,7 @@ export default function AboutPage() {
       {/* Mobile CTA Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-blue-600 text-white p-4 text-center z-50">
         <a
-          href="https://calendly.com/rba-aus"
+          href="https://calendly.com/impactoautomation-ai"
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium"

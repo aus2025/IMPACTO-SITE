@@ -18,7 +18,7 @@ export default function SpecialOfferSection() {
           </div>
           <div>
             <a
-              href="https://calendly.com/rba-aus"
+              href="https://calendly.com/impactoautomation-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow-md transition-colors duration-200 min-w-[200px]"

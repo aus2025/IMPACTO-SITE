@@ -3,6 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from "@/components/layout";
 import { defaultSEO } from "@/utils/seo";
+import dynamic from 'next/dynamic';
+
+// Dynamically import Chatbot component with no SSR
+const Chatbot = dynamic(() => import('@/components/Chatbot'), { ssr: false });
 
 const inter = Inter({
   subsets: ["latin"],
@@ -84,6 +88,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );

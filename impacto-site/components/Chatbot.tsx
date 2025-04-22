@@ -280,23 +280,32 @@ export default function Chatbot() {
     setDebug('Testing Supabase connection...');
     
     if (!supabase) {
-      setDebug('No Supabase client found! Check credentials.');
+      setDebug('No Supabase client found! Check environment variables.');
       return;
     }
     
     try {
+      // First check if we have valid credentials
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+        setDebug('Missing Supabase credentials in environment variables!');
+        return;
+      }
+      
+      // Then try to query the table
       const { data, error } = await supabase
         .from('chatbot_history')
         .select('count(*)', { count: 'exact', head: true });
       
       if (error) {
-        setDebug(`Connection error: ${error.message}`);
+        // More informative error message
+        setDebug(`Connection error: ${error.message}. Check your network and credentials.`);
       } else {
-        setDebug(`Connected to Supabase! Table exists.`);
+        setDebug(`Connected to Supabase! Table exists and is accessible.`);
       }
     } catch (err) {
       const errMsg = err instanceof Error ? err.message : String(err);
-      setDebug(`Unexpected error: ${errMsg}`);
+      setDebug(`Unexpected error: ${errMsg}. Check browser console for details.`);
+      console.error('Supabase connection test error:', err);
     }
   };
 

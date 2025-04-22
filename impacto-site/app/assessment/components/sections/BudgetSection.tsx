@@ -18,8 +18,11 @@ export type BudgetSectionProps = {
     funding_source?: string;
     timeline?: string;
     roi_expectations?: string;
-    budget_constraints?: string[];
+    budget_constraints?: string;
     additional_budget_notes?: string;
+    decision_timeline?: string;
+    investment_factors?: string[];
+    competitor_automation?: string;
   };
   errors: Record<string, string>;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -203,7 +206,7 @@ export default function BudgetSection({
           <Textarea 
             id="budget_constraints" 
             name="budget_constraints"
-            value={formData.budget_constraints?.join('\n') || ''}
+            value={formData.budget_constraints || ''}
             onChange={onInputChange}
             placeholder="Please describe any budget constraints or considerations"
             className="mt-1 text-gray-900 h-24"

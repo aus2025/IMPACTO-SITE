@@ -38,6 +38,7 @@ interface FormData {
   decision_timeline: string;
   investment_factors: string[];
   competitor_automation: string;
+  budget_constraints: string;
   
   // Additional Info
   consultation_preference: string;
@@ -91,6 +92,7 @@ export default function BusinessAssessmentForm(): JSX.Element {
     decision_timeline: '',
     investment_factors: [],
     competitor_automation: '',
+    budget_constraints: '',
     consultation_preference: '',
     additional_comments: '',
     consent_terms: false,
@@ -160,8 +162,33 @@ export default function BusinessAssessmentForm(): JSX.Element {
     try {
       console.log('Processing assessment submission:', formData);
       
-      // Simulate API submission delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // First, submit the assessment data to our API or Supabase
+      try {
+        // Create Supabase client
+        // This is just a placeholder - implement proper Supabase client creation
+        // We assume you have a route handler or API endpoint for this
+        const response = await fetch('/api/submit-assessment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+        
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Failed to submit assessment');
+        }
+        
+        // Optionally, get the created assessment ID
+        const result = await response.json();
+        if (result.id) {
+          sessionStorage.setItem('last_assessment_id', result.id);
+        }
+      } catch (apiError) {
+        console.error('API submission error:', apiError);
+        // Continue with local processing even if API fails
+      }
       
       // Calculate real automation score based on user inputs
       const score = calculateAutomationScore(formData);

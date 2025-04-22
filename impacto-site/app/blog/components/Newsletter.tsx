@@ -1,13 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import { FaPaperPlane } from 'react-icons/fa';
+
+// Create a direct Supabase client (client-side)
+const getSupabaseClient = () => {
+  // Use window object to guarantee we're on client-side
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('Supabase environment variables not found');
+    return null;
+  }
+  
+  return createClient(supabaseUrl, supabaseKey);
+};
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [supabase, setSupabase] = useState<any>(null);
+  
+  // Initialize Supabase client on component mount
+  useEffect(() => {
+    // Set supabase client only on client-side
+    setSupabase(getSupabaseClient());
+  }, []);
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,18 +44,40 @@ export function Newsletter() {
       return;
     }
     
+    if (!supabase) {
+      setError('Database connection not available. Please try again later.');
+      return;
+    }
+    
     setIsSubmitting(true);
     setError('');
     
     try {
-      // In a real implementation, you would send the email to your API
-      // For now, we'll simulate a successful submission after a short delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log('Attempting to subscribe with email:', email);
       
+      // Direct Supabase insert - no fetch call, no API
+      const { error: insertError } = await supabase
+        .from('newsletter_subscriptions')
+        .insert({
+          email: email,
+          source: 'direct_component',
+          status: 'subscribed',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+      
+      if (insertError) {
+        console.error('Supabase insert error:', insertError);
+        throw new Error(insertError.message || 'Failed to save subscription');
+      }
+      
+      console.log('Subscription successful!');
       setIsSubmitted(true);
       setEmail('');
-    } catch (err) {
-      setError('An error occurred. Please try again.');
+      
+    } catch (err: any) {
+      console.error('Newsletter error:', err);
+      setError(err.message || 'Failed to subscribe. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -49,7 +93,7 @@ export function Newsletter() {
       {isSubmitted ? (
         <div className="bg-green-50 border border-green-100 rounded-lg p-4 text-green-800">
           <p className="font-medium">Thank you for subscribing!</p>
-          <p className="text-sm mt-1">We'll send you the latest updates and insights.</p>
+          <p className="text-sm mt-1">We'll keep you updated!.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -59,7 +103,7 @@ export function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email address"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200 text-gray-800"
               disabled={isSubmitting}
             />
             {error && <p className="text-red-600 text-sm mt-1">{error}</p>}

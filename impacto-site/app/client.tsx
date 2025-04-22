@@ -8,8 +8,8 @@ import CounterCard from '@/components/stats/CounterCard';
 import { TrendingUp, AlertTriangle, Calendar, Zap, Rocket, BarChart2, DollarSign, Share2, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Create a motion-enabled Link component
-const MotionLink = motion(Link);
+// Create a motion-enabled Link component using newer API
+const MotionLink = motion(Link, { forwardMotionProps: true });
 
 // Animation variants
 const staggerContainer = {

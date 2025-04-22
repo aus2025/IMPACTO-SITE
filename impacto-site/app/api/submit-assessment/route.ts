@@ -47,28 +47,36 @@ export async function POST(request: NextRequest) {
     // Insert data into Supabase with detailed error tracking
     try {
       const { data: assessment, error } = await supabase
-        .from('assessments')
+        .from('business_assessments')
         .insert([
           {
-            name: data.full_name,
+            full_name: data.full_name,
             email: data.email,
-            company: data.company_name || '',
+            company_name: data.company_name || '',
             job_title: data.job_title || '',
             phone: data.phone || '',
             industry: data.industry || '',
-            company_size: data.employee_count || '',
-            business_goals: data.business_goals || '',
-            pain_points: data.pain_points || '',
-            automation_experience: data.current_automation || '',
-            current_tools: Array.isArray(data.current_tools) ? data.current_tools : [],
-            automation_needs: data.automation_areas || '',
-            document_types: data.document_types || '',
+            employee_count: data.employee_count || '',
+            business_goals: Array.isArray(data.business_goals) ? data.business_goals : [],
+            pain_points: Array.isArray(data.pain_points) ? data.pain_points : [],
+            compliance_concerns: Array.isArray(data.compliance_concerns) ? data.compliance_concerns : [],
+            automation_areas: Array.isArray(data.automation_areas) ? data.automation_areas : [],
+            document_types: Array.isArray(data.document_types) ? data.document_types : [],
             document_volume: data.document_volume || '',
-            timeline: data.implementation_timeline || '',
+            process_complexity: data.process_complexity || '',
+            integration_needs: Array.isArray(data.integration_needs) ? data.integration_needs : [],
             budget_range: data.budget_range || '',
-            referral_source: data.referral_source || '',
+            funding_source: data.funding_source || '',
+            decision_timeline: data.decision_timeline || '',
+            investment_factors: Array.isArray(data.investment_factors) ? data.investment_factors : [],
+            competitor_automation: data.competitor_automation || '',
+            budget_constraints: data.budget_constraints || '',
+            consultation_preference: data.consultation_preference || '',
             additional_comments: data.additional_comments || '',
-            consent: Boolean(data.consent_terms),
+            consent_terms: Boolean(data.consent_terms),
+            consent_marketing: Boolean(data.consent_marketing),
+            referral_source: data.referral_source || '',
+            status: 'new',
             created_at: new Date(),
           }
         ])

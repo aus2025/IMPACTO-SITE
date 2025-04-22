@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-// Create a motion-enabled Link component
-const MotionLink = motion(Link);
+// Create a motion-enabled Link component using newer API
+const MotionLink = motion(Link, { forwardMotionProps: true });
 
 export default function HeroSection() {
   return (
